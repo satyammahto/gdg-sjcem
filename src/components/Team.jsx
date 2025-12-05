@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Tilt from 'react-parallax-tilt';
 import ImageWithLoader from './ImageWithLoader';
+import { getOptimizedImageUrl } from '../utils/imageOptimizer';
 import './Organizers.css';
 
 const Team = () => {
@@ -163,7 +164,7 @@ const Team = () => {
                 >
                     {org.image ? (
                         <ImageWithLoader
-                            src={org.image}
+                            src={getOptimizedImageUrl(org.image, 400)}
                             alt={org.name}
                             style={{ width: '100%', height: '100%', borderRadius: '50%' }}
                         />
@@ -233,7 +234,7 @@ const Team = () => {
                                 }}>
                                 {selectedOrganizer.image ? (
                                     <ImageWithLoader
-                                        src={selectedOrganizer.image}
+                                        src={getOptimizedImageUrl(selectedOrganizer.image, 600)}
                                         alt={selectedOrganizer.name}
                                         style={{ width: '100%', height: '100%', borderRadius: '50%' }}
                                     />
