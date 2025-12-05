@@ -26,9 +26,10 @@ const Navbar = () => {
           <a href="/#about" onClick={() => setMenuOpen(false)}>About</a>
           <a href="/#events" onClick={() => setMenuOpen(false)}>Events</a>
           <Link to="/gallery" onClick={() => setMenuOpen(false)}>Gallery</Link>
+          <Link to="/team" onClick={() => setMenuOpen(false)}>Team</Link>
           <a href="/#organizers" onClick={() => setMenuOpen(false)}>Organizers</a>
           <a href="/#contact" onClick={() => setMenuOpen(false)}>Contact</a>
-          <button className="btn btn-primary join-btn">Join Chapter</button>
+          <a href="https://gdg.community.dev/gdg-on-campus-st-john-college-of-engineering-and-management-autonomous-palghar-india/" target="_blank" rel="noreferrer" className="btn btn-primary join-btn">Join Chapter</a>
         </div>
 
         <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>

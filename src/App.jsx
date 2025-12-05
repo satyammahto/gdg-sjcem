@@ -14,9 +14,12 @@ import Terms from './components/Terms';
 import Gallery from './components/Gallery';
 import Contact from './components/Contact';
 import CommunityGuidelines from './components/CommunityGuidelines';
+import Team from './components/Team';
+import JoinTeam from './components/JoinTeam';
 
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
+import ScrollToTop from './components/ScrollToTop';
 
 const Home = () => (
   <>
@@ -57,10 +60,12 @@ function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/team" element={<Team />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-and-conditions" element={<Terms />} />
               <Route path="/community-guidelines" element={<CommunityGuidelines />} />
+              <Route path="/join" element={<JoinTeam />} />
             </Routes>
             <Footer />
             <BackToTop />

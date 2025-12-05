@@ -33,5 +33,8 @@ We welcome contributions from the community! To contribute, please follow these 
 **Made by Dhiraj Chaudhari**
 *Lead Developer & Maintainer*
 
+## 📧 Contact
+For more info, contact: **gdg@sjcem.edu.in**
+
 ---
 © 2025 GDG on Campus SJCEM. All rights reserved.

@@ -1,0 +1,259 @@
+import React, { useState, useEffect } from 'react';
+import Tilt from 'react-parallax-tilt';
+import './Organizers.css';
+
+const Team = () => {
+    const [selectedOrganizer, setSelectedOrganizer] = useState(null);
+
+    // Lock body scroll when modal is open
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        if (selectedOrganizer) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+    }, [selectedOrganizer]);
+
+    const facultyAdvisor = [
+        {
+            name: 'Dr. Sunny Sall',
+            role: 'Faculty Advisor & HOD Computer Engineering',
+            image: 'https://i.ibb.co/RTNCNWTD/file-2.jpg',
+            bio: 'Head of Department, Computer Engineering. Guiding the GDG on Campus chapter to excellence.',
+            twitter: null
+        }
+    ];
+
+    const coreTeam = [
+        {
+            name: 'Dhiraj Chaudhari',
+            role: 'GDGoC Organizer',
+            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/dhiraj_chaudhari.jpeg',
+            twitter: 'https://twitter.com/DhirajC39511965',
+            bio: 'Passionate about building communities and empowering students through technology.'
+        },
+        {
+            name: 'Aayush Bari',
+            role: 'Co-Organizer',
+            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/aayush_bari.jpg',
+            twitter: 'https://twitter.com/aayush_bari02',
+            bio: 'Tech enthusiast and community builder.'
+        }
+    ];
+
+    const techTeam = [
+        { name: 'Sumedh Patil', role: 'Technical Head', image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sumedh_patil_CV1e5fD.png' },
+        { name: 'Shashikant Rajput', role: 'Web Lead' },
+        { name: 'Prathamesh Jakkula', role: 'AIML/DSA Lead', image: 'https://media.licdn.com/dms/image/v2/D4D03AQEq9KDUDMDm9g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1727442836862?e=2147483647&v=beta&t=jYbosW2CKm2-yxozapKCka6dc6NDoNAUi3iyc4wBTWY' },
+        { name: 'Hitanshu Vaidya', role: 'AI/ML Lead' },
+        { name: 'Ramesh Choudhary', role: 'Tech Coordinator' },
+        { name: 'Prashant Yadav', role: 'App Lead' },
+        { name: 'Satyam R Tiwari', role: 'Event Coordinator' },
+        { name: 'Satyam Ashok Mahto', role: 'Volunteer' },
+        { name: 'Rudra Kushal Jaikar', role: 'Volunteer' },
+        { name: 'Kunal Bhandarkar', role: 'Tech Member' },
+        { name: 'Riya Singh', role: 'Tech Member' },
+        { name: 'Sairaj Khade', role: 'Tech Member' },
+        { name: 'Anushri Sane', role: 'Tech Member' },
+        { name: 'Saiyed Furquanahmed', role: 'Tech Lead' },
+        { name: 'Sakshi Mhatre', role: 'Volunteer' },
+        { name: 'Saish Mekal', role: 'Web Dev Lead' }
+    ];
+
+    const eventsTeam = [
+        { name: 'Rupesh Nandale', role: 'Events & Operations Head', image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/rupesh_nandale_eQDyo0t.jpeg' },
+        { name: 'Lokesh Rane', role: 'Outreach Coordinator' },
+        { name: 'Sahil Dongre', role: 'Volunteer' },
+        { name: 'Mihir Pimple', role: 'Logistic Manager' },
+        { name: 'Darshan Repale', role: 'Volunteer' },
+        { name: 'Kamlesh Choudhary', role: 'Volunteer' },
+        { name: 'Vighnesh Rane', role: 'Member' },
+        { name: 'Neha Parab', role: 'Coordinator' },
+        { name: 'Jyoti Awasthi', role: 'Volunteer' },
+        { name: 'Siddhant Koli', role: 'Manager' },
+        { name: 'Smital Raut', role: 'Volunteer' },
+        { name: 'Rajendra Rajput', role: 'Member' },
+        { name: 'Shivprasad Umbare', role: 'Manager' },
+        { name: 'Tejas Bhavthankar', role: 'Coordinator' },
+        { name: 'Vidhi Jain', role: 'Coordinator' },
+        { name: 'Upasana Meher', role: 'Member' },
+        { name: 'Jowin Mascarenhas', role: 'Media/Volunteer' },
+        { name: 'Neej Patel', role: 'Member' }
+    ];
+
+    const communityTeam = [
+        { name: 'Sahas Bochare', role: 'Community Head', image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sahas_bochare_EIH7Urf.jpg' },
+        { name: 'Sejal Rai', role: 'Marketing Head', image: 'https://media.licdn.com/dms/image/v2/D4E03AQE0pqh_npE7bQ/profile-displayphoto-scale_200_200/B4EZlln7rdKQAY-/0/1758346591904?e=1766620800&v=beta&t=Z8phlcanXrqhmSGB_Q7PPxypHkc12KSHRogFe9aD4k0' },
+        { name: 'Vaibhav Somanna', role: 'Community Coordinator' },
+        { name: 'Vaishnavi Khandagale', role: 'PR Member' },
+        { name: 'Tanaya Bagade', role: 'Member' },
+        { name: 'Saanj Bari', role: 'PR Member' },
+        { name: 'Sadaf Asar', role: 'Member' },
+        { name: 'Prachi Rambriksh', role: 'Member' },
+        { name: 'Pratishtha Upadhyay', role: 'Member' },
+        { name: 'Devyani Jadhav', role: 'Volunteer' },
+        { name: 'Rupali Kashid', role: 'Ambassador' },
+        { name: 'S. Madhav', role: 'Volunteer' },
+        { name: 'Priti Vishwakarma', role: 'PR Member' },
+        { name: 'Dev Sehgal', role: 'PR & Outreach Manager' }
+    ];
+
+    const mediaTeam = [
+        { name: 'Abhijeet Rogye', role: 'Design & Media Head', image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/abhijeet_rogye_DhOJ3Wv.jpg' },
+        { name: 'Manasvi Kadu', role: 'Social Media Head', image: 'https://media.licdn.com/dms/image/v2/D4D35AQEmVUB1ryOArA/profile-framedphoto-shrink_800_800/B4DZqM3HvqH0Ag-/0/1763299851612?e=1765569600&v=beta&t=8jkpW_MOY-oNMI8sTZGlbg_BIkk5ab_X3iAyXL2Th9s' },
+        { name: 'Devanshu Pal', role: 'Social Media Manager' },
+        { name: 'Sai Deepak Alim', role: 'Volunteer' },
+        { name: 'Siddhant Meher', role: 'Media & Design Lead' },
+        { name: 'Vidhisha Sonar', role: 'Design Member' },
+        { name: 'Kushal Mali', role: 'Member', image: 'https://media.licdn.com/dms/image/v2/D4D03AQEnJP7XBOHz6w/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1707369848628?e=1766620800&v=beta&t=tjxCvW6Wm9FvWWgvKd3B_rpR-hDgn5qWuui8xi8e6Ps' },
+        { name: 'Juee Patil', role: 'Member' },
+        { name: 'Viraj Tamhanekar', role: 'Media Member' },
+        { name: 'Aarchi Pimple', role: 'Graphic Designer' },
+        { name: 'Shivanshu Mishra', role: 'Media & Design Lead' },
+        { name: 'Tanishka Gharat', role: 'Volunteer' },
+        { name: 'Viren Soni', role: 'Member' },
+        { name: 'Parveen Shaikh', role: 'Volunteer' }
+    ];
+
+    const contentTeam = [
+        { name: 'Aleena Joji', role: 'Content Head' },
+        { name: 'Siddhi Akre', role: 'Coordinator' },
+        { name: 'Rutuja Gharat', role: 'Technical Writer' },
+        { name: 'Durvesh Vinherkar', role: 'Content Lead' },
+        { name: 'Ilf Bhimani', role: 'Member' },
+        { name: 'Ayushi Shukla', role: 'Member' },
+        { name: 'Prem Nayi', role: 'Coordinator' },
+        { name: 'Ritika Chaurasiya', role: 'Member' },
+        { name: 'Rashmi Chaudhari', role: 'Member' }
+    ];
+
+
+    const getInitials = (name) => {
+        return name.split(' ').map(n => n[0]).join('').substring(0, 2);
+    };
+
+    const renderOrganizerCard = (org, index) => (
+        <Tilt
+            key={index}
+            tiltMaxAngleX={5}
+            tiltMaxAngleY={5}
+            perspective={1000}
+            scale={1.02}
+            transitionSpeed={400}
+            className="organizer-tilt-card"
+            data-aos="fade-up"
+        >
+            <li
+                className="people-card general-card"
+                onClick={() => setSelectedOrganizer(org)}
+            >
+                <div
+                    className="organizer-avatar-bg"
+                    style={{
+                        backgroundColor: org.image ? 'transparent' : '#e8f0fe',
+                        color: '#1a73e8'
+                    }}
+                >
+                    {org.image ? (
+                        <img
+                            src={org.image}
+                            alt={org.name}
+                            loading="lazy"
+                            decoding="async"
+                            style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
+                        />
+                    ) : (
+                        <span className="initials">{getInitials(org.name)}</span>
+                    )}
+                </div>
+
+                <div className="People-styles-info">
+                    <h2 className="organizer-name-premium" dir="auto">{org.name}</h2>
+                    <p className="organizer-role-premium" dir="auto">{org.role}</p>
+                </div>
+            </li>
+        </Tilt>
+    );
+
+    return (
+        <section className="section organizers-section theme-provider-namespace-people-card" style={{ paddingTop: '120px' }}>
+            <div className="container">
+                <h1 className="section-title" data-aos="fade-up">Visionary Leaders</h1>
+                <ul className="organizers-grid faculty-grid">
+                    {facultyAdvisor.map(renderOrganizerCard)}
+                </ul>
+
+                <h1 className="section-title" data-aos="fade-up" style={{ marginTop: '3rem' }}>Core Team</h1>
+                <ul className="organizers-grid">
+                    {coreTeam.map(renderOrganizerCard)}
+                </ul>
+
+                <div className="team-divider" style={{ margin: '4rem 0' }}></div>
+
+                <h2 className="section-title team-title" data-aos="fade-up">Tech Wizards 💻</h2>
+                <ul className="organizers-grid team-grid">
+                    {techTeam.map(renderOrganizerCard)}
+                </ul>
+
+                <h2 className="section-title team-title" data-aos="fade-up" style={{ marginTop: '3rem' }}>Events & Operations 🚀</h2>
+                <ul className="organizers-grid team-grid">
+                    {eventsTeam.map(renderOrganizerCard)}
+                </ul>
+
+                <h2 className="section-title team-title" data-aos="fade-up" style={{ marginTop: '3rem' }}>Community & Marketing 🤝</h2>
+                <ul className="organizers-grid team-grid">
+                    {communityTeam.map(renderOrganizerCard)}
+                </ul>
+
+                <h2 className="section-title team-title" data-aos="fade-up" style={{ marginTop: '3rem' }}>Media & Design 🎨</h2>
+                <ul className="organizers-grid team-grid">
+                    {mediaTeam.map(renderOrganizerCard)}
+                </ul>
+
+                <h2 className="section-title team-title" data-aos="fade-up" style={{ marginTop: '3rem' }}>Content & Research 📝</h2>
+                <ul className="organizers-grid team-grid">
+                    {contentTeam.map(renderOrganizerCard)}
+                </ul>
+
+            </div>
+
+            {/* Modal - Simplified for large list usage */}
+            {selectedOrganizer && (
+                <div className="organizer-modal-overlay" onClick={() => setSelectedOrganizer(null)}>
+                    <div className="organizer-modal-content" onClick={(e) => e.stopPropagation()}>
+                        <button className="modal-close-btn" onClick={() => setSelectedOrganizer(null)}>&times;</button>
+                        <div className="modal-header">
+                            <div className="modal-avatar"
+                                style={{
+                                    backgroundColor: selectedOrganizer.image ? 'transparent' : '#4285F4'
+                                }}>
+                                {selectedOrganizer.image ? (
+                                    <img
+                                        src={selectedOrganizer.image}
+                                        alt={selectedOrganizer.name}
+                                        loading="lazy"
+                                        decoding="async"
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
+                                    />
+                                ) : (
+                                    <span className="initials">{getInitials(selectedOrganizer.name)}</span>
+                                )}
+                            </div>
+                        </div>
+                        <div className="modal-body">
+                            <h2 className="modal-name">{selectedOrganizer.name}</h2>
+                            <p className="modal-role">{selectedOrganizer.role}</p>
+                            {selectedOrganizer.bio && <p className="modal-bio">{selectedOrganizer.bio}</p>}
+                            {selectedOrganizer.twitter && (
+                                <a href={selectedOrganizer.twitter} target="_blank" rel="noreferrer" className="modal-social-link">View Profile</a>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
+        </section>
+    );
+};
+
+export default Team;

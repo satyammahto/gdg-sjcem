@@ -12,7 +12,7 @@ const Events = () => {
             type: 'Info session',
             title: 'TechSprint Hackathon 2025 – Kick-Off Session | GDG on Campus SJCEM',
             description: 'Welcome to the official Kick-Off Session of TechSprint 2025! Hosted by GDG on Campus – St. John College of Engineering &...',
-            image: 'https://i.ibb.co/bjc6f31T/Generated-Image-December-04-2025-8-46-PM.jpg',
+            image: 'https://i.ibb.co/nMk7f1mG/blob-Iq7f-MFD.webp',
             showTimer: true,
             buttons: [
                 {
@@ -37,7 +37,8 @@ const Events = () => {
             title: 'Google Cloud Study Jams – Online Info Session',
             location: 'GDG on Campus St. John College of Engineering and Management Autonomous - Palghar, India',
             materialsLink: 'https://docs.google.com/presentation/d/1goUL1QPjTLqMbLyKFuzTORWKXmkiCJ7K_gBM2UG61z0/edit?usp=sharing',
-            registrations: 152
+            registrations: 152,
+            image: 'https://i.ibb.co/Ng0NCJvj/blob-Pca-Hqc5.webp'
         },
         {
             id: 2,
@@ -46,7 +47,8 @@ const Events = () => {
             title: 'Info Session: GDG on Campus – SJCEM | Kick-off 2025',
             location: 'GDG on Campus St. John College of Engineering and Management Autonomous - Palghar, India',
             materialsLink: 'https://docs.google.com/presentation/d/1HUS16B9qQuLxBBUgkEHog2-ROPqccoG7b_ZpW4jS-y4/edit?usp=sharing',
-            registrations: 200
+            registrations: 200,
+            image: 'https://i.ibb.co/nMk7f1mG/blob-Iq7f-MFD.webp'
         }
     ];
 
@@ -72,7 +74,14 @@ const Events = () => {
                                     data-aos="flip-left"
                                     data-aos-delay={index * 100}
                                 >
-                                    <div className="event-image" style={{ backgroundImage: 'url(' + event.image + ')' }}>
+                                    <div className="event-image">
+                                        <img
+                                            src={event.image}
+                                            alt={event.title}
+                                            loading="lazy"
+                                            decoding="async"
+                                            style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: 0 }}
+                                        />
                                         <div className="event-date-badge">
                                             <span className="day">{event.date.split(' ')[0]}</span>
                                             <span className="month">{event.date.split(' ')[1]}</span>

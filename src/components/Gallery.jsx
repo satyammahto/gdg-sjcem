@@ -29,7 +29,7 @@ const Gallery = () => {
                 <div className="gallery-grid">
                     {images.map((src, index) => (
                         <div key={index} className="gallery-item" data-aos="fade-up" data-aos-delay={index * 50}>
-                            <img src={src} alt={`Gallery Event ${index + 1}`} loading="lazy" />
+                            <img src={src} alt={`Gallery Event ${index + 1}`} loading="lazy" decoding="async" />
                             <div className="gallery-overlay">
                                 <span>GDG Event</span>
                             </div>
