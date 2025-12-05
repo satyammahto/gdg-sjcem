@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Tilt from 'react-parallax-tilt';
+import ImageWithLoader from './ImageWithLoader';
 import './Organizers.css';
 
 const Team = () => {
@@ -43,7 +44,13 @@ const Team = () => {
     ];
 
     const techTeam = [
-       
+        {
+            name: "Furquan Saiyed",
+            role: "Technical Member",
+            image: "https://i.ibb.co/PsTLNkfk/1761723296279.jpg",
+            twitter: "https://www.linkedin.com/in/furquan-s-9331372a6",
+            bio: "I enjoy learning new technologies and helping others grow in the developer community"
+        },
         { name: 'Sumedh Patil', role: 'Technical Head', image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sumedh_patil_CV1e5fD.png' },
         { name: 'Shashikant Rajput', role: 'Web Lead' },
         { name: 'Prathamesh Jakkula', role: 'AIML/DSA Lead', image: 'https://media.licdn.com/dms/image/v2/D4D03AQEq9KDUDMDm9g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1727442836862?e=2147483647&v=beta&t=jYbosW2CKm2-yxozapKCka6dc6NDoNAUi3iyc4wBTWY' },
@@ -51,13 +58,6 @@ const Team = () => {
         { name: 'Ramesh Choudhary', role: 'Tech Coordinator' },
         { name: 'Prashant Yadav', role: 'App Lead' },
         { name: 'Satyam R Tiwari', role: 'Event Coordinator' },
-         {
-            name: "Furquan Saiyed",
-            role: "Technical Member",
-            image: "https://i.ibb.co/PsTLNkfk/1761723296279.jpg",
-            twitter: "https://www.linkedin.com/in/furquan-s-9331372a6",
-            bio: "I enjoy learning new technologies and helping others grow in the developer community"
-        },
         { name: 'Satyam Ashok Mahto', role: 'Volunteer' },
         { name: 'Rudra Kushal Jaikar', role: 'Volunteer' },
         { name: 'Kunal Bhandarkar', role: 'Tech Member' },
@@ -135,7 +135,6 @@ const Team = () => {
         { name: 'Rashmi Chaudhari', role: 'Member' }
     ];
 
-
     const getInitials = (name) => {
         return name.split(' ').map(n => n[0]).join('').substring(0, 2);
     };
@@ -163,12 +162,10 @@ const Team = () => {
                     }}
                 >
                     {org.image ? (
-                        <img
+                        <ImageWithLoader
                             src={org.image}
                             alt={org.name}
-                            loading="lazy"
-                            decoding="async"
-                            style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
+                            style={{ width: '100%', height: '100%', borderRadius: '50%' }}
                         />
                     ) : (
                         <span className="initials">{getInitials(org.name)}</span>
@@ -222,10 +219,9 @@ const Team = () => {
                 <ul className="organizers-grid team-grid">
                     {contentTeam.map(renderOrganizerCard)}
                 </ul>
-
             </div>
 
-            {/* Modal - Simplified for large list usage */}
+            {/* Modal */}
             {selectedOrganizer && (
                 <div className="organizer-modal-overlay" onClick={() => setSelectedOrganizer(null)}>
                     <div className="organizer-modal-content" onClick={(e) => e.stopPropagation()}>
@@ -236,12 +232,10 @@ const Team = () => {
                                     backgroundColor: selectedOrganizer.image ? 'transparent' : '#4285F4'
                                 }}>
                                 {selectedOrganizer.image ? (
-                                    <img
+                                    <ImageWithLoader
                                         src={selectedOrganizer.image}
                                         alt={selectedOrganizer.name}
-                                        loading="lazy"
-                                        decoding="async"
-                                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
+                                        style={{ width: '100%', height: '100%', borderRadius: '50%' }}
                                     />
                                 ) : (
                                     <span className="initials">{getInitials(selectedOrganizer.name)}</span>
