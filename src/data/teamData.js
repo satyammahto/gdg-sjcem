@@ -39,7 +39,7 @@ export const teamData = [
 
     // Community Department
     { name: "Sahas Santosh Bochare", role: "Community Head", department: "Community" },
-    { name: "Sejal Rai", role: "PR & Outreach Manager", department: "Community" },
+    { name: "Sejal Rai", role: "PR & Outreach Lead", department: "Community" },
     { name: "Vaibhav Somanna", role: "Community Coordinator", department: "Community" },
     { name: "Vaishnavi H Khandagale", role: "Community Member (PR)", department: "Community" },
     { name: "Tanaya Mohan Bagade", role: "Community Member", department: "Community" },

@@ -21,6 +21,8 @@ const Organizers = () => {
             role: 'Faculty Advisor & HOD Computer Engineering',
             image: 'https://i.ibb.co/RTNCNWTD/file-2.jpg',
             bio: 'Head of Department, Computer Engineering. Guiding the GDG on Campus chapter to excellence.',
+            linkedin: '#',
+            google_scholar: 'https://scholar.google.com/citations?user=EwZhrZITmhFEC',
             twitter: null
         }
     ];
@@ -31,6 +33,9 @@ const Organizers = () => {
             role: 'GDGoC Organizer',
             image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/dhiraj_chaudhari.jpeg',
             twitter: 'https://twitter.com/DhirajC39511965',
+            linkedin: 'https://www.linkedin.com/in/dhirajchaudhari20/',
+            github: 'https://github.com/dhirajchaudhari20',
+            instagram: 'https://www.instagram.com/the_alpha_engineer/',
             bio: 'Passionate about building communities and empowering students through technology.'
         },
         {
@@ -64,9 +69,19 @@ const Organizers = () => {
             image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sahas_bochare_EIH7Urf.jpg'
         },
         {
+            name: 'Manasvi Kadu',
+            role: 'Social Media Head',
+            image: 'https://i.ibb.co/3yk1pRCB/IMG-20251206-153035.jpg',
+            linkedin: 'https://www.linkedin.com/in/manasvi-kadu-8729b3286',
+            github: 'https://github.com/AlgoWhizMk',
+            twitter: 'https://x.com/manasvi52370?t=HBTufU3UyjMkyQP0ZwmUbA&s=09',
+            bio: 'Bringing clean design, creative ideas, and an eye for trends to elevate GDG on Campus SJCEM’s social media identity.'
+        },
+        {
             name: 'Sejal Rai',
-            role: 'Marketing Head',
-            image: 'https://media.licdn.com/dms/image/v2/D4E03AQE0pqh_npE7bQ/profile-displayphoto-scale_200_200/B4EZlln7rdKQAY-/0/1758346591904?e=1766620800&v=beta&t=Z8phlcanXrqhmSGB_Q7PPxypHkc12KSHRogFe9aD4k0'
+            role: 'PR & Outreach Lead',
+            image: 'https://media.licdn.com/dms/image/v2/D4E03AQE0pqh_npE7bQ/profile-displayphoto-scale_200_200/B4EZlln7rdKQAY-/0/1758346591904?e=1766620800&v=beta&t=Z8phlcanXrqhmSGB_Q7PPxypHkc12KSHRogFe9aD4k0',
+            linkedin: 'https://www.linkedin.com/in/sejal-rai-18334a321/'
         }
     ];
 
@@ -112,6 +127,34 @@ const Organizers = () => {
                 <div className="People-styles-info">
                     <h2 className="organizer-name-premium" dir="auto">{org.name}</h2>
                     <p className="organizer-role-premium" dir="auto">{org.role}</p>
+
+                    <div className="card-socials" onClick={(e) => e.stopPropagation()}>
+                        {org.linkedin && (
+                            <a href={org.linkedin} target="_blank" rel="noreferrer" className="social-icon linkedin">
+                                <i className="fab fa-linkedin-in"></i>
+                            </a>
+                        )}
+                        {org.github && (
+                            <a href={org.github} target="_blank" rel="noreferrer" className="social-icon github">
+                                <i className="fab fa-github"></i>
+                            </a>
+                        )}
+                        {org.twitter && (
+                            <a href={org.twitter} target="_blank" rel="noreferrer" className="social-icon twitter">
+                                <i className="fab fa-twitter"></i>
+                            </a>
+                        )}
+                        {org.instagram && (
+                            <a href={org.instagram} target="_blank" rel="noreferrer" className="social-icon instagram">
+                                <i className="fab fa-instagram"></i>
+                            </a>
+                        )}
+                        {org.google_scholar && (
+                            <a href={org.google_scholar} target="_blank" rel="noreferrer" className="social-icon google-scholar" title="Google Scholar">
+                                <i className="fas fa-graduation-cap"></i>
+                            </a>
+                        )}
+                    </div>
                 </div>
             </li>
         </Tilt>
@@ -130,7 +173,7 @@ const Organizers = () => {
                     {coreTeam.map(renderOrganizerCard)}
                 </ul>
 
-                <h1 className="section-title" data-aos="fade-up" style={{ marginTop: '3rem' }}>Department Leads</h1>
+                <h1 className="section-title" data-aos="fade-up" style={{ marginTop: '3rem', color: '#FBBC04' }}>Department Leads</h1>
                 <ul className="organizers-grid team-grid">
                     {departmentLeads.map(renderOrganizerCard)}
                 </ul>
@@ -175,9 +218,33 @@ const Organizers = () => {
                             <h2 className="modal-name">{selectedOrganizer.name}</h2>
                             <p className="modal-role">{selectedOrganizer.role}</p>
                             {selectedOrganizer.bio && <p className="modal-bio">{selectedOrganizer.bio}</p>}
-                            {selectedOrganizer.twitter && (
-                                <a href={selectedOrganizer.twitter} target="_blank" rel="noreferrer" className="modal-social-link">View Profile</a>
-                            )}
+                            <div className="card-socials" style={{ justifyContent: 'center', marginTop: '1rem' }}>
+                                {selectedOrganizer.linkedin && (
+                                    <a href={selectedOrganizer.linkedin} target="_blank" rel="noreferrer" className="social-icon linkedin" title="LinkedIn">
+                                        <i className="fab fa-linkedin-in"></i>
+                                    </a>
+                                )}
+                                {selectedOrganizer.github && (
+                                    <a href={selectedOrganizer.github} target="_blank" rel="noreferrer" className="social-icon github" title="GitHub">
+                                        <i className="fab fa-github"></i>
+                                    </a>
+                                )}
+                                {selectedOrganizer.twitter && (
+                                    <a href={selectedOrganizer.twitter} target="_blank" rel="noreferrer" className="social-icon twitter" title="Twitter/X">
+                                        <i className="fab fa-twitter"></i>
+                                    </a>
+                                )}
+                                {selectedOrganizer.instagram && (
+                                    <a href={selectedOrganizer.instagram} target="_blank" rel="noreferrer" className="social-icon instagram" title="Instagram">
+                                        <i className="fab fa-instagram"></i>
+                                    </a>
+                                )}
+                                {selectedOrganizer.google_scholar && (
+                                    <a href={selectedOrganizer.google_scholar} target="_blank" rel="noreferrer" className="social-icon google-scholar" title="Google Scholar">
+                                        <i className="fas fa-graduation-cap"></i>
+                                    </a>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -32,18 +32,27 @@ const Team = () => {
     const coreTeam = [
         {
             name: 'Dhiraj Chaudhari',
-            role: 'Organiser',
+            role: 'GDGoC Organizer',
             image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/dhiraj_chaudhari.jpeg',
             twitter: 'https://twitter.com/DhirajC39511965',
+            linkedin: 'https://www.linkedin.com/in/dhirajchaudhari20/',
+            github: 'https://github.com/dhirajchaudhari20',
+            instagram: 'https://www.instagram.com/the_alpha_engineer/',
             bio: 'Passionate about building communities and empowering students through technology.'
         },
         {
             name: 'Aayush Bari',
-            role: 'Co-Organiser',
-            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/aayush_bari.jpg',
-            twitter: 'https://twitter.com/aayush_bari02',
-            bio: 'Tech enthusiast and community builder.'
-        },
+            role: 'Co-Organizer',
+            image: 'https://i.ibb.co/qFpsP4MF/Profile-Pic.jpg',
+            twitter: 'https://x.com/aayush_bari01',
+            linkedin: 'https://www.linkedin.com/in/aayush-bari/',
+            github: 'https://github.com/Aayush0735',
+            instagram: 'https://www.instagram.com/aayush.bari.585',
+            bio: 'I work at the intersection of Agentic AI, TensorFlow, and RAG, building solutions that are scalable, performant, and meaningful. I enjoy sharing knowledge through workshops, events, and mentorship, helping students grow in emerging tech. As GDG Co-Organizer, I foster community innovation and hands-on learning.'
+        }
+    ];
+
+    const departmentLeads = [
         {
             name: 'Abhijeet Rogye',
             role: 'Design & Media Head',
@@ -55,14 +64,29 @@ const Team = () => {
             image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sumedh_patil_CV1e5fD.png'
         },
         {
+            name: 'Rupesh Nandale',
+            role: 'Events & Operations Head',
+            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/rupesh_nandale_eQDyo0t.jpeg'
+        },
+        {
             name: 'Sahas Bochare',
-            role: 'Community & Marketing Head',
+            role: 'Community Head',
             image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sahas_bochare_EIH7Urf.jpg'
         },
         {
-            name: 'Rupesh Nandale',
-            role: 'Event & Operations Head',
-            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/rupesh_nandale_eQDyo0t.jpeg'
+            name: 'Manasvi Kadu',
+            role: 'Social Media Head',
+            image: 'https://i.ibb.co/3yk1pRCB/IMG-20251206-153035.jpg',
+            linkedin: 'https://www.linkedin.com/in/manasvi-kadu-8729b3286',
+            github: 'https://github.com/AlgoWhizMk',
+            twitter: 'https://x.com/manasvi52370?t=HBTufU3UyjMkyQP0ZwmUbA&s=09',
+            instagram: 'https://www.instagram.com/_manasv.iii?igsh=MWl2MDA0eGk1NzgxOA==',
+            bio: 'Bringing clean design, creative ideas, and an eye for trends to elevate GDG on Campus SJCEM’s social media identity.'
+        },
+        {
+            name: 'Sejal Rai',
+            role: 'PR & Outreach Lead',
+            image: 'https://media.licdn.com/dms/image/v2/D4E03AQE0pqh_npE7bQ/profile-displayphoto-scale_200_200/B4EZlln7rdKQAY-/0/1758346591904?e=1766620800&v=beta&t=Z8phlcanXrqhmSGB_Q7PPxypHkc12KSHRogFe9aD4k0'
         }
     ];
 
@@ -75,19 +99,29 @@ const Team = () => {
         {
             name: 'Prathamesh L. Jakkula',
             role: 'AIML/DSA Lead',
-            image: 'https://media.licdn.com/dms/image/v2/D4D03AQEq9KDUDMDm9g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1727442836862?e=2147483647&v=beta&t=jYbosW2CKm2-yxozapKCka6dc6NDoNAUi3iyc4wBTWY'
+            image: 'https://i.ibb.co/35jPBNjj/profile.jpg',
+            linkedin: 'https://www.linkedin.com/in/prathamesh-jakkula-496a39285/',
+            github: 'https://github.com/Prathamesh01110',
+            twitter: 'https://x.com/Prathamesh01_',
+            bio: 'Started as a participant, became a finalist, then a winner; now I mentor and judge hackathons, with still a long way to go. I enjoy working with Google’s AI tools, Building agents, and practical ML projects while helping others learn faster.'
         },
         { name: 'Shashikant Rajput', role: 'Web Development Lead' },
         { name: 'Prashant Yadav', role: 'App Lead' },
         { name: 'Hitanshu Vaidya', role: 'Member' },
         {
             name: 'Kunal Bhandarkar',
-            role: 'Member',
+            role: 'Technical Team Volunteer',
             image: 'https://i.ibb.co/fYyRkXS9/IMG-20250820-145505.jpg',
             linkedin: 'https://www.linkedin.com/in/kunal-bhandarkar-24ba3a2b3'
         },
         { name: 'Riya Umesh Singh', role: 'Member' },
-        { name: 'Sairaj Ganpat Khade', role: 'Member' },
+        {
+            name: 'Sairaj Ganpat Khade',
+            role: 'Tech Member',
+            image: 'https://i.ibb.co/BxrR0JZ/1000036970.jpg',
+            linkedin: 'https://www.linkedin.com/in/sairaj-khade-95b9b6373',
+            github: 'https://github.com/Sairajgit25'
+        },
         { name: 'Anushri Amul Sane', role: 'Member' },
         {
             name: 'Saiyed Furquanahmed Barkatali',
@@ -103,7 +137,15 @@ const Team = () => {
             linkedin: 'https://www.linkedin.com/in/satyam-tiwari-219583276/',
             github: 'https://github.com/Satyamrtiwari'
         },
-        { name: 'Ramesh Kheemaram Choudhary', role: 'Volunteer' },
+        {
+            name: 'Ramesh Kheemaram Choudhary',
+            role: 'Technical member',
+            image: 'https://i.ibb.co/dwB15YnD/my-pic.jpg',
+            linkedin: 'https://www.linkedin.com/in/ramesh-choudhary-397025291',
+            github: 'https://github.com/RameshKChoudhary',
+            instagram: 'https://www.instagram.com/ramesh__07__05',
+            bio: 'Ramesh Choudhary is a Frontend Developer and AIML Engineering student skilled in building responsive and user-friendly web applications. With strong expertise in React.js, JavaScript, Python, and API integration, he focuses on creating practical and scalable digital solutions.'
+        },
         { name: 'Saish Mekal', role: 'Volunteer' },
         { name: 'Satyam Ashok Mahto', role: 'Volunteer' }
     ];
@@ -117,7 +159,13 @@ const Team = () => {
         { name: 'Vighnesh Rane', role: 'Member' },
         { name: 'Neej Patel', role: 'Member' },
         { name: 'Sahil Dongre', role: 'Volunteer' },
-        { name: 'Darshan Arun Repale', role: 'Volunteer' },
+        {
+            name: 'Darshan Arun Repale',
+            role: 'Events and Operations Department',
+            image: 'https://i.ibb.co/Q7B8LByd/1000227605.jpg',
+            linkedin: 'https://www.linkedin.com/in/darshan-repale-89b1bb321',
+            github: 'https://github.com/DarshanR1234'
+        },
         { name: 'Kamlesh S. Choudhary', role: 'Volunteer' },
         { name: 'Rajendra Singh Rajput', role: 'Volunteer' },
         { name: 'Tejas D. Bhavthankar', role: 'Volunteer' },
@@ -140,14 +188,26 @@ const Team = () => {
 
     const communityTeam = [
         { name: 'Sahas Bochare', role: 'Community & Marketing Head', image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sahas_bochare_EIH7Urf.jpg' },
-        { name: 'Sejal Rai', role: 'PR & Outreach Manager', image: 'https://media.licdn.com/dms/image/v2/D4E03AQE0pqh_npE7bQ/profile-displayphoto-scale_200_200/B4EZlln7rdKQAY-/0/1758346591904?e=1766620800&v=beta&t=Z8phlcanXrqhmSGB_Q7PPxypHkc12KSHRogFe9aD4k0' },
+        {
+            name: 'Sejal Rai',
+            role: 'PR & Outreach Lead',
+            image: 'https://media.licdn.com/dms/image/v2/D4E03AQE0pqh_npE7bQ/profile-displayphoto-scale_200_200/B4EZlln7rdKQAY-/0/1758346591904?e=1766620800&v=beta&t=Z8phlcanXrqhmSGB_Q7PPxypHkc12KSHRogFe9aD4k0',
+            linkedin: 'https://www.linkedin.com/in/sejal-rai-18334a321/'
+        },
         { name: 'Tanaya Mohan Bagade', role: 'Partnership Manager' },
         { name: 'Sadaf Shakeel Asar', role: 'Community Coordinator' },
         { name: 'Vaibhav Somanna', role: 'Member' },
         { name: 'Vaishnavi Khandagale', role: 'Member' },
         { name: 'Saanj Dilsukh Bari', role: 'Member' },
         { name: 'Prachi R. Vishwakarma', role: 'Member' },
-        { name: 'Pratishtha Upadhyay', role: 'Member' },
+        {
+            name: 'Pratishtha Upadhyay',
+            role: 'Community and marketing member',
+            image: 'https://i.ibb.co/GjQ7LKr/1000108151.jpg',
+            linkedin: 'https://www.linkedin.com/in/pratishtha-upadhyay-ba42b4392',
+            instagram: 'https://www.instagram.com/disco_potato___',
+            bio: 'A second-year student who loves learning new tech skills. Excited to grow, collaborate, and explore opportunities through GDG.'
+        },
         { name: 'S. Madhav', role: 'Volunteer' },
         { name: 'Devyani Jadhav', role: 'Volunteer' },
         { name: 'Rupali Bharat Kashid', role: 'Volunteer' },
@@ -159,8 +219,25 @@ const Team = () => {
 
     const mediaTeam = [
         { name: 'Abhijeet Rogye', role: 'Design & Media Head', image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/abhijeet_rogye_DhOJ3Wv.jpg' },
-        { name: 'Manasvi Kadu', role: 'Co-Head', image: 'https://i.ibb.co/JwP5dRqM/IMG-2300.jpg' },
-        { name: 'Siddhant Kiran Meher', role: 'Graphic Designer' },
+        {
+            name: 'Manasvi Kadu',
+            role: 'Social Media Head',
+            image: 'https://i.ibb.co/3yk1pRCB/IMG-20251206-153035.jpg',
+            linkedin: 'https://www.linkedin.com/in/manasvi-kadu-8729b3286',
+            github: 'https://github.com/AlgoWhizMk',
+            twitter: 'https://x.com/manasvi52370?t=HBTufU3UyjMkyQP0ZwmUbA&s=09',
+            instagram: 'https://www.instagram.com/_manasv.iii?igsh=MWl2MDA0eGk1NzgxOA==',
+            bio: 'Bringing clean design, creative ideas, and an eye for trends to elevate GDG on Campus SJCEM’s social media identity.'
+        },
+        {
+            name: 'Siddhant Kiran Meher',
+            role: 'Graphic Designer',
+            image: 'https://i.ibb.co/Q3gRBMgj/EU2237020.jpg',
+            linkedin: 'https://www.linkedin.com/in/siddhant-meher-6921b127b',
+            github: 'https://github.com/siddhantmeher45-stack',
+            instagram: 'https://www.instagram.com/siddhu_1926',
+            twitter: 'https://x.com/SiddhantMeher7'
+        },
         { name: 'Aarchi C. Pimple', role: 'Graphic Designer' },
         { name: 'Devanshu Pramod Pal', role: 'Social Media Manager' },
         {
@@ -180,13 +257,27 @@ const Team = () => {
         { name: 'Tanishka Gharat', role: 'Volunteer' },
         { name: 'Parveen A. Shaikh', role: 'Volunteer' },
         { name: 'Viren Suresh Soni', role: 'Volunteer' },
-        { name: 'Kushal Haresh Mali', role: 'Volunteer', image: 'https://media.licdn.com/dms/image/v2/D4D03AQEnJP7XBOHz6w/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1707369848628?e=1766620800&v=beta&t=tjxCvW6Wm9FvWWgvKd3B_rpR-hDgn5qWuui8xi8e6Ps' }
+        {
+            name: 'Kushal Mali',
+            role: 'Media Member',
+            image: 'https://i.ibb.co/SwNjN9G2/DSC-2238.jpg',
+            linkedin: 'https://www.linkedin.com/in/kushal-mali-b109b12b3?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+            instagram: 'https://www.instagram.com/kushal9035?igsh=MTUyMWJrZ2I0eXlkOA==',
+            bio: "Hi, I'm Kushal Mali, a passionate member of GDG Media. I love exploring new trends, creating engaging content, and connecting with like-minded individuals. Let's collaborate and make a positive impact together! 📱💻"
+        }
     ];
 
     const contentTeam = [
         { name: 'Aleena Joji', role: 'Content Lead' },
         { name: 'Durvesh Suresh Vinherkar', role: 'Content Lead' },
-        { name: 'Rutuja Ramesh Gharat', role: 'Technical Writer' },
+        {
+            name: 'Rutuja Ramesh Gharat',
+            role: 'Technical Writer',
+            image: 'https://i.ibb.co/WNvns43P/IMG-20251013-WA0039.jpg',
+            linkedin: 'https://www.linkedin.com/in/rutuja-gharat-6b8375372',
+            github: 'https://github.com/RutujaGharat-11',
+            instagram: 'https://www.instagram.com/rutujagharat_11'
+        },
         {
             name: 'Siddhi Mahendra Akre',
             role: 'Member',
@@ -200,6 +291,11 @@ const Team = () => {
 
     const getInitials = (name) => {
         return name.split(' ').map(n => n[0]).join('').substring(0, 2);
+    };
+
+    const isLead = (role) => {
+        const r = role.toLowerCase();
+        return r.includes('head') || r.includes('lead') || r.includes('manager') || r.includes('co-organizer') || r.includes('organizer');
     };
 
     const renderOrganizerCard = (org, index) => (
@@ -276,6 +372,29 @@ const Team = () => {
         </Tilt>
     );
 
+    const renderTeamSection = (title, teamArray, animation) => {
+        const leads = teamArray.filter(m => isLead(m.role));
+        const members = teamArray.filter(m => !isLead(m.role));
+
+        return (
+            <React.Fragment key={title}>
+                <h2 className="section-title team-title" data-aos={animation} style={{ marginTop: '3rem' }}>{title}</h2>
+
+                {leads.length > 0 && (
+                    <ul className="organizers-grid team-grid" style={{ justifyContent: 'center', marginBottom: '2rem' }}>
+                        {leads.map((member, idx) => renderOrganizerCard(member, `lead-${idx}`))}
+                    </ul>
+                )}
+
+                {members.length > 0 && (
+                    <ul className="organizers-grid team-grid">
+                        {members.map((member, idx) => renderOrganizerCard(member, `mem-${idx}`))}
+                    </ul>
+                )}
+            </React.Fragment>
+        );
+    };
+
     return (
         <section className="section organizers-section theme-provider-namespace-people-card" style={{ paddingTop: '120px' }}>
             <div className="container">
@@ -289,32 +408,18 @@ const Team = () => {
                     {coreTeam.map(renderOrganizerCard)}
                 </ul>
 
+                <h1 className="section-title" data-aos="fade-up" style={{ marginTop: '3rem', color: '#FBBC04' }}>Department Leads</h1>
+                <ul className="organizers-grid department-leads-grid" style={{ justifyContent: 'center' }}>
+                    {departmentLeads.map(renderOrganizerCard)}
+                </ul>
+
                 <div className="team-divider" style={{ margin: '4rem 0' }}></div>
 
-                <h2 className="section-title team-title" data-aos="fade-right">Tech Wizards 💻</h2>
-                <ul className="organizers-grid team-grid">
-                    {techTeam.map(renderOrganizerCard)}
-                </ul>
-
-                <h2 className="section-title team-title" data-aos="fade-left" style={{ marginTop: '3rem' }}>Events & Operations 🚀</h2>
-                <ul className="organizers-grid team-grid">
-                    {eventsTeam.map(renderOrganizerCard)}
-                </ul>
-
-                <h2 className="section-title team-title" data-aos="fade-right" style={{ marginTop: '3rem' }}>Community & Marketing 🤝</h2>
-                <ul className="organizers-grid team-grid">
-                    {communityTeam.map(renderOrganizerCard)}
-                </ul>
-
-                <h2 className="section-title team-title" data-aos="fade-left" style={{ marginTop: '3rem' }}>Media & Design 🎨</h2>
-                <ul className="organizers-grid team-grid">
-                    {mediaTeam.map(renderOrganizerCard)}
-                </ul>
-
-                <h2 className="section-title team-title" data-aos="fade-right" style={{ marginTop: '3rem' }}>Content & Research 📝</h2>
-                <ul className="organizers-grid team-grid">
-                    {contentTeam.map(renderOrganizerCard)}
-                </ul>
+                {renderTeamSection("Tech Wizards 💻", techTeam, "fade-right")}
+                {renderTeamSection("Events & Operations 🚀", eventsTeam, "fade-left")}
+                {renderTeamSection("Community & Marketing 🤝", communityTeam, "fade-right")}
+                {renderTeamSection("Media & Design 🎨", mediaTeam, "fade-left")}
+                {renderTeamSection("Content & Research 📝", contentTeam, "fade-right")}
             </div>
 
             {/* Modal */}

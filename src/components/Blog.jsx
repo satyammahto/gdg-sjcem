@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './Blog.css';
 import BlogSubmission from './BlogSubmission';
+import aiFutureImg from '../assets/blog/ai-future.jpg';
+import googleCloudImg from '../assets/blog/google-cloud.jpg';
+import webDevImg from '../assets/blog/web-dev-2025.jpg';
 
 const Blog = () => {
     const [selectedPost, setSelectedPost] = useState(null);
@@ -27,7 +30,7 @@ const Blog = () => {
 
                 <p>As we move forward, integrating these models into our applications will become standard practice for GDG developers.</p>
             `,
-            image: "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_v0jB2gTyM-t7m9X7vF8Z8Zl8Zl8Zl8Zl8Zl8Zl8Zl8Zl8Zl8Zl8Zl8Zl8Zl8Zl8Zl8=s0-d"
+            image: aiFutureImg
         },
         {
             id: 2,
@@ -48,7 +51,7 @@ const Blog = () => {
 
                 <p>Starting with GCP is easier than you think. The free tier offers enough resources to host your portfolio or a small project for free!</p>
             `,
-            image: "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_uy_7z7z7z7z7z7z7z7z7z7z7z7z7z7z7z7z7z7z7z7z7z7z7z7z7z7z7z7z7z7z7=s0-d"
+            image: googleCloudImg
         },
         {
             id: 3,
@@ -69,7 +72,7 @@ const Blog = () => {
                 <h3>3. Bento Grids</h3>
                 <p>Inspired by Apple's promotional materials, the Bento Grid layout allows for a clean, organized, yet visually rich way to present information.</p>
             `,
-            image: "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_x9_9_9_9_9_9_9_9_9_9_9_9_9_9_9_9_9_9_9_9_9_9_9_9_9_9_9_9_9_9_9=s0-d"
+            image: webDevImg
         }
     ];
 
@@ -133,7 +136,8 @@ const Blog = () => {
                 <div className="blog-grid">
                     {blogPosts.map((post, index) => (
                         <div key={post.id} className="blog-card" data-aos="fade-up" data-aos-delay={index * 100}>
-                            <div className="blog-image-placeholder">
+                            <div className="blog-image-container">
+                                <img src={post.image} alt={post.title} className="blog-card-image" />
                                 <span className="blog-category">{post.category}</span>
                             </div>
                             <div className="blog-content">
