@@ -3,6 +3,7 @@ import Tilt from 'react-parallax-tilt';
 import ImageWithLoader from './ImageWithLoader';
 import { getOptimizedImageUrl } from '../utils/imageOptimizer';
 import './Organizers.css';
+import './Team.css';
 
 const Team = () => {
     const [selectedOrganizer, setSelectedOrganizer] = useState(null);
@@ -56,7 +57,8 @@ const Team = () => {
         {
             name: 'Abhijeet Rogye',
             role: 'Design & Media Head',
-            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/abhijeet_rogye_DhOJ3Wv.jpg'
+            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/abhijeet_rogye_DhOJ3Wv.jpg',
+            linkedin: 'https://www.linkedin.com/in/abhijeetrogye/'
         },
         {
             name: 'Sumedh Patil',
@@ -66,7 +68,8 @@ const Team = () => {
         {
             name: 'Rupesh Nandale',
             role: 'Events & Operations Head',
-            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/rupesh_nandale_eQDyo0t.jpeg'
+            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/rupesh_nandale_eQDyo0t.jpeg',
+            linkedin: 'https://www.linkedin.com/in/rupesh-nandale-287678277/'
         },
         {
             name: 'Sahas Santosh Bochare',
@@ -88,7 +91,8 @@ const Team = () => {
         {
             name: 'Sejal Rai',
             role: 'PR & Outreach Lead',
-            image: 'https://media.licdn.com/dms/image/v2/D4E03AQE0pqh_npE7bQ/profile-displayphoto-scale_200_200/B4EZlln7rdKQAY-/0/1758346591904?e=1766620800&v=beta&t=Z8phlcanXrqhmSGB_Q7PPxypHkc12KSHRogFe9aD4k0'
+            image: 'https://media.licdn.com/dms/image/v2/D4E03AQE0pqh_npE7bQ/profile-displayphoto-scale_200_200/B4EZlln7rdKQAY-/0/1758346591904?e=1766620800&v=beta&t=Z8phlcanXrqhmSGB_Q7PPxypHkc12KSHRogFe9aD4k0',
+            linkedin: 'https://www.linkedin.com/in/sejal-rai-18334a321/'
         },
         {
             name: 'Aleena Maria Joji',
@@ -109,6 +113,12 @@ const Team = () => {
     ];
 
     const techTeam = [
+        {
+            name: 'Sumedh Patil',
+            role: 'Technical Head',
+            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sumedh_patil_CV1e5fD.png',
+            linkedin: 'https://www.linkedin.com/in/sumedh-patil-640512251/'
+        },
         {
             name: 'Prathamesh Jakkula',
             role: 'AIML/DSA Lead',
@@ -156,6 +166,12 @@ const Team = () => {
 
     const eventsTeam = [
         {
+            name: 'Rupesh Nandale',
+            role: 'Events & Operations Head',
+            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/rupesh_nandale_eQDyo0t.jpeg',
+            linkedin: 'https://www.linkedin.com/in/rupesh-nandale-287678277/'
+        },
+        {
             name: 'Darshan Repale',
             role: 'Events and Operations Department',
             image: 'https://i.ibb.co/Q7B8LByd/1000227605.jpg',
@@ -192,6 +208,12 @@ const Team = () => {
     ];
 
     const communityTeam = [
+        {
+            name: 'Sejal Rai',
+            role: 'PR & Outreach Lead',
+            image: 'https://media.licdn.com/dms/image/v2/D4E03AQE0pqh_npE7bQ/profile-displayphoto-scale_200_200/B4EZlln7rdKQAY-/0/1758346591904?e=1766620800&v=beta&t=Z8phlcanXrqhmSGB_Q7PPxypHkc12KSHRogFe9aD4k0',
+            linkedin: 'https://www.linkedin.com/in/sejal-rai-18334a321/'
+        },
         {
             name: 'Sahas Santosh Bochare',
             role: 'Community & Marketing Head',
@@ -237,9 +259,15 @@ const Team = () => {
 
     const mediaTeam = [
         {
+            name: 'Abhijeet Rogye',
+            role: 'Design & Media Head',
+            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/abhijeet_rogye_DhOJ3Wv.jpg',
+            linkedin: 'https://www.linkedin.com/in/abhijeetrogye/'
+        },
+        {
             name: 'Kushal Mali',
             role: 'Media Member',
-            image: 'https://i.ibb.co/SwNjN9G2/DSC-2238.jpg',
+            image: 'https://media.licdn.com/dms/image/v2/D4D03AQEnJP7XBOHz6w/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1707369848628?e=1766620800&v=beta&t=tjxCvW6Wm9FvWWgvKd3B_rpR-hDgn5qWuui8xi8e6Ps',
             linkedin: 'https://www.linkedin.com/in/kushal-mali-b109b12b3?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
             instagram: 'https://www.instagram.com/kushal9035?igsh=MTUyMWJrZ2I0eXlkOA==',
             bio: "Hi, I'm Kushal Mali, a passionate member of GDG Media. I love exploring new trends, creating engaging content, and connecting with like-minded individuals. Let's collaborate and make a positive impact together! 📱💻"
@@ -400,7 +428,7 @@ const Team = () => {
 
         return (
             <React.Fragment key={title}>
-                <h2 className="section-title team-title" data-aos={animation} style={{ marginTop: '3rem' }}>{title}</h2>
+                <h2 className="section-title-premium team-title" data-aos={animation} style={{ marginTop: '3rem' }}>{title}</h2>
 
                 {leads.length > 0 && (
                     <ul className="organizers-grid team-grid" style={{ justifyContent: 'center', marginBottom: '2rem' }}>
@@ -418,24 +446,34 @@ const Team = () => {
     };
 
     return (
-        <section className="section organizers-section theme-provider-namespace-people-card" style={{ paddingTop: '120px' }}>
+        <section className="section team-section-container theme-provider-namespace-people-card">
             <div className="container">
-                <h1 className="section-title" data-aos="fade-up">Visionary Leaders</h1>
+                {/* Floating Background Blobs */}
+                <div className="floating-blob blob-blue"></div>
+                <div className="floating-blob blob-red"></div>
+                <div className="floating-blob blob-yellow"></div>
+                <div className="floating-blob blob-green"></div>
+
+                <h1 className="section-title-premium" data-aos="fade-up">Visionary Leaders</h1>
                 <ul className="organizers-grid faculty-grid">
                     {facultyAdvisor.map(renderOrganizerCard)}
                 </ul>
 
-                <h1 className="section-title" data-aos="fade-up" style={{ marginTop: '3rem' }}>Core Team</h1>
+                <div className="team-divider-premium"></div>
+
+                <h1 className="section-title-premium" data-aos="fade-up">Core Team</h1>
                 <ul className="organizers-grid">
                     {coreTeam.map(renderOrganizerCard)}
                 </ul>
 
-                <h1 className="section-title" data-aos="fade-up" style={{ marginTop: '3rem', color: '#FBBC04' }}>Department Leads</h1>
+                <div className="team-divider-premium"></div>
+
+                <h1 className="section-title-premium" data-aos="fade-up">Department Leads</h1>
                 <ul className="organizers-grid department-leads-grid" style={{ justifyContent: 'center' }}>
                     {departmentLeads.map(renderOrganizerCard)}
                 </ul>
 
-                <div className="team-divider" style={{ margin: '4rem 0' }}></div>
+                <div className="team-divider-premium"></div>
 
                 {renderTeamSection("Tech Wizards 💻", techTeam, "fade-right")}
                 {renderTeamSection("Events & Operations 🚀", eventsTeam, "fade-left")}

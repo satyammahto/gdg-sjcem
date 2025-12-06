@@ -1,0 +1,136 @@
+/* Team Page Specific Styles */
+.team-section-container {
+    padding: 120px 0 80px;
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+/* =========================================
+   Floating Background Blobs
+   ========================================= */
+.floating-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    opacity: 0.25;
+    animation: floatBlobTeam 20s infinite ease-in-out alternate;
+}
+
+.blob-blue {
+    top: -5%;
+    left: -5%;
+    width: 600px;
+    height: 600px;
+    background: #4285F4;
+    animation-delay: 0s;
+}
+
+.blob-red {
+    top: 20%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: #EA4335;
+    animation-delay: -5s;
+}
+
+.blob-yellow {
+    bottom: 10%;
+    left: -10%;
+    width: 550px;
+    height: 550px;
+    background: #FBBC05;
+    animation-delay: -10s;
+}
+
+.blob-green {
+    bottom: -5%;
+    right: 15%;
+    width: 450px;
+    height: 450px;
+    background: #34A853;
+    animation-delay: -15s;
+}
+
+@keyframes floatBlobTeam {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+
+    33% {
+        transform: translate(50px, 40px) scale(1.1) rotate(10deg);
+    }
+
+    66% {
+        transform: translate(-30px, 60px) scale(0.9) rotate(-5deg);
+    }
+
+    100% {
+        transform: translate(20px, -30px) scale(1.05) rotate(5deg);
+    }
+}
+
+/* =========================================
+   Enhanced Typography
+   ========================================= */
+.section-title-premium {
+    font-size: 3rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 3rem;
+    background: linear-gradient(135deg, #1a73e8, #ea4335, #fbbc04, #34a853);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.team-divider-premium {
+    height: 1px;
+    width: 100%;
+    max-width: 800px;
+    margin: 5rem auto;
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+    position: relative;
+}
+
+.team-divider-premium::after {
+    content: '★';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 0 20px;
+    color: #dadce0;
+    font-size: 1.5rem;
+}
+
+/* =========================================
+   Overrides & Enhancements
+   ========================================= */
+/* Ensure cards sit above the blobs */
+.container {
+    position: relative;
+    z-index: 2;
+}
+
+.people-card {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.85);
+    /* Slightly transparent for glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.people-card:hover {
+    box-shadow: 0 25px 50px rgba(66, 133, 244, 0.15);
+    background-color: #ffffff;
+    transform: translateY(-10px);
+}
