@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Navbar from './components/Navbar';
@@ -25,6 +26,7 @@ import Blog from './components/Blog';
 import Newsletter from './components/Newsletter';
 import EventDetails from './components/EventDetails';
 import ProjectSubmission from './components/ProjectSubmission';
+import PageTransition from './components/PageTransition';
 
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
@@ -44,6 +46,31 @@ const Home = () => (
   </>
 );
 
+const AnimatedRoutes = () => {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+        <Route path="/team" element={<PageTransition><Team /></PageTransition>} />
+        <Route path="/gallery" element={<PageTransition><Gallery /></PageTransition>} />
+        <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
+        <Route path="/terms-and-conditions" element={<PageTransition><Terms /></PageTransition>} />
+        <Route path="/community-guidelines" element={<PageTransition><CommunityGuidelines /></PageTransition>} />
+        <Route path="/join" element={<PageTransition><JoinTeam /></PageTransition>} />
+        <Route path="/team-directory" element={<PageTransition><TeamDirectory /></PageTransition>} />
+        <Route path="/emails" element={<PageTransition><TeamEmails /></PageTransition>} />
+        <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
+        <Route path="/events/:id" element={<PageTransition><EventDetails /></PageTransition>} />
+        <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
+        <Route path="/submit-idea" element={<PageTransition><ProjectSubmission /></PageTransition>} />
+        <Route path="/leaderboard" element={<PageTransition><Leaderboard /></PageTransition>} />
+      </Routes>
+    </AnimatePresence>
+  );
+};
+
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -59,7 +86,9 @@ function App() {
 
   useEffect(() => {
     if (!loading) {
-      AOS.refresh();
+      setTimeout(() => {
+        AOS.refresh();
+      }, 500); // Slight delay to Ensure DOM is ready after transition
     }
   }, [loading]);
 
@@ -71,22 +100,8 @@ function App() {
           <>
             <ScrollProgress />
             <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/team" element={<Team />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/terms-and-conditions" element={<Terms />} />
-              <Route path="/community-guidelines" element={<CommunityGuidelines />} />
-              <Route path="/join" element={<JoinTeam />} />
-              <Route path="/team-directory" element={<TeamDirectory />} />
-              <Route path="/emails" element={<TeamEmails />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/events/:id" element={<EventDetails />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/submit-idea" element={<ProjectSubmission />} />
-              <Route path="/leaderboard" element={<Leaderboard />} />
-            </Routes>
+            <ScrollToTop />
+            <AnimatedRoutes />
             <Footer />
             <BackToTop />
           </>
