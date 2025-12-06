@@ -33,17 +33,18 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     transform: translate(-50%, -50%);
     pointer-events: none;
 }
 
 @media (min-aspect-ratio: 16/9) {
     .hero-video-wrapper iframe {
-        width: 100vw;
+        /* CSS aspect-ratio hack or object-fit if possible, but keeping logic */
+        width: 100%;
         height: 56.25vw;
-        /* 100 * 9 / 16 */
+        /* Keep vw for height ratio scaling only if needed */
     }
 }
 
