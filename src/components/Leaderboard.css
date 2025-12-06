@@ -211,35 +211,77 @@
 }
 
 @media (max-width: 768px) {
+    .leaderboard-title {
+        font-size: 2rem;
+    }
+
     .podium {
         flex-direction: column;
         height: auto;
         align-items: center;
-        gap: 30px;
+        gap: 15px;
+        margin-bottom: 30px;
     }
 
     .podium-place {
         width: 100%;
-        max-width: 300px;
+        max-width: 100%;
         flex-direction: row;
         align-items: center;
-        background: rgba(255, 255, 255, 0.05);
+        background: white;
         padding: 15px;
         border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    /* Override rank-specific heights and borders for mobile */
+    .rank-1 .podium-block,
+    .rank-2 .podium-block,
+    .rank-3 .podium-block {
+        height: auto;
+        background: transparent;
+        border-top: none;
+        border: none;
+        box-shadow: none;
+        padding: 0 0 0 15px;
+        align-items: flex-start;
+        width: 100%;
     }
 
     .podium-block {
-        display: none;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .podium-avatar-wrapper {
-        margin: 0 15px 0 0;
+        margin: 0;
+        flex-shrink: 0;
+    }
+
+    .podium-avatar {
+        width: 60px;
+        height: 60px;
+        border-width: 2px;
+    }
+
+    .podium-name {
+        font-size: 1.1rem;
+        margin-bottom: 2px;
+    }
+
+    .podium-score {
+        font-size: 0.9rem;
+    }
+
+    .podium-rank {
+        display: none;
+        /* Hide large background rank number on mobile for cleaner look */
     }
 
     .crown {
         top: -15px;
-        left: 15px;
-        transform: none;
         font-size: 1.5rem;
     }
 }

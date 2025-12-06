@@ -5,6 +5,21 @@ const JoinTeam = () => {
     // Set Deadline: Sunday, Dec 7, 2025 at 8:00 PM
     const deadline = new Date("2025-12-07T20:00:00").getTime();
     const [isClosed, setIsClosed] = useState(false);
+    const [formData, setFormData] = useState({
+        id: '',
+        name: '',
+        role: '', // Changed to string input based on screenshot
+        image: '',
+        linkedin: '',
+        github: '',
+        instagram: '',
+        twitter: '',
+        bio: '',
+        timestamp: ''
+    });
+    const [submitting, setSubmitting] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const [uploadingImage, setUploadingImage] = useState(false);
 
     useEffect(() => {
         const checkDeadline = () => {
@@ -19,13 +34,92 @@ const JoinTeam = () => {
         return () => clearInterval(interval);
     }, []);
 
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleImageUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        setUploadingImage(true);
+        const data = new FormData();
+        data.append('image', file);
+
+        try {
+            const response = await fetch('https://api.imgbb.com/1/upload?key=3bc6dafa7ecd7c01a118fad187d32ca5', {
+                method: 'POST',
+                body: data
+            });
+            const result = await response.json();
+            if (result.success) {
+                setFormData(prev => ({ ...prev, image: result.data.url }));
+            } else {
+                alert('Image upload failed. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            alert('Error uploading image.');
+        } finally {
+            setUploadingImage(false);
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setSubmitting(true);
+
+        const submissionData = {
+            ...formData,
+            id: crypto.randomUUID(),
+            timestamp: new Date().toLocaleString()
+        };
+
+        try {
+            const response = await fetch('https://sheetdb.io/api/v1/kdq3tgljm208b', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: [submissionData]
+                })
+            });
+
+            if (response.ok) {
+                setSubmitted(true);
+                alert("Application Submitted Successfully! 🚀");
+                // Reset form
+                setFormData({
+                    id: '',
+                    name: '',
+                    role: '',
+                    image: '',
+                    linkedin: '',
+                    github: '',
+                    instagram: '',
+                    twitter: '',
+                    bio: '',
+                    timestamp: ''
+                });
+            } else {
+                throw new Error('Submission failed');
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            alert("There was an error submitting your application. Please try again.");
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
     return (
         <section className="join-team-section">
             <div className="join-container" data-aos="fade-up">
-                <h1 className="section-title">Join the Core Team</h1>
-                <p className="section-subtitle">
-                    Be a part of the driving force behind GDG on Campus SJCEM.
-                </p>
 
                 {isClosed ? (
                     <div className="applications-closed-card" data-aos="zoom-in">
@@ -37,25 +131,137 @@ const JoinTeam = () => {
                             <a href="mailto:gdg@sjcem.edu.in" className="contact-link">gdg@sjcem.edu.in</a>
                         </p>
                     </div>
+                ) : submitted ? (
+                    <div className="success-message">
+                        <div className="success-icon">🎉</div>
+                        <h2>Application Submitted!</h2>
+                        <p>Thanks for filling the form, <strong>{formData.name}</strong>. We will make sure we feature you on our GDG website.</p>
+                        <button className="reset-btn" onClick={() => setSubmitted(false)}>Submit Another Response</button>
+                    </div>
                 ) : (
-                    <>
-                        <div className="deadline-alert">
-                            ⚠️ <strong>Deadline:</strong> Sunday, 8:00 PM. Please complete this on time!
-                        </div>
-                        <div className="form-wrapper">
-                            <iframe
-                                src="https://docs.google.com/forms/d/e/1FAIpQLSdXvJjJ7y8x8x8x8x8x8x8x8x8x8x8x/viewform?embedded=true"
-                                width="100%"
-                                height="1150"
-                                frameBorder="0"
-                                marginHeight="0"
-                                marginWidth="0"
-                                title="Recruitment Form"
-                            >
-                                Loading…
-                            </iframe>
-                        </div>
-                    </>
+                    <div className="form-card">
+                        <h1 className="form-title">Join the <span className="highlight-text">Squad</span></h1>
+                        <p className="form-subtitle">Fill in your details to get featured on our Team page.</p>
+
+                        <form className="recruitment-form" onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label>Full Name</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    required
+                                    placeholder="e.g. Dhiraj Chaudhari"
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label>Role</label>
+                                <input
+                                    type="text"
+                                    name="role"
+                                    value={formData.role}
+                                    onChange={handleChange}
+                                    required
+                                    placeholder="e.g. Technical Head"
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label>Profile Photo</label>
+                                <div className={`image-upload-box ${formData.image ? 'has-image' : ''}`}>
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleImageUpload}
+                                        id="image-input"
+                                        hidden
+                                    />
+                                    <label htmlFor="image-input" className="image-upload-label">
+                                        {uploadingImage ? (
+                                            <span className="loading-text">Uploading...</span>
+                                        ) : formData.image ? (
+                                            <div className="preview-container">
+                                                <img src={formData.image} alt="Preview" className="image-preview" />
+                                                <span className="change-text">Change Image</span>
+                                            </div>
+                                        ) : (
+                                            <>
+                                                <span className="camera-icon">📷</span>
+                                                <span>Choose Image (Max 5MB)</span>
+                                            </>
+                                        )}
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div className="form-group">
+                                <label>Short Bio (Optional)</label>
+                                <textarea
+                                    name="bio"
+                                    value={formData.bio}
+                                    onChange={handleChange}
+                                    rows="3"
+                                    placeholder="Tell us a bit about yourself..."
+                                ></textarea>
+                            </div>
+
+                            <div className="form-row">
+                                <div className="form-group">
+                                    <label>LinkedIn URL</label>
+                                    <input
+                                        type="url"
+                                        name="linkedin"
+                                        value={formData.linkedin}
+                                        onChange={handleChange}
+                                        placeholder="https://linkedin.com/in/..."
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label>GitHub URL</label>
+                                    <input
+                                        type="url"
+                                        name="github"
+                                        value={formData.github}
+                                        onChange={handleChange}
+                                        placeholder="https://github.com/..."
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="form-row">
+                                <div className="form-group">
+                                    <label>Instagram URL</label>
+                                    <input
+                                        type="url"
+                                        name="instagram"
+                                        value={formData.instagram}
+                                        onChange={handleChange}
+                                        placeholder="https://instagram.com/..."
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label>Twitter/X URL</label>
+                                    <input
+                                        type="url"
+                                        name="twitter"
+                                        value={formData.twitter}
+                                        onChange={handleChange}
+                                        placeholder="https://x.com/..."
+                                    />
+                                </div>
+                            </div>
+
+                            <button type="submit" className="submit-btn" disabled={submitting || uploadingImage}>
+                                {submitting ? 'Submitting...' : 'Submit Profile 🚀'}
+                            </button>
+
+                            <p className="privacy-disclaimer">
+                                <strong>Note:</strong> The image and information provided will be used <u>strictly</u> for the Google Developer Group on Campus SJCEM website team page. Your data is secure and will not be shared elsewhere.
+                            </p>
+                        </form>
+                    </div>
                 )}
             </div>
         </section>
