@@ -25,6 +25,10 @@ export const upcomingEvents = [
         teamSize: '2-4 Members',
         lastDate: 'Sat 20 Dec 2025',
         location: 'SJCEM Campus, Palghar',
+        registrationStatus: {
+            message: 'Only 50 teams and 160 total seats are available for TechSprint 2025. Participation is 100% free — no fees at any stage.',
+            type: 'urgent'
+        },
         timeline: [
             { date: '05 Dec - 20 Dec 2025', title: 'Registration', description: '05:30 AM IST Start - 05:30 AM IST End' },
             { date: '05 Dec - 20 Dec 2025', title: 'Team Formation', description: 'Form your squads and brainstorm ideas.' },
@@ -63,6 +67,15 @@ export const upcomingEvents = [
             top10: [], // To be populated later
             top3: []
         },
+        prizes: {
+            title: 'Rewards & Recognition',
+            description: 'Rewards for the top 3 winning teams in their chapter (sent to the organizer for distribution).',
+            items: [
+                { icon: '🥇', title: '1st Place Team', desc: 'Winner Certificate + Exclusive Swag' },
+                { icon: '🥈', title: '2nd Place Team', desc: 'Runner-up Certificate + Swag' },
+                { icon: '🥉', title: '3rd Place Team', desc: 'Runner-up Certificate + Swag' }
+            ]
+        },
         challenge: {
             title: 'Open Innovation',
             description: 'Participants are free to choose any problem statement or theme they are passionate about. The only limit is your imagination!'
@@ -95,7 +108,9 @@ export const upcomingEvents = [
             { question: 'Do I need prior experience to participate?', answer: 'No, this hackathon is open to beginners and experts alike. We will have mentors to guide you.' },
             { question: 'Can I choose any problem statement or theme?', answer: 'Yes! The theme is Open Innovation, so you can build solutions for any problem you identify.' },
             { question: 'Is participation free?', answer: 'Yes, participation is completely free.' },
-            { question: 'What is the team size?', answer: 'Teams can consist of 2 to 4 members.' }
+            { question: 'What is the team size?', answer: 'Teams can consist of 2 to 4 members.' },
+            { question: 'Will food be provided?', answer: 'Yes, snacks and refreshments will be provided during the offline sessions.' },
+            { question: 'Can I participate remotely?', answer: 'The initial submission is online, but the final round will be held offline at the campus.' }
         ]
     }
 ];

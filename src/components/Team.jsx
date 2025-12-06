@@ -32,140 +32,170 @@ const Team = () => {
     const coreTeam = [
         {
             name: 'Dhiraj Chaudhari',
-            role: 'GDGoC Organizer',
+            role: 'Organiser',
             image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/dhiraj_chaudhari.jpeg',
             twitter: 'https://twitter.com/DhirajC39511965',
             bio: 'Passionate about building communities and empowering students through technology.'
         },
         {
             name: 'Aayush Bari',
-            role: 'Co-Organizer',
+            role: 'Co-Organiser',
             image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/aayush_bari.jpg',
             twitter: 'https://twitter.com/aayush_bari02',
             bio: 'Tech enthusiast and community builder.'
+        },
+        {
+            name: 'Abhijeet Rogye',
+            role: 'Design & Media Head',
+            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/abhijeet_rogye_DhOJ3Wv.jpg'
+        },
+        {
+            name: 'Sumedh Patil',
+            role: 'Technical Head',
+            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sumedh_patil_CV1e5fD.png'
+        },
+        {
+            name: 'Sahas Bochare',
+            role: 'Community & Marketing Head',
+            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sahas_bochare_EIH7Urf.jpg'
+        },
+        {
+            name: 'Rupesh Nandale',
+            role: 'Event & Operations Head',
+            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/rupesh_nandale_eQDyo0t.jpeg'
         }
     ];
 
     const techTeam = [
         {
-            name: "Furquan Saiyed",
-            role: "Technical Member",
-            image: "https://i.ibb.co/PsTLNkfk/1761723296279.jpg",
-            twitter: "https://www.linkedin.com/in/furquan-s-9331372a6",
-            bio: "I enjoy learning new technologies and helping others grow in the developer community"
+            name: 'Sumedh Patil',
+            role: 'Technical Head',
+            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sumedh_patil_CV1e5fD.png'
         },
-        { name: 'Sumedh Patil', role: 'Technical Head', image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sumedh_patil_CV1e5fD.png' },
-        { name: 'Shashikant Rajput', role: 'Web Lead' },
-        { name: 'Prathamesh Jakkula', role: 'AIML/DSA Lead', image: 'https://media.licdn.com/dms/image/v2/D4D03AQEq9KDUDMDm9g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1727442836862?e=2147483647&v=beta&t=jYbosW2CKm2-yxozapKCka6dc6NDoNAUi3iyc4wBTWY' },
-        { name: 'Hitanshu Vaidya', role: 'AI/ML Lead' },
-        { name: 'Ramesh Choudhary', role: 'Tech Coordinator' },
-        { name: 'Prashant Yadav', role: 'App Lead' },
         {
-            name: 'Satyam R Tiwari',
-            role: 'Backend Developer',
+            name: 'Prathamesh L. Jakkula',
+            role: 'AIML/DSA Lead',
+            image: 'https://media.licdn.com/dms/image/v2/D4D03AQEq9KDUDMDm9g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1727442836862?e=2147483647&v=beta&t=jYbosW2CKm2-yxozapKCka6dc6NDoNAUi3iyc4wBTWY'
+        },
+        { name: 'Shashikant Rajput', role: 'Web Development Lead' },
+        { name: 'Prashant Yadav', role: 'App Lead' },
+        { name: 'Hitanshu Vaidya', role: 'Member' },
+        {
+            name: 'Kunal Bhandarkar',
+            role: 'Member',
+            image: 'https://i.ibb.co/fYyRkXS9/IMG-20250820-145505.jpg',
+            linkedin: 'https://www.linkedin.com/in/kunal-bhandarkar-24ba3a2b3'
+        },
+        { name: 'Riya Umesh Singh', role: 'Member' },
+        { name: 'Sairaj Ganpat Khade', role: 'Member' },
+        { name: 'Anushri Amul Sane', role: 'Member' },
+        {
+            name: 'Saiyed Furquanahmed Barkatali',
+            role: 'Member',
+            image: "https://i.ibb.co/PsTLNkfk/1761723296279.jpg",
+            twitter: "https://www.linkedin.com/in/furquan-s-9331372a6"
+        },
+        { name: 'Sakshi Jaywant Mhatre', role: 'Volunteer' },
+        {
+            name: 'Satyam R. Tiwari',
+            role: 'Volunteer',
             image: 'https://i.ibb.co/v6MmDcds/1000121746.jpg',
             linkedin: 'https://www.linkedin.com/in/satyam-tiwari-219583276/',
             github: 'https://github.com/Satyamrtiwari'
         },
-        { name: 'Satyam Ashok Mahto', role: 'Volunteer' },
-        { name: 'Rudra Kushal Jaikar', role: 'Volunteer' },
-        {
-            name: 'Kunal Bhandarkar',
-            role: 'Technical Team Volunteer',
-            image: 'https://i.ibb.co/fYyRkXS9/IMG-20250820-145505.jpg',
-            linkedin: 'https://www.linkedin.com/in/kunal-bhandarkar-24ba3a2b3'
-        },
-        { name: 'Riya Singh', role: 'Tech Member' },
-        { name: 'Sairaj Khade', role: 'Tech Member' },
-        { name: 'Anushri Sane', role: 'Tech Member' },
-        { name: 'Sakshi Mhatre', role: 'Volunteer' },
-        { name: 'Saish Mekal', role: 'Web Dev Lead' }
+        { name: 'Ramesh Kheemaram Choudhary', role: 'Volunteer' },
+        { name: 'Saish Mekal', role: 'Volunteer' },
+        { name: 'Satyam Ashok Mahto', role: 'Volunteer' }
     ];
 
     const eventsTeam = [
-        { name: 'Rupesh Nandale', role: 'Events & Operations Head', image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/rupesh_nandale_eQDyo0t.jpeg' },
+        { name: 'Rupesh Nandale', role: 'Event & Operations Head', image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/rupesh_nandale_eQDyo0t.jpeg' },
         { name: 'Lokesh Rane', role: 'Outreach Coordinator' },
-        { name: 'Sahil Dongre', role: 'Volunteer' },
-        { name: 'Mihir Pimple', role: 'Logistic Manager' },
-        { name: 'Darshan Repale', role: 'Volunteer' },
-        { name: 'Kamlesh Choudhary', role: 'Volunteer' },
+        { name: 'Sarth Gawad', role: 'Event Manager' },
+        { name: 'Mihir Kishor Pimple', role: 'Logistic Manager' },
+        { name: 'Neha Vijay Parab', role: 'Event Coordinator' },
         { name: 'Vighnesh Rane', role: 'Member' },
-        { name: 'Neha Parab', role: 'Coordinator' },
-        { name: 'Jyoti Awasthi', role: 'Volunteer' },
-        { name: 'Siddhant Koli', role: 'Manager' },
-        { name: 'Smital Raut', role: 'Volunteer' },
-        { name: 'Rajendra Rajput', role: 'Member' },
-        { name: 'Shivprasad Umbare', role: 'Manager' },
-        { name: 'Tejas Bhavthankar', role: 'Coordinator' },
+        { name: 'Neej Patel', role: 'Member' },
+        { name: 'Sahil Dongre', role: 'Volunteer' },
+        { name: 'Darshan Arun Repale', role: 'Volunteer' },
+        { name: 'Kamlesh S. Choudhary', role: 'Volunteer' },
+        { name: 'Rajendra Singh Rajput', role: 'Volunteer' },
+        { name: 'Tejas D. Bhavthankar', role: 'Volunteer' },
+        { name: 'Jowin Mascarenhas', role: 'Volunteer' },
+        { name: 'Siddhant Prasad Koli', role: 'Volunteer' },
+        { name: 'Smital Ravindra Raut', role: 'Volunteer' },
+        { name: 'Shivprasad S. Umbare', role: 'Volunteer' },
         {
-            name: 'Vidhi Jain',
-            role: 'Event Volunteer',
+            name: 'Vidhi Naresh Jain',
+            role: 'Volunteer',
             image: 'https://i.ibb.co/BH7Vc2rb/1000012426.jpg',
             bio: "I'm Vidhi, an event member who's passionate about decor and knows how to manage an event! Still learning and exploring.",
             linkedin: 'https://www.linkedin.com/in/vidhi-jain-b68418318',
             github: 'https://github.com/vidhii-24',
             instagram: 'https://www.instagram.com/vidhi_jain_._'
         },
-        { name: 'Upasana Meher', role: 'Member' },
-        { name: 'Jowin Mascarenhas', role: 'Media/Volunteer' },
-        { name: 'Neej Patel', role: 'Member' }
+        { name: 'Upasana Kundan Meher', role: 'Volunteer' },
+        { name: 'Jyoti Satyendra Awasthi', role: 'Volunteer' }
     ];
 
     const communityTeam = [
-        { name: 'Sahas Bochare', role: 'Community Head', image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sahas_bochare_EIH7Urf.jpg' },
-        { name: 'Sejal Rai', role: 'Marketing Head', image: 'https://media.licdn.com/dms/image/v2/D4E03AQE0pqh_npE7bQ/profile-displayphoto-scale_200_200/B4EZlln7rdKQAY-/0/1758346591904?e=1766620800&v=beta&t=Z8phlcanXrqhmSGB_Q7PPxypHkc12KSHRogFe9aD4k0' },
-        { name: 'Vaibhav Somanna', role: 'Community Coordinator' },
-        { name: 'Vaishnavi Khandagale', role: 'PR Member' },
-        { name: 'Tanaya Bagade', role: 'Member' },
-        { name: 'Saanj Bari', role: 'PR Member' },
-        { name: 'Sadaf Asar', role: 'Member' },
-        { name: 'Prachi Rambriksh', role: 'Member' },
+        { name: 'Sahas Bochare', role: 'Community & Marketing Head', image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sahas_bochare_EIH7Urf.jpg' },
+        { name: 'Sejal Rai', role: 'PR & Outreach Manager', image: 'https://media.licdn.com/dms/image/v2/D4E03AQE0pqh_npE7bQ/profile-displayphoto-scale_200_200/B4EZlln7rdKQAY-/0/1758346591904?e=1766620800&v=beta&t=Z8phlcanXrqhmSGB_Q7PPxypHkc12KSHRogFe9aD4k0' },
+        { name: 'Tanaya Mohan Bagade', role: 'Partnership Manager' },
+        { name: 'Sadaf Shakeel Asar', role: 'Community Coordinator' },
+        { name: 'Vaibhav Somanna', role: 'Member' },
+        { name: 'Vaishnavi Khandagale', role: 'Member' },
+        { name: 'Saanj Dilsukh Bari', role: 'Member' },
+        { name: 'Prachi R. Vishwakarma', role: 'Member' },
         { name: 'Pratishtha Upadhyay', role: 'Member' },
-        { name: 'Devyani Jadhav', role: 'Volunteer' },
-        { name: 'Rupali Kashid', role: 'Ambassador' },
         { name: 'S. Madhav', role: 'Volunteer' },
-        { name: 'Priti Vishwakarma', role: 'PR Member' },
-        { name: 'Dev Sehgal', role: 'PR & Outreach Manager' }
+        { name: 'Devyani Jadhav', role: 'Volunteer' },
+        { name: 'Rupali Bharat Kashid', role: 'Volunteer' },
+        { name: 'Priti Brijnath Vishwakarma', role: 'Volunteer' },
+        { name: 'Dev Sehgal', role: 'Volunteer' },
+        { name: 'Atharva Mallya', role: 'Volunteer' },
+        { name: 'Om Manglure', role: 'Volunteer' }
     ];
 
     const mediaTeam = [
         { name: 'Abhijeet Rogye', role: 'Design & Media Head', image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/abhijeet_rogye_DhOJ3Wv.jpg' },
-        { name: 'Manasvi Kadu', role: 'Social Media Head', image: 'https://i.ibb.co/JwP5dRqM/IMG-2300.jpg' },
-        { name: 'Devanshu Pal', role: 'Social Media Manager' },
-        { name: 'Sai Deepak Alim', role: 'Volunteer' },
-        { name: 'Siddhant Meher', role: 'Media & Design Lead' },
-        { name: 'Vidhisha Sonar', role: 'Design Member' },
-        { name: 'Kushal Mali', role: 'Member', image: 'https://media.licdn.com/dms/image/v2/D4D03AQEnJP7XBOHz6w/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1707369848628?e=1766620800&v=beta&t=tjxCvW6Wm9FvWWgvKd3B_rpR-hDgn5qWuui8xi8e6Ps' },
-        { name: 'Juee Patil', role: 'Member' },
+        { name: 'Manasvi Kadu', role: 'Co-Head', image: 'https://i.ibb.co/JwP5dRqM/IMG-2300.jpg' },
+        { name: 'Siddhant Kiran Meher', role: 'Graphic Designer' },
+        { name: 'Aarchi C. Pimple', role: 'Graphic Designer' },
+        { name: 'Devanshu Pramod Pal', role: 'Social Media Manager' },
         {
             name: 'Viraj Tamhanekar',
-            role: 'Media Member',
+            role: 'Member',
             image: 'https://media.licdn.com/dms/image/v2/D4D03AQHuJOwdR7GHIQ/profile-displayphoto-crop_800_800/B4DZqvjKeRIkAI-/0/1763881823603?e=1766620800&v=beta&t=bpxNqsH4OwnOTszb4C4Gd6hUe2yCYlfFqPZs3E3FZOE',
             linkedin: 'https://www.linkedin.com/in/viraj-tamhanekar/'
         },
-        { name: 'Aarchi Pimple', role: 'Graphic Designer' },
-        { name: 'Shivanshu Mishra', role: 'Media & Design Lead' },
-        { name: 'Aarya Krup', role: 'Media Member', image: null },
+        { name: 'Arya Kurup', role: 'Member' },
+        { name: 'Prathamesh Dhatavkar', role: 'Member' },
+        { name: 'Sarvesh Ambire', role: 'Member' },
+        { name: 'Harsh Chaudhari', role: 'Member' },
+        { name: 'Vidhisha Nitin Sonar', role: 'Member' },
+        { name: 'Juee Subhash Patil', role: 'Member' },
+        { name: 'Sai Deepak Alim', role: 'Volunteer' },
+        { name: 'Shivanshu A. Mishra', role: 'Volunteer' },
         { name: 'Tanishka Gharat', role: 'Volunteer' },
-        { name: 'Viren Soni', role: 'Member' },
-        { name: 'Parveen Shaikh', role: 'Volunteer' }
+        { name: 'Parveen A. Shaikh', role: 'Volunteer' },
+        { name: 'Viren Suresh Soni', role: 'Volunteer' },
+        { name: 'Kushal Haresh Mali', role: 'Volunteer', image: 'https://media.licdn.com/dms/image/v2/D4D03AQEnJP7XBOHz6w/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1707369848628?e=1766620800&v=beta&t=tjxCvW6Wm9FvWWgvKd3B_rpR-hDgn5qWuui8xi8e6Ps' }
     ];
 
     const contentTeam = [
-        { name: 'Aleena Joji', role: 'Content Head' },
+        { name: 'Aleena Joji', role: 'Content Lead' },
+        { name: 'Durvesh Suresh Vinherkar', role: 'Content Lead' },
+        { name: 'Rutuja Ramesh Gharat', role: 'Technical Writer' },
         {
-            name: 'Siddhi Akre',
-            role: 'Coordinator',
+            name: 'Siddhi Mahendra Akre',
+            role: 'Member',
             image: 'https://media.licdn.com/dms/image/v2/D4D03AQH-31z--vjkSw/profile-displayphoto-scale_200_200/B4DZkfMzcHIEAY-/0/1757165075955?e=1766620800&v=beta&t=gKakyLie0g9SF8FrmGJLitpZhiOTb8kDfB9zBkqf-mc',
             linkedin: 'https://www.linkedin.com/in/siddhi-akre-1199b5250/'
         },
-        { name: 'Rutuja Gharat', role: 'Technical Writer' },
-        { name: 'Durvesh Vinherkar', role: 'Content Lead' },
-        { name: 'Ilf Bhimani', role: 'Member' },
-        { name: 'Ayushi Shukla', role: 'Member' },
-        { name: 'Prem Nayi', role: 'Coordinator' },
-        { name: 'Ritika Chaurasiya', role: 'Member' },
-        { name: 'Rashmi Chaudhari', role: 'Member' }
+        { name: 'Ilf Bhimani', role: 'Volunteer' },
+        { name: 'Ayushi Shukla', role: 'Volunteer' },
+        { name: 'Nayi Prem Babubhai', role: 'Volunteer' }
     ];
 
     const getInitials = (name) => {

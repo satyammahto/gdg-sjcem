@@ -75,7 +75,45 @@ const EventDetails = () => {
 
     // Registration Counter Animation
     const [displayCount, setDisplayCount] = useState(0);
+    const [formSubmitted, setFormSubmitted] = useState(false);
+    const [formLoading, setFormLoading] = useState(false);
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        setFormLoading(true);
+        const formData = new FormData(e.target);
+        formData.append("access_key", "98defd20-dee9-48a7-ac0f-e2fdd45d1f32");
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", { method: "POST", body: formData });
+            const data = await response.json();
+            if (data.success) {
+                setFormSubmitted(true);
+                e.target.reset();
+            } else {
+                alert("Something went wrong: " + data.message);
+            }
+        } catch (error) {
+            alert("Error sending message.");
+        } finally {
+            setFormLoading(false);
+        }
+    };
     const [activeFaq, setActiveFaq] = useState(null);
+
+    // Scroll Progress Logic
+    const [scrollProgress, setScrollProgress] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const totalScroll = document.documentElement.scrollTop;
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scroll = totalScroll / windowHeight;
+            setScrollProgress(scroll * 100);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const toggleFaq = (index) => {
         setActiveFaq(activeFaq === index ? null : index);
@@ -179,6 +217,15 @@ const EventDetails = () => {
 
     return (
         <section className="event-details-section">
+            {/* Scroll Progress Bar */}
+            <div className="scroll-progress-container">
+                <div className="scroll-progress-bar" style={{ width: `${scrollProgress}%` }}></div>
+            </div>
+
+            {/* Background Animations */}
+            <div className="bg-shape shape-circle"></div>
+            <div className="bg-shape shape-triangle"></div>
+            <div className="bg-shape shape-square"></div>
             <Link to="/" className="back-nav-btn">← Back to Home</Link>
 
             <div className="event-details-hero">
@@ -187,6 +234,13 @@ const EventDetails = () => {
                     <div className="event-hero-content" data-aos="fade-up">
                         <span className="event-badge">{event.type}</span>
                         <h1 className="event-hero-title">{event.title}</h1>
+                        {/* Urgency Alert Banner */}
+                        {event.registrationStatus && (
+                            <div className="registration-alert-banner" data-aos="fade-down">
+                                <span className="alert-icon">⚠️</span>
+                                <p>{event.registrationStatus.message}</p>
+                            </div>
+                        )}
                         <div className="event-meta-row">
                             <span className="meta-icon-item">📅 {event.date}</span>
                             <span className="meta-icon-item">📍 {event.location || 'SJCEM Campus'}</span>
@@ -321,21 +375,23 @@ const EventDetails = () => {
                     </div>
                 )}
 
-                {/* Event Timeline */}
+                {/* Event Timeline (Redesigned) */}
                 {event.timeline && (
                     <div className="event-timeline full-width-block">
                         <div className="content-wrapper">
                             <h3 className="agenda-title">Hackathon Timeline (Tentative)</h3>
-                            <div className="agenda-timeline" ref={timelineRef}>
-                                <div className="agenda-progress-line" ref={timelineProgressRef}></div>
+                            <div className="premium-vertical-timeline">
                                 {event.timeline.map((item, index) => (
-                                    <div
-                                        key={index}
-                                        className="agenda-item"
-                                    >
-                                        <div className="agenda-time">{item.date}</div>
-                                        <div className="agenda-event-title">{item.title}</div>
-                                        <div className="agenda-desc">{item.description}</div>
+                                    <div key={index} className="pv-timeline-item" data-aos="fade-up" data-aos-delay={index * 100}>
+                                        <div className="pv-timeline-marker">
+                                            <div className="pv-timeline-dot"></div>
+                                            {index !== event.timeline.length - 1 && <div className="pv-timeline-line"></div>}
+                                        </div>
+                                        <div className="pv-timeline-content">
+                                            <div className="pv-date-badge">{item.date}</div>
+                                            <h4 className="pv-title">{item.title}</h4>
+                                            <p className="pv-description">{item.description}</p>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
@@ -391,6 +447,31 @@ const EventDetails = () => {
                             <h3 className="challenge-title">The Challenge: {event.challenge.title}</h3>
                             <div className="challenge-card-large">
                                 <p className="challenge-desc-large">{event.challenge.description}</p>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Prizes Section */}
+                {event.prizes && (
+                    <div className="event-prizes full-width-block">
+                        <div className="content-wrapper">
+                            <h3 className="section-title-premium">{event.prizes.title}</h3>
+                            <p className="prizes-description">{event.prizes.description}</p>
+
+                            <div className="prizes-grid">
+                                {event.prizes.items.map((item, index) => (
+                                    <div key={index} className="prize-card" data-aos="zoom-in" data-aos-delay={index * 100}>
+                                        <div className="prize-icon">{item.icon}</div>
+                                        <h4 className="prize-title">{item.title}</h4>
+                                        <p className="prize-desc">{item.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="prizes-disclaimer">
+                                <span className="info-icon">ℹ️</span>
+                                <p>{event.prizes.disclaimer}</p>
                             </div>
                         </div>
                     </div>
@@ -466,8 +547,6 @@ const EventDetails = () => {
                                         key={index}
                                         className={`faq-item ${activeFaq === index ? 'active' : ''}`}
                                         onClick={() => toggleFaq(index)}
-                                        data-aos="fade-up"
-                                        data-aos-delay={index * 50}
                                     >
                                         <div className="faq-question">
                                             {item.question}
@@ -478,6 +557,31 @@ const EventDetails = () => {
                                         </div>
                                     </div>
                                 ))}
+                            </div>
+
+                            <div className="faq-ask-question">
+                                <h4 className="ask-title">Have more questions?</h4>
+                                {formSubmitted ? (
+                                    <div className="ask-success">
+                                        <p>✅ Info sent! We'll get back to you at gdg@sjcem.edu.in</p>
+                                        <button className="btn-reset" onClick={() => setFormSubmitted(false)}>Ask another</button>
+                                    </div>
+                                ) : (
+                                    <form onSubmit={handleFormSubmit} className="ask-form">
+                                        <input type="hidden" name="subject" value="Event Question" />
+                                        <div className="form-row">
+                                            <input type="text" name="name" placeholder="Name" required />
+                                            <input type="email" name="email" placeholder="Email" required />
+                                        </div>
+                                        <div className="form-row">
+                                            <input type="tel" name="phone" placeholder="Phone Number (Optional)" />
+                                        </div>
+                                        <textarea name="message" placeholder="Your Question..." rows="3" required></textarea>
+                                        <button type="submit" disabled={formLoading} className="btn-ask">
+                                            {formLoading ? 'Sending...' : 'Ask Question'}
+                                        </button>
+                                    </form>
+                                )}
                             </div>
                         </div>
                     </div>
