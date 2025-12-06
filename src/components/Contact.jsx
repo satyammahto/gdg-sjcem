@@ -74,7 +74,14 @@ const Contact = () => {
                             </div>
 
                             <button type="submit" className="btn btn-primary submit-btn" disabled={loading}>
-                                {loading ? 'Sending...' : 'Send Message'}
+                                {loading ? (
+                                    <>
+                                        <span className="loader-spinner"></span>
+                                        <span>Sending...</span>
+                                    </>
+                                ) : (
+                                    'Send Message'
+                                )}
                             </button>
                         </form>
                     )}
