@@ -169,7 +169,13 @@
         gap: 25px;
     }
 
+    .nav-links a {
+        color: var(--text-color);
+        font-size: 1.1rem;
+    }
+
     .nav-links.active {
+
         clip-path: circle(150% at 100% 0);
     }
 }

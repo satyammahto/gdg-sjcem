@@ -1391,6 +1391,7 @@
     margin-bottom: 1rem;
     background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
 }
