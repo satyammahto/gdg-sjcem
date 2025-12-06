@@ -56,6 +56,10 @@ const Footer = () => {
                         <Link to="/community-guidelines">Community Guidelines</Link>
                     </div>
                 </div>
+                {/* Deployment Verification */}
+                <div style={{ textAlign: 'center', fontSize: '0.7rem', color: 'rgba(255,255,255,0.3)', marginTop: '10px' }}>
+                    Last Updated: {typeof __BUILD_TIME__ !== 'undefined' ? __BUILD_TIME__ : 'Local Dev'}
+                </div>
             </div>
         </footer>
     );
