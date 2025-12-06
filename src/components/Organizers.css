@@ -137,7 +137,7 @@
     position: absolute;
     top: 24px;
     right: 24px;
-    transform: translateZ(30px);
+    /* transform: translateZ(30px); removed */
 }
 
 .People-styles-socialIcon {
@@ -163,7 +163,7 @@
 .People-styles-info {
     margin-bottom: 28px;
     width: 100%;
-    transform: translateZ(10px);
+    /* transform: translateZ(10px); removed */
 }
 
 .organizer-name-premium {
@@ -185,7 +185,7 @@
 .organizer-actions {
     margin-top: auto;
     width: 100%;
-    transform: translateZ(15px);
+    /* transform: translateZ(15px); removed */
 }
 
 /* Card Social Icons */
@@ -194,7 +194,9 @@
     justify-content: center;
     gap: 12px;
     margin-top: 12px;
-    transform: translateZ(20px);
+    /* Removed translateZ to fix visibility issues with overflow:hidden */
+    position: relative;
+    z-index: 10;
 }
 
 .social-icon {
