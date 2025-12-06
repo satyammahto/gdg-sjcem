@@ -166,6 +166,9 @@ const JoinTeam = () => {
                                     required
                                     placeholder="e.g. Technical Head"
                                 />
+                                <small className="role-helper">
+                                    Unsure of your role? <a href="/team-directory" className="contact-link" target="_blank">Check the Team Directory</a>
+                                </small>
                             </div>
 
                             <div className="form-group">

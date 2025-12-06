@@ -20,6 +20,7 @@ import TeamEmails from './components/TeamEmails';
 import Projects from './components/Projects';
 import Leaderboard from './components/Leaderboard';
 import FAQ from './components/FAQ';
+import TeamDirectory from './components/TeamDirectory';
 import Newsletter from './components/Newsletter';
 
 import ScrollProgress from './components/ScrollProgress';
@@ -75,6 +76,7 @@ function App() {
               <Route path="/terms-and-conditions" element={<Terms />} />
               <Route path="/community-guidelines" element={<CommunityGuidelines />} />
               <Route path="/join" element={<JoinTeam />} />
+              <Route path="/team-directory" element={<TeamDirectory />} />
               <Route path="/emails" element={<TeamEmails />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
