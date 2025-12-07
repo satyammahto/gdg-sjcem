@@ -14,6 +14,18 @@ import AOS from 'aos';
 const EventDetails = () => {
     const { id } = useParams();
 
+    // Mentor/Judge Modal State
+    const [selectedProfile, setSelectedProfile] = useState(null);
+
+    // Lock body scroll when modal is open
+    useEffect(() => {
+        if (selectedProfile) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+    }, [selectedProfile]);
+
     // Find event in either list - Moved up for access in hooks
     const event = [...upcomingEvents, ...pastEvents].find(e => e.id.toString() === id);
 
@@ -539,18 +551,43 @@ const EventDetails = () => {
                     </div>
                 )}
 
-                {/* Mentors Section */}
-                {event.mentors && (
+                {/* Judges / Mentors Section */}
+                {(event.judges || event.mentors) && (
                     <div className="event-mentors full-width-block">
                         <div className="content-wrapper">
-                            <h3 className="mentors-title">Mentors</h3>
+                            <h3 className="mentors-title">{event.judges ? 'Judges' : 'Mentors'}</h3>
                             <div className="mentors-grid-large">
-                                {event.mentors.map((mentor, index) => (
-                                    <div key={index} className="mentor-card-large" data-aos="zoom-in" data-aos-delay={index * 100}>
-                                        <img src={mentor.image} alt={mentor.name} className="mentor-image-large" />
+                                {(event.judges || event.mentors).map((person, index) => (
+                                    <div
+                                        key={index}
+                                        className="mentor-card-large clickable-card"
+                                        data-aos="zoom-in"
+                                        data-aos-delay={index * 100}
+                                        onClick={() => setSelectedProfile(person)}
+                                    >
+                                        <img src={person.image} alt={person.name} className="mentor-image-large" />
                                         <div className="mentor-info">
-                                            <h4 className="mentor-name-large">{mentor.name}</h4>
-                                            <p className="mentor-role-large">{mentor.role}</p>
+                                            <h4 className="mentor-name-large">{person.name}</h4>
+                                            <p className="mentor-role-large">{person.role}</p>
+
+                                            {/* Social Links */}
+                                            <div className="mentor-socials">
+                                                {person.linkedin && (
+                                                    <a href={person.linkedin} target="_blank" rel="noopener noreferrer" className="mentor-social-link linkedin" onClick={(e) => e.stopPropagation()}>
+                                                        <i className="fab fa-linkedin-in"></i>
+                                                    </a>
+                                                )}
+                                                {person.googleScholar && (
+                                                    <a href={person.googleScholar} target="_blank" rel="noopener noreferrer" className="mentor-social-link google-scholar" onClick={(e) => e.stopPropagation()}>
+                                                        <i className="fas fa-graduation-cap"></i>
+                                                    </a>
+                                                )}
+                                            </div>
+
+                                            {/* Short Bio */}
+                                            {person.bio && (
+                                                <p className="mentor-bio-short">{person.bio}</p>
+                                            )}
                                         </div>
                                     </div>
                                 ))}
@@ -661,6 +698,37 @@ const EventDetails = () => {
                     )}
                 </div>
             </div>
+
+            {/* Mentor/Judge Modal */}
+            {selectedProfile && (
+                <div className="organizer-modal-overlay" onClick={() => setSelectedProfile(null)}>
+                    <div className="organizer-modal-content" onClick={(e) => e.stopPropagation()}>
+                        <button className="modal-close-btn" onClick={() => setSelectedProfile(null)}>&times;</button>
+                        <div className="modal-header">
+                            <div
+                                className="modal-avatar"
+                                style={{
+                                    backgroundImage: `url(${selectedProfile.image})`
+                                }}
+                            ></div>
+                        </div>
+                        <div className="modal-body">
+                            <h2 className="modal-name">{selectedProfile.name}</h2>
+                            <p className="modal-role">{selectedProfile.role}</p>
+                            {selectedProfile.bio && <p className="modal-bio">{selectedProfile.bio}</p>}
+
+                            <div className="modal-socials-container" style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+                                {selectedProfile.linkedin && (
+                                    <a href={selectedProfile.linkedin} target="_blank" rel="noopener noreferrer" className="modal-social-link">LinkedIn</a>
+                                )}
+                                {selectedProfile.googleScholar && (
+                                    <a href={selectedProfile.googleScholar} target="_blank" rel="noopener noreferrer" className="modal-social-link">Google Scholar</a>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </section>
     );
 };

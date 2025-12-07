@@ -101,8 +101,22 @@ export const upcomingEvents = [
             { title: 'Kickoff Session Slides', link: 'https://docs.google.com/presentation/d/1OpAQNu0PjsB-GmXl-NWgZWz8r2MUqd1qZXvKUd0fonI/edit?usp=sharing' },
             { title: 'Submission Template', link: 'https://docs.google.com/presentation/d/10s9OMNMbQ0AGpKZUA4JOXPOvrWafiO4CYvJ_OtHV1j0/edit' }
         ],
-        mentors: [
-            { name: 'Dr. Sunny Sall', role: 'Faculty Advisor', image: 'https://wsrv.nl/?url=https%3A%2F%2Fi.ibb.co%2FRTNCNWTD%2Ffile-2.jpg&w=400&h=400&fit=cover&a=center&q=80&output=webp' }
+        judges: [
+            {
+                name: 'Dr. Sunny Sall',
+                role: 'Faculty Advisor',
+                image: 'https://wsrv.nl/?url=https%3A%2F%2Fi.ibb.co%2FRTNCNWTD%2Ffile-2.jpg&w=400&h=400&fit=cover&a=center&q=80&output=webp',
+                linkedin: 'https://www.linkedin.com/in/sunny-sall-12372b284/?originalSubdomain=in',
+                googleScholar: 'https://scholar.google.com/citations?user=DV2d_v8AAAAJ&hl=en',
+                bio: 'Faculty Advisor and HOD of Computer Engineering at St. John College of Engineering and Management. A distinguished researcher with numerous publications in AI, Machine Learning, and Wireless Sensor Networks.'
+            },
+            {
+                name: 'Nomthandazo T. Tshuma',
+                role: 'Lead AI Engineer | GDE | Docker Captain',
+                image: 'https://media.licdn.com/dms/image/v2/D4D03AQFfFEuKlDTZ5g/profile-displayphoto-shrink_200_200/B4DZcebfwaHMAY-/0/1748562214841?e=1766620800&v=beta&t=UK1GVNOfnuAAJqTPrvUamUS7Zj0PkuiWTfkN2a_nuiI',
+                linkedin: 'https://www.linkedin.com/in/nomthat/',
+                bio: 'A Data & AI Engineer and ML specialist, I convert raw data into strategic assets, enabling informed decision-making and driving business growth.'
+            }
         ],
         faq: [
             { question: 'Do I need prior experience to participate?', answer: 'No, this hackathon is open to beginners and experts alike. We will have mentors to guide you.' },
