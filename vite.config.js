@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.jpg', 'gdg-logo.png'],
+      includeAssets: ['favicon.png', 'gdg-logo.png'],
       manifest: {
         name: 'GDG on Campus SJCEM',
         short_name: 'GDG SJCEM',
