@@ -45,7 +45,7 @@ const Events = () => {
                                     <div className="event-content">
                                         <span className="event-type">{event.type}</span>
                                         <h3 className="event-title">{event.title}</h3>
-                                        {event.showTimer && <CountdownTimer targetDate="Dec 13, 2025 10:00:00" />}
+                                        {event.showTimer && <CountdownTimer targetDate="Dec 16, 2025 11:15:00" />}
                                         <p className="event-desc">{event.description}</p>
 
                                         <div className="event-buttons">

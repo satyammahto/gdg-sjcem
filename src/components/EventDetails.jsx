@@ -233,7 +233,7 @@ const EventDetails = () => {
         if (!event) return;
         const calculateTimeLeft = () => {
             // Assume 10 AM start time for the date if not specified
-            const eventDateTime = new Date(`${event.date} 10:00:00`);
+            const eventDateTime = new Date(`${event.date} 11:15:00`);
             const difference = +eventDateTime - +new Date();
             let timeLeft = {};
 

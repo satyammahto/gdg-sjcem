@@ -1,7 +1,7 @@
 export const upcomingEvents = [
     {
         id: 1,
-        date: '13 Dec 2025',
+        date: '16 Dec 2025',
         type: 'Info session',
         title: 'TechSprint Hackathon 2025 – Kick-Off Session | GDG on Campus SJCEM',
         description: 'Welcome to the official Kick-Off Session of TechSprint 2025! Hosted by GDG on Campus – St. John College of Engineering & Management, this session marks the beginning of an exciting journey of innovation, problem-solving, and collaboration.',
@@ -23,8 +23,8 @@ export const upcomingEvents = [
         showTimer: true,
         registrations: 6,
         teamSize: '2-4 Members',
-        lastDate: 'Sat 20 Dec 2025',
-        location: 'SJCEM Campus, Palghar',
+        lastDate: 'Mon 15 Dec 2025',
+        location: 'Lab - 1, SJCEM Campus',
         registrationStatus: {
             message: 'Only 50 teams and 160 total seats are available for TechSprint 2025. Participation is 100% free — no fees at any stage.',
             type: 'urgent'
@@ -38,12 +38,12 @@ export const upcomingEvents = [
             { date: '13 Jan - 14 Jan 2026', title: 'Top 3 Announcement - Final', description: 'Winners declared!' }
         ],
         agenda: [
-            { time: '10:00 AM', title: 'Check-in & Registration', description: 'Get your badges and swag kits.' },
-            { time: '10:30 AM', title: 'Opening Ceremony', description: 'Keynote speech by GDG Lead & Faculty Advisor.' },
-            { time: '11:00 AM', title: 'Problem Statements Reveal', description: 'Detailed breakdown of the hackathon tracks.' },
-            { time: '12:00 PM', title: 'Team Formation & Networking', description: 'Find teammates and mentors.' },
-            { time: '01:00 PM', title: 'Lunch Break', description: 'Networking lunch.' },
-            { time: '02:00 PM', title: 'Q&A with Mentors', description: 'Clarify your doubts regarding rules and evaluation.' }
+            { time: '11:15 AM', title: 'Check-in & Registration', description: 'Get your badges and swag kits.' },
+            { time: '11:45 AM', title: 'Opening Ceremony', description: 'Keynote speech by GDG Lead & Faculty Advisor.' },
+            { time: '12:15 PM', title: 'Problem Statements Reveal', description: 'Detailed breakdown of the hackathon tracks.' },
+            { time: '01:00 PM', title: 'Team Formation & Networking', description: 'Find teammates and mentors.' },
+            { time: '01:30 PM', title: 'Lunch Break', description: 'Networking lunch.' },
+            { time: '02:30 PM', title: 'Q&A with Mentors', description: 'Clarify your doubts regarding rules and evaluation.' }
         ],
         gallery: null,
         buttons: [

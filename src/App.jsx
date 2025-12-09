@@ -73,10 +73,31 @@ const AnimatedRoutes = () => {
   );
 };
 
+import LaunchCountdown from './components/LaunchCountdown';
+
 function App() {
   const [loading, setLoading] = useState(true);
+  const [isLaunched, setIsLaunched] = useState(false);
+
+  // Launch Date: Dec 16, 2025 11:35:00
+  const launchDate = new Date('Dec 16, 2025 11:35:00');
 
   useEffect(() => {
+    const checkLaunchStatus = () => {
+      const now = new Date();
+      const searchParams = new URLSearchParams(window.location.search);
+      const bypass = searchParams.get('bypass');
+
+      if (now >= launchDate || bypass === 'true') {
+        setIsLaunched(true);
+      } else {
+        setIsLaunched(false);
+      }
+    };
+
+    checkLaunchStatus(); // Initial check
+    const interval = setInterval(checkLaunchStatus, 1000); // Check every second
+
     AOS.init({
       duration: 1000,
       easing: 'ease-out-cubic',
@@ -84,15 +105,23 @@ function App() {
       offset: 100,
       delay: 100,
     });
+
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
-    if (!loading) {
+    if (!loading && isLaunched) {
       setTimeout(() => {
         AOS.refresh();
       }, 500); // Slight delay to Ensure DOM is ready after transition
     }
-  }, [loading]);
+  }, [loading, isLaunched]);
+
+  /*
+  if (!isLaunched) {
+    return <LaunchCountdown targetDate={launchDate} onFinished={() => setIsLaunched(true)} />;
+  }
+  */
 
   return (
     <ThemeProvider>

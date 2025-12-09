@@ -51,22 +51,31 @@ const Organizers = () => {
         {
             name: 'Abhijeet Rogye',
             role: 'Design & Media Head',
-            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/abhijeet_rogye_DhOJ3Wv.jpg'
+            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/abhijeet_rogye_DhOJ3Wv.jpg',
+            linkedin: 'https://www.linkedin.com/in/abhijeetrogye/'
         },
         {
             name: 'Sumedh Patil',
             role: 'Technical Head',
-            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sumedh_patil_CV1e5fD.png'
+            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sumedh_patil_CV1e5fD.png',
+            linkedin: 'https://www.linkedin.com/in/sumedh-patil-640512251/',
+            github: 'https://github.com/Sumedh1102',
+            instagram: 'https://www.instagram.com/sumedh1102'
         },
         {
             name: 'Rupesh Nandale',
             role: 'Events & Operations Head',
-            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/rupesh_nandale_eQDyo0t.jpeg'
+            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/rupesh_nandale_eQDyo0t.jpeg',
+            linkedin: 'https://www.linkedin.com/in/rupesh-nandale-287678277/',
+            github: 'https://github.com/rupesh108-iebe',
+            twitter: 'https://x.com/Anvayu108'
         },
         {
             name: 'Sahas Bochare',
-            role: 'Community Head',
-            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sahas_bochare_EIH7Urf.jpg'
+            role: 'Community & Marketing Head',
+            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sahas_bochare_EIH7Urf.jpg',
+            linkedin: 'https://www.linkedin.com/in/sahasbochare',
+            bio: 'Leading with passion | Growing with community 💖'
         },
         {
             name: 'Manasvi Kadu',
