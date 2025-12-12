@@ -38,12 +38,80 @@ export const upcomingEvents = [
             { date: '13 Jan - 14 Jan 2026', title: 'Top 3 Announcement - Final', description: 'Winners declared!' }
         ],
         agenda: [
-            { time: '11:15 AM', title: 'Check-in & Registration', description: 'Get your badges and swag kits.' },
-            { time: '11:45 AM', title: 'Opening Ceremony', description: 'Keynote speech by GDG Lead & Faculty Advisor.' },
-            { time: '12:15 PM', title: 'Problem Statements Reveal', description: 'Detailed breakdown of the hackathon tracks.' },
-            { time: '01:00 PM', title: 'Team Formation & Networking', description: 'Find teammates and mentors.' },
-            { time: '01:30 PM', title: 'Lunch Break', description: 'Networking lunch.' },
-            { time: '02:30 PM', title: 'Q&A with Mentors', description: 'Clarify your doubts regarding rules and evaluation.' }
+            {
+                time: '11:15 AM – 11:45 AM',
+                title: 'Opening & Kickoff',
+                description: 'Welcome message, Hackathon goals & expectations, Full-day roadmap overview.',
+                speakers: [
+                    {
+                        name: 'Dhiraj Chaudhari',
+                        role: 'GDGoC Organizer',
+                        image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/dhiraj_chaudhari.jpeg',
+                        linkedin: 'https://www.linkedin.com/in/dhirajchaudhari20/'
+                    },
+                    {
+                        name: 'Aayush Bari',
+                        role: 'Co-Organizer',
+                        image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/aayush_bari.jpg',
+                        linkedin: '#'
+                    }
+                ]
+            },
+            {
+                time: '11:45 AM – 12:00 PM',
+                title: 'Starting the Tech Journey',
+                description: 'Most common beginner problems, Resource platform walkthrough (prathamesh01110.vercel.app), Introduction to Google’s AI ecosystem.',
+                speakers: [
+                    {
+                        name: 'Prathamesh Jakkula',
+                        role: 'AIML/DSA Lead',
+                        image: 'https://i.ibb.co/35jPBNjj/profile.jpg',
+                        linkedin: 'https://www.linkedin.com/in/prathamesh-jakkula-496a39285/'
+                    }
+                ]
+            },
+            {
+                time: '12:00 PM – 01:15 PM',
+                title: 'Hands-On Workshop – Part 1',
+                description: 'Basics of Google Colab & GCP, Deploying ML/AI projects, Basics of Google AI Studio & Firebase, ADK + Gemini API + Firebase Mini-Project.',
+                speakers: [
+                    {
+                        name: 'Prathamesh Jakkula',
+                        role: 'AIML/DSA Lead',
+                        image: 'https://i.ibb.co/35jPBNjj/profile.jpg',
+                        linkedin: 'https://www.linkedin.com/in/prathamesh-jakkula-496a39285/'
+                    },
+                    {
+                        name: 'Sumedh Patil',
+                        role: 'Technical Head',
+                        image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/sumedh_patil_CV1e5fD.png',
+                        linkedin: 'https://www.linkedin.com/in/sumedh-patil-640512251/'
+                    }
+                ]
+            },
+            {
+                time: '01:15 PM – 02:15 PM',
+                title: 'Lunch Break 🍱',
+                description: 'Networking lunch.'
+            },
+            {
+                time: '02:15 PM – 03:30 PM',
+                title: 'Hands-On Workshop – Part 2',
+                description: 'Idea brainstorming session, Anti-Gravity IDE practical demo + project direction, Team formation & grouping.'
+            },
+            {
+                time: '03:30 PM – 04:00 PM',
+                title: 'Closing, Team Formation & Q&A',
+                description: 'Final team confirmations, Hackathon guidelines, Open floor Q&A.',
+                speakers: [
+                    {
+                        name: 'Dhiraj Chaudhari',
+                        role: 'GDGoC Organizer',
+                        image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/dhiraj_chaudhari.jpeg',
+                        linkedin: 'https://www.linkedin.com/in/dhirajchaudhari20/'
+                    }
+                ]
+            }
         ],
         gallery: null,
         buttons: [
@@ -54,7 +122,7 @@ export const upcomingEvents = [
             },
             {
                 text: 'Register for Info Session',
-                link: 'https://gdg.community.dev/gdg-on-campus-st-john-college-of-engineering-and-management-autonomous-palghar-india/',
+                link: 'https://gdg.community.dev/events/details/google-gdg-on-campus-st-john-college-of-engineering-and-management-autonomous-palghar-india-presents-techsprint-hackathon-2025-kick-off-session-gdg-on-campus-sjcem/',
                 style: 'outline'
             }
         ],
@@ -117,13 +185,13 @@ export const upcomingEvents = [
                 linkedin: 'https://www.linkedin.com/in/nomthat/',
                 bio: 'A Data & AI Engineer and ML specialist, I convert raw data into strategic assets, enabling informed decision-making and driving business growth.'
             },
-               {
-            name: 'Biswanath Giri',
-            role: 'Google Developer Expert | Principal Architect',
-            image: 'https://media.licdn.com/dms/image/v2/D5603AQHZRTzsf7raNA/profile-displayphoto-scale_200_200/B56ZoMZ29DIYAY-/0/1761144697834?e=1766620800&v=beta&t=-1zXZ1xM5FPmYxvIHi9kZ94vY0JHthmriYUKxtkk5Ws',
-            linkedin: 'https://www.linkedin.com/in/biswanathgiri/',
-            bio: '16+ Years of IT industry experience. Google Developer Expert (GDE) in Cloud. Helping businesses with their journey to Cloud & AI. Principal Architect at Kenvue.'
-        }
+            {
+                name: 'Biswanath Giri',
+                role: 'Google Developer Expert | Principal Architect',
+                image: 'https://media.licdn.com/dms/image/v2/D5603AQHZRTzsf7raNA/profile-displayphoto-scale_200_200/B56ZoMZ29DIYAY-/0/1761144697834?e=1766620800&v=beta&t=-1zXZ1xM5FPmYxvIHi9kZ94vY0JHthmriYUKxtkk5Ws',
+                linkedin: 'https://www.linkedin.com/in/biswanathgiri/',
+                bio: '16+ Years of IT industry experience. Google Developer Expert (GDE) in Cloud. Helping businesses with their journey to Cloud & AI. Principal Architect at Kenvue.'
+            }
         ],
         faq: [
             { question: 'Do I need prior experience to participate?', answer: 'No, this hackathon is open to beginners and experts alike. We will have mentors to guide you.' },
