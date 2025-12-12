@@ -211,7 +211,7 @@ const EventDetails = () => {
                 }
             };
 
-            fetchRsvpCount();
+            // fetchRsvpCount();
         }
     }, [event]);
 

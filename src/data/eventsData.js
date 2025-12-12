@@ -21,7 +21,7 @@ export const upcomingEvents = [
         `,
         image: 'https://i.ibb.co/bjc6f31T/Generated-Image-December-04-2025-8-46-PM.jpg',
         showTimer: true,
-        registrations: 6,
+        registrations: 20,
         teamSize: '2-4 Members',
         lastDate: 'Mon 15 Dec 2025',
         location: 'Lab - 1, SJCEM Campus',
