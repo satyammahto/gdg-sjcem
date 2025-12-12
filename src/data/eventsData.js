@@ -138,6 +138,11 @@ export const upcomingEvents = [
                 text: 'Register for Info Session',
                 link: 'https://gdg.community.dev/events/details/google-gdg-on-campus-st-john-college-of-engineering-and-management-autonomous-palghar-india-presents-techsprint-hackathon-2025-kick-off-session-gdg-on-campus-sjcem/',
                 style: 'outline'
+            },
+            {
+                text: 'Join Session (Meet)',
+                link: 'https://meet.google.com/ghv-pdks-zsj?authuser=0&hs=122&ijlm=1765555890226',
+                style: 'primary'
             }
         ],
         partners: [
