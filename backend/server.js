@@ -61,13 +61,18 @@ io.on('connection', (socket) => {
 
     // Handle New Message
     socket.on('send_message', async (data) => {
+        console.log('📥 Received send_message event:', data);
         // data: { codelabId, text, image, uid, displayName, photoURL }
         const { codelabId, ...messageContent } = data;
 
-        if (!codelabId) return;
+        if (!codelabId) {
+            console.error('❌ No codelabId provided');
+            return;
+        }
 
         // 1. Save to Firestore (Server-side, secure)
         try {
+            console.log(`💾 Saving message to Firestore: ${codelabId}/chat_messages`);
             const messageRef = await db.collection('codelabs').doc(codelabId).collection('chat_messages').add({
                 ...messageContent,
                 timestamp: admin.firestore.FieldValue.serverTimestamp()
@@ -79,11 +84,15 @@ io.on('connection', (socket) => {
                 timestamp: new Date().toISOString() // Send simplified timestamp to client immediately
             };
 
+            console.log(`✅ Message saved with ID: ${messageRef.id}`);
+            console.log(`📡 Broadcasting to room: ${codelabId}`);
+
             // 2. Broadcast to everyone in the room (Remote Client)
             io.to(codelabId).emit('receive_message', savedMessage);
+            console.log('✅ Message broadcasted successfully');
 
         } catch (error) {
-            console.error("Error saving message:", error);
+            console.error("❌ Error saving message:", error);
             socket.emit('error', 'Failed to save message');
         }
     });
