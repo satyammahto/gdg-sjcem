@@ -28,7 +28,7 @@ import Newsletter from './components/Newsletter';
 import EventDetails from './components/EventDetails';
 import ProjectSubmission from './components/ProjectSubmission';
 import PageTransition from './components/PageTransition';
-
+import CodelabTabs from './components/CodelabTabs';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
 import ScrollToTop from './components/ScrollToTop';
@@ -68,12 +68,14 @@ const AnimatedRoutes = () => {
         <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
         <Route path="/submit-idea" element={<PageTransition><ProjectSubmission /></PageTransition>} />
         <Route path="/leaderboard" element={<PageTransition><Leaderboard /></PageTransition>} />
+        <Route path="/CodelabTab" element={<PageTransition><CodelabTabs /></PageTransition>} />
       </Routes>
     </AnimatePresence>
   );
 };
 
 import LaunchCountdown from './components/LaunchCountdown';
+
 
 function App() {
   const [loading, setLoading] = useState(true);
