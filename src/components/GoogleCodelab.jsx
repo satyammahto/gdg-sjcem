@@ -18,6 +18,7 @@ const GoogleCodelab = () => {
     const [showProfileMenu, setShowProfileMenu] = useState(false);
     const navigate = useNavigate();
     const [codelab, setCodelab] = useState(null);
+    const [showMobileChat, setShowMobileChat] = useState(false);
 
     // Unique session ID for multi-tab support
     const sessionId = useRef(`session_${Math.random().toString(36).substr(2, 9)}`).current;
@@ -258,6 +259,15 @@ const GoogleCodelab = () => {
                         <span>English</span>
                     </div>
 
+                    {/* Mobile Chat Toggle */}
+                    <button
+                        className="gc-mobile-chat-toggle"
+                        onClick={() => setShowMobileChat(!showMobileChat)}
+                        title="Live Chat"
+                    >
+                        💬
+                    </button>
+
                     {currentUser ? (
                         <div className="gc-profile-container" style={{ position: 'relative' }}>
                             <div
@@ -377,7 +387,17 @@ const GoogleCodelab = () => {
                 </main>
 
                 {/* Right Sidebar - Live Session */}
-                <LiveSessionPanel codelabId={codelab.id} sessionId={sessionId} />
+                <div className={`live-session-wrapper ${showMobileChat ? 'mobile-visible' : ''}`}>
+                    <LiveSessionPanel codelabId={codelab.id} sessionId={sessionId} />
+                    {showMobileChat && (
+                        <button
+                            className="mobile-close-chat"
+                            onClick={() => setShowMobileChat(false)}
+                        >
+                            ×
+                        </button>
+                    )}
+                </div>
             </div>
         </div>
     );

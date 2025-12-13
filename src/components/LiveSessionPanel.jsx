@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { db } from '../firebase';
-import { collection, doc, setDoc, addDoc, deleteDoc, onSnapshot, query, orderBy, limit } from 'firebase/firestore';
+import { collection, doc, setDoc, addDoc, deleteDoc, onSnapshot, query, orderBy, limit, writeBatch, getDocs } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -165,15 +165,56 @@ const LiveSessionPanel = ({ codelabId, sessionId }) => {
         }
     };
 
+    const handleResetSession = async () => {
+        if (!window.confirm("Are you sure you want to clear the session? This will delete all chat history and votes for everyone.")) return;
+
+        try {
+            const batch = writeBatch(db);
+
+            // Delete Votes
+            const votesSnap = await getDocs(collection(db, "codelabs", codelabId, "live_votes"));
+            votesSnap.forEach((doc) => {
+                batch.delete(doc.ref);
+            });
+
+            // Delete Chat Messages
+            const chatSnap = await getDocs(collection(db, "codelabs", codelabId, "chat_messages"));
+            chatSnap.forEach((doc) => {
+                batch.delete(doc.ref);
+            });
+
+            await batch.commit();
+            console.log("Session reset successfully");
+        } catch (e) {
+            console.error("Error resetting session:", e);
+        }
+    };
+
     return (
         <div className="gc-right-sidebar">
             {/* Persistent Header */}
             <div className="live-header" style={{ marginBottom: '16px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <h3 style={{ margin: 0 }}>Live Session 🔴</h3>
-                    <span style={{ fontSize: '12px', color: '#5f6368', fontWeight: 'bold' }}>
-                        {votes.length} Joined
-                    </span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{ fontSize: '12px', color: '#5f6368', fontWeight: 'bold' }}>
+                            {votes.length} Joined
+                        </span>
+                        <button
+                            onClick={handleResetSession}
+                            style={{
+                                background: 'none',
+                                border: 'none',
+                                cursor: 'pointer',
+                                fontSize: '14px',
+                                padding: '4px',
+                                color: '#5f6368'
+                            }}
+                            title="Reset Session (Clear All)"
+                        >
+                            🔄
+                        </button>
+                    </div>
                 </div>
             </div>
 
