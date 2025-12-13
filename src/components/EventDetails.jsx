@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { upcomingEvents, pastEvents } from '../data/eventsData';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -146,6 +147,16 @@ const AgendaCard = ({ item }) => {
 
 const EventDetails = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
+    const [isCodelabLoading, setIsCodelabLoading] = useState(false);
+
+    const handleStartCodelab = (e) => {
+        e.preventDefault();
+        setIsCodelabLoading(true);
+        setTimeout(() => {
+            navigate('/codelab/techsprint-1');
+        }, 1500);
+    };
 
     // Mentor/Judge Modal State
     const [selectedProfile, setSelectedProfile] = useState(null);
@@ -454,6 +465,51 @@ const EventDetails = () => {
                     <div className="event-action-card">
                         <h3 className="event-sidebar-title">Join Us</h3>
 
+                        {/* High Visibility Codelab Button */}
+                        <div style={{ marginBottom: '1.5rem', paddingBottom: '1.5rem', borderBottom: '1px solid #e0e0e0' }}>
+                            <button
+                                onClick={handleStartCodelab}
+                                className="sidebar-btn btn-primary-action"
+                                disabled={isCodelabLoading}
+                                style={{
+                                    textDecoration: 'none',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: '10px',
+                                    width: '100%',
+                                    cursor: isCodelabLoading ? 'wait' : 'pointer',
+                                    opacity: isCodelabLoading ? 0.9 : 1,
+                                    background: '#1a73e8', // Google Blue
+                                    border: 'none',
+                                    color: 'white',
+                                    fontWeight: '500'
+                                }}
+                            >
+                                {isCodelabLoading ? (
+                                    <>
+                                        <motion.div
+                                            animate={{ rotate: 360 }}
+                                            transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                                            style={{
+                                                width: '16px',
+                                                height: '16px',
+                                                border: '2px solid rgba(255,255,255,0.3)',
+                                                borderTop: '2px solid #fff',
+                                                borderRadius: '50%'
+                                            }}
+                                        />
+                                        <span>Opening...</span>
+                                    </>
+                                ) : (
+                                    <>Start Codelab 🚀</>
+                                )}
+                            </button>
+                            <p style={{ fontSize: '0.8rem', color: '#5f6368', textAlign: 'center', marginTop: '0.5rem', marginBottom: 0 }}>
+                                *Hands-on Workshop
+                            </p>
+                        </div>
+
                         {event.buttons ? (
                             event.buttons.map((btn, index) => (
                                 <a
@@ -561,6 +617,64 @@ const EventDetails = () => {
                                 {event.agenda.map((item, index) => (
                                     <AgendaCard key={index} item={item} />
                                 ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Codelab CTA Section (TechSprint Only) */}
+                {event.id === 1 && (
+                    <div className="full-width-block" id="codelabs-section">
+                        <div className="content-wrapper">
+                            <h3 className="section-title-premium">Hands-On Workshop Resources</h3>
+                            <div className="codelab-cta-card" style={{
+                                background: '#f8f9fa',
+                                padding: '30px',
+                                borderRadius: '12px',
+                                textAlign: 'center',
+                                border: '1px solid #e0e0e0'
+                            }}>
+                                <h4 style={{ fontSize: '1.2rem', marginBottom: '1rem', color: '#202124' }}>
+                                    Build a Travel Agent using MCP Toolbox & ADK
+                                </h4>
+                                <p style={{ color: '#5f6368', marginBottom: '1.5rem', maxWidth: '600px', margin: '0 auto 1.5rem' }}>
+                                    Follow this step-by-step codelab to build and deploy your multi-agent AI system.
+                                </p>
+
+                                <button
+                                    onClick={handleStartCodelab}
+                                    className="btn-primary-action"
+                                    disabled={isCodelabLoading}
+                                    style={{
+                                        textDecoration: 'none',
+                                        display: 'inline-flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        gap: '10px',
+                                        minWidth: '180px',
+                                        cursor: isCodelabLoading ? 'wait' : 'pointer',
+                                        opacity: isCodelabLoading ? 0.9 : 1
+                                    }}
+                                >
+                                    {isCodelabLoading ? (
+                                        <>
+                                            <motion.div
+                                                animate={{ rotate: 360 }}
+                                                transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                                                style={{
+                                                    width: '20px',
+                                                    height: '20px',
+                                                    border: '3px solid rgba(255,255,255,0.3)',
+                                                    borderTop: '3px solid #fff',
+                                                    borderRadius: '50%'
+                                                }}
+                                            />
+                                            <span>Opening...</span>
+                                        </>
+                                    ) : (
+                                        <>Start Codelab 🚀</>
+                                    )}
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -813,29 +927,31 @@ const EventDetails = () => {
             </div>
 
             {/* Gallery Section - Full Bleed */}
-            {event.gallery && (
-                <div className="event-gallery-full-bleed">
-                    <h3 className="gallery-title-center">Highlights</h3>
-                    <Swiper
-                        modules={[Navigation, Pagination, Autoplay]}
-                        spaceBetween={0}
-                        slidesPerView={1}
-                        navigation
-                        pagination={{ clickable: true }}
-                        autoplay={{ delay: 3000 }}
-                        loop={true}
-                        className="gallery-slider-full"
-                    >
-                        {event.gallery.map((img, index) => (
-                            <SwiperSlide key={index}>
-                                <div className="gallery-slide-container">
-                                    <img src={img} alt={`Gallery ${index}`} className="gallery-image-full" />
-                                </div>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
-                </div>
-            )}
+            {
+                event.gallery && (
+                    <div className="event-gallery-full-bleed">
+                        <h3 className="gallery-title-center">Highlights</h3>
+                        <Swiper
+                            modules={[Navigation, Pagination, Autoplay]}
+                            spaceBetween={0}
+                            slidesPerView={1}
+                            navigation
+                            pagination={{ clickable: true }}
+                            autoplay={{ delay: 3000 }}
+                            loop={true}
+                            className="gallery-slider-full"
+                        >
+                            {event.gallery.map((img, index) => (
+                                <SwiperSlide key={index}>
+                                    <div className="gallery-slide-container">
+                                        <img src={img} alt={`Gallery ${index}`} className="gallery-image-full" />
+                                    </div>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    </div>
+                )
+            }
 
             <FeedbackModal
                 isOpen={isFeedbackModalOpen}
@@ -863,36 +979,38 @@ const EventDetails = () => {
             </div>
 
             {/* Mentor/Judge Modal */}
-            {selectedProfile && (
-                <div className="organizer-modal-overlay" onClick={() => setSelectedProfile(null)}>
-                    <div className="organizer-modal-content" onClick={(e) => e.stopPropagation()}>
-                        <button className="modal-close-btn" onClick={() => setSelectedProfile(null)}>&times;</button>
-                        <div className="modal-header">
-                            <div
-                                className="modal-avatar"
-                                style={{
-                                    backgroundImage: `url(${selectedProfile.image})`
-                                }}
-                            ></div>
-                        </div>
-                        <div className="modal-body">
-                            <h2 className="modal-name">{selectedProfile.name}</h2>
-                            <p className="modal-role">{selectedProfile.role}</p>
-                            {selectedProfile.bio && <p className="modal-bio">{selectedProfile.bio}</p>}
+            {
+                selectedProfile && (
+                    <div className="organizer-modal-overlay" onClick={() => setSelectedProfile(null)}>
+                        <div className="organizer-modal-content" onClick={(e) => e.stopPropagation()}>
+                            <button className="modal-close-btn" onClick={() => setSelectedProfile(null)}>&times;</button>
+                            <div className="modal-header">
+                                <div
+                                    className="modal-avatar"
+                                    style={{
+                                        backgroundImage: `url(${selectedProfile.image})`
+                                    }}
+                                ></div>
+                            </div>
+                            <div className="modal-body">
+                                <h2 className="modal-name">{selectedProfile.name}</h2>
+                                <p className="modal-role">{selectedProfile.role}</p>
+                                {selectedProfile.bio && <p className="modal-bio">{selectedProfile.bio}</p>}
 
-                            <div className="modal-socials-container" style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
-                                {selectedProfile.linkedin && (
-                                    <a href={selectedProfile.linkedin} target="_blank" rel="noopener noreferrer" className="modal-social-link">LinkedIn</a>
-                                )}
-                                {selectedProfile.googleScholar && (
-                                    <a href={selectedProfile.googleScholar} target="_blank" rel="noopener noreferrer" className="modal-social-link">Google Scholar</a>
-                                )}
+                                <div className="modal-socials-container" style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+                                    {selectedProfile.linkedin && (
+                                        <a href={selectedProfile.linkedin} target="_blank" rel="noopener noreferrer" className="modal-social-link">LinkedIn</a>
+                                    )}
+                                    {selectedProfile.googleScholar && (
+                                        <a href={selectedProfile.googleScholar} target="_blank" rel="noopener noreferrer" className="modal-social-link">Google Scholar</a>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            )}
-        </section>
+                )
+            }
+        </section >
     );
 };
 

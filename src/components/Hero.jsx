@@ -26,22 +26,13 @@ const Hero = () => {
             </div>
             <div className="container hero-content">
                 <div className="hero-text">
-                    <Tilt
-                        tiltMaxAngleX={10}
-                        tiltMaxAngleY={10}
-                        perspective={1000}
-                        scale={1.05}
-                        transitionSpeed={1000}
-                        className="tilt-badge"
+                    <div
+                        className="hero-badge"
+                        data-aos="fade-down"
+                        data-aos-delay="200"
                     >
-                        <div
-                            className="hero-badge"
-                            data-aos="fade-down"
-                            data-aos-delay="200"
-                        >
-                            <span className="badge-icon">✨</span> Welcome to our community
-                        </div>
-                    </Tilt>
+                        ✨ Welcome to our community
+                    </div>
                     <h1
                         className="hero-title"
                         data-aos="fade-up"

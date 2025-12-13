@@ -38,19 +38,7 @@ export const upcomingEvents = [
 
             <hr/>
 
-            <h3>📅 TechSprint 2025 – Official Timeline</h3>
-            <ul>
-                <li><strong>16 December:</strong> Kick-Off Session (Problem statement briefing)</li>
-                <li><strong>16–22 December:</strong> Team Formation & Ideation (Reg Deadline: 22 Dec)</li>
-                <li><strong>20 December:</strong> Ask Me Anything (Online Session)</li>
-                <li><strong>23–31 December:</strong> Project Development Phase</li>
-                <li><strong>24 December:</strong> Onsite Guidance Session (SJCEM Campus)</li>
-                <li><strong>01 January:</strong> Project Submission Deadline (Hack2Skill)</li>
-                <li><strong>02–04 January:</strong> Internal Evaluation (Top 10 Shortlisting)</li>
-                <li><strong>05 January:</strong> Top 10 Teams Displayed on Website</li>
-                <li><strong>06–12 January:</strong> Pitching & Mentoring Phase (Top 10)</li>
-                <li><strong>13 January:</strong> Top 3 Wining Teams Announcement</li>
-            </ul>
+          
         `,
         image: 'https://i.ibb.co/bjc6f31T/Generated-Image-December-04-2025-8-46-PM.jpg',
         showTimer: true,

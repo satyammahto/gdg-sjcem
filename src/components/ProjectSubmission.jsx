@@ -79,6 +79,35 @@ const ProjectSubmission = () => {
             Description: ${formData.description}
             Video Link: ${formData.videoLink || 'N/A'}
             Project Image: ${formData.image || 'N/A'}
+
+            ----- CODELAB JSON TEMPLATE (FOR ADMIN COPY-PASTE) -----
+            {
+                id: "${formData.projectTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}",
+                title: "${formData.projectTitle}",
+                duration: "60 min",
+                level: "Intermediate",
+                author: {
+                    name: "${formData.name}",
+                    title: "Community Member | GDG On Campus SJCEM",
+                    image: "${formData.userImage || 'https://lh3.googleusercontent.com/a/default-user'}"
+                },
+                steps: [
+                    {
+                        title: "Introduction",
+                        duration: "5 mins",
+                        content: (
+                            <div className="gc-step-content">
+                                <p>${formData.description.replace(/\n/g, ' ')}</p>
+                                <div className="gc-info-box">
+                                    <span className="gc-info-box-title">What you'll build</span>
+                                    <p>${formData.projectTitle}</p>
+                                </div>
+                            </div>
+                        )
+                    }
+                ]
+            },
+            --------------------------------------------------------
         `);
 
         try {

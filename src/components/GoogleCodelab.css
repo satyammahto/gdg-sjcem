@@ -1,0 +1,624 @@
+/* Google Codelab Clone Styles */
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400&display=swap');
+
+:root {
+    --gc-blue: #1a73e8;
+    --gc-blue-hover: #1765cc;
+    --gc-text-primary: #202124;
+    --gc-text-secondary: #5f6368;
+    --gc-border-color: #dadce0;
+    --gc-bg-hover: #f1f3f4;
+    --gc-bg-active: #e8f0fe;
+    --gc-font-family: 'Roboto', sans-serif;
+    --gc-heading-font: 'Google Sans', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.google-codelab-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: var(--gc-font-family);
+    color: var(--gc-text-primary);
+    background-color: #fff;
+    overflow: hidden;
+}
+
+/* Top Bar */
+.gc-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 64px;
+    background-color: #fff;
+    border-bottom: 1px solid var(--gc-border-color);
+    /* Google usually has a subtle shadow or just border */
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.30), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+    z-index: 1001;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.gc-top-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.gc-back-link {
+    color: var(--gc-text-secondary);
+    text-decoration: none;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.gc-back-link:hover {
+    background-color: rgba(95, 99, 104, 0.08);
+}
+
+.gc-codelab-title {
+    font-family: var(--gc-heading-font);
+    font-size: 20px;
+    color: var(--gc-text-secondary);
+    /* Often slightly softer than black */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: .01785714em;
+}
+
+.gc-top-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.gc-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    /* Usually medium weight */
+    color: var(--gc-text-secondary);
+}
+
+.gc-profile-icon {
+    width: 32px;
+    height: 32px;
+    background-color: #673ab7;
+    /* Purple generic */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Main Layout */
+.gc-main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Sidebar */
+.gc-sidebar {
+    width: 280px;
+    background-color: #fff;
+    border-right: 1px solid var(--gc-border-color);
+    overflow-y: auto;
+    padding: 12px 0;
+    flex-shrink: 0;
+}
+
+.gc-step-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px 24px;
+    cursor: pointer;
+    color: var(--gc-text-secondary);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.gc-step-item:hover {
+    background-color: var(--gc-bg-hover);
+    color: var(--gc-text-primary);
+}
+
+.gc-step-item.active {
+    color: var(--gc-blue);
+    font-weight: 500;
+    background-color: var(--gc-bg-active);
+}
+
+.gc-step-number {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--gc-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    font-size: 12px;
+    background-color: #fff;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+
+.gc-step-item.active .gc-step-number {
+    background-color: var(--gc-blue);
+    color: white;
+    border-color: var(--gc-blue);
+}
+
+/* Content Area */
+.gc-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 40px 60px;
+    max-width: 900px;
+    /* Optimal reading width */
+    margin: 0;
+    /* Align leftish, or margin: 0 auto to center */
+}
+
+/* Make content centered in main area like real codelabs */
+#gc-content-area {
+    padding: 48px 64px;
+}
+
+.gc-step-title {
+    font-family: var(--gc-heading-font);
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 400;
+    color: var(--gc-text-primary);
+    margin-bottom: 40px;
+    letter-spacing: -0.2px;
+}
+
+.gc-step-content {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--gc-text-primary);
+    /* Roboto */
+}
+
+.gc-step-content h3 {
+    font-family: var(--gc-heading-font);
+    font-size: 24px;
+    line-height: 32px;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    font-weight: 400;
+}
+
+.gc-step-content h4 {
+    font-family: var(--gc-heading-font);
+    font-size: 18px;
+    line-height: 26px;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.gc-step-content p {
+    margin-bottom: 16px;
+}
+
+.gc-step-content ul,
+.gc-step-content ol {
+    margin-bottom: 24px;
+    padding-left: 24px;
+}
+
+.gc-step-content li {
+    margin-bottom: 8px;
+}
+
+/* Code Blocks */
+.gc-step-content pre {
+    background-color: #f1f3f4;
+    /* Google's light gray for code */
+    padding: 16px;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 14px;
+    margin: 16px 0 32px;
+    position: relative;
+    border: 1px solid var(--gc-border-color);
+}
+
+.gc-step-content code {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 14px;
+}
+
+/* Custom Alert/Note Boxes - "Blue box" style */
+.gc-info-box {
+    background-color: #e8f0fe;
+    padding: 16px;
+    margin: 24px 0;
+    border-radius: 4px;
+    /* Google boxes are often rounded */
+    /* Often no left border, but bold text inside */
+}
+
+.gc-info-box-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--gc-text-primary);
+    display: block;
+}
+
+/* Buttons */
+.btn-gc-primary {
+    background-color: var(--gc-blue);
+    color: white;
+    border: none;
+    padding: 8px 24px;
+    /* slightly smaller padding */
+    border-radius: 4px;
+    font-family: var(--gc-heading-font);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: .0892857143em;
+    text-transform: none;
+    /* or uppercase? Google usually Sentence or Title case for primary buttons in updated MD */
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-gc-primary:hover {
+    background-color: #2d6bcf;
+    /* approximate hover */
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+}
+
+/* Footer (Nav buttons) */
+.gc-footer {
+    margin-top: 60px;
+    display: flex;
+    justify-content: flex-end;
+    /* Google usually puts Next on right */
+    padding-top: 24px;
+    padding-bottom: 64px;
+}
+
+/* Code Copy Button */
+.gc-copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: white;
+    border: 1px solid var(--gc-border-color);
+    border-radius: 4px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--gc-text-secondary);
+    transition: all 0.2s;
+}
+
+.gc-copy-btn:hover {
+    background-color: var(--gc-bg-hover);
+    color: var(--gc-text-primary);
+}
+
+/* Toast Notification */
+.gc-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    /* Or center? Google often does snackbars bottom left or center */
+    background-color: #323232;
+    color: white;
+    padding: 14px 24px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    z-index: 2000;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+}
+
+/* =========================================
+   BADGE CARD STYLES
+   ========================================= */
+
+/* BADGE OVERLAY: Fixed positioning to slide up */
+.badge-overlay {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    /* Align bottom */
+    padding-bottom: 40px;
+    /* some spacing from bottom edge */
+    pointer-events: none;
+    /* Let clicks pass through if needed, but the card needs pointer events */
+}
+
+/* Enable pointer events on the card itself */
+.badge-overlay .card {
+    pointer-events: auto;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.30), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+    padding: 24px;
+    max-width: 600px;
+    width: 90%;
+    /* responsive width */
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.card-content {
+    /* Styles for content */
+}
+
+.completed-title {
+    font-family: var(--gc-heading-font);
+    font-size: 24px;
+    color: var(--gc-text-primary);
+    margin-bottom: 8px;
+}
+
+.badge-name {
+    color: var(--gc-blue);
+    font-weight: 700;
+}
+
+.completed-text {
+    font-family: var(--gc-font-family);
+    color: var(--gc-text-secondary);
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+.illustration-container {
+    position: relative;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 24px 0;
+}
+
+.badge-icon {
+    height: 96px;
+    width: 96px;
+    z-index: 2;
+    position: relative;
+}
+
+.badge-animation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    z-index: 1;
+    opacity: 0.6;
+}
+
+.badge-icon-counter {
+    /* Optional if we want to show counter */
+    display: none;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+    border-top: 1px solid var(--gc-border-color);
+    padding-top: 24px;
+}
+
+.buttons.sharing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: var(--gc-text-secondary);
+    font-size: 14px;
+}
+
+.share-buttons-container {
+    display: flex;
+    gap: 12px;
+}
+
+.share-buttons-container button,
+.share-link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.share-buttons-container button:hover,
+.share-link:hover {
+    background-color: var(--gc-bg-hover);
+}
+
+.share-buttons-container img {
+    width: 20px;
+    height: 20px;
+    opacity: 0.7;
+}
+
+.buttons.actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.button.button-primary {
+    background-color: var(--gc-blue);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: var(--gc-heading-font);
+    font-weight: 500;
+}
+
+.button.dismiss {
+    background: none;
+    border: 1px solid var(--gc-border-color);
+    color: var(--gc-blue);
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-family: var(--gc-heading-font);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .gc-sidebar {
+        display: none;
+    }
+
+    #gc-content-area {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 600px) {
+    .gc-top-bar {
+        padding: 0 16px;
+    }
+
+    .gc-codelab-title {
+        font-size: 16px;
+        max-width: 150px;
+        /* Force truncate on very small screens */
+    }
+
+    /* Hide Language on mobile */
+    .gc-top-right .gc-meta-item:nth-child(2) {
+        display: none;
+    }
+
+    /* Adjust timer to be smaller */
+    .gc-top-right .gc-meta-item:nth-child(1) {
+        font-size: 12px;
+    }
+
+    .gc-top-right {
+        gap: 12px;
+    }
+
+    .card {
+        padding: 16px;
+        width: 95%;
+    }
+
+    .badge-icon {
+        width: 72px;
+        height: 72px;
+    }
+
+    .completed-title {
+        font-size: 20px;
+    }
+}
+
+/* Reference List Styling */
+.gc-reference-list {
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.gc-reference-list li {
+    margin: 0;
+}
+
+.gc-reference-list a {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    background-color: white;
+    border: 1px solid var(--gc-border-color);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--gc-blue);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.1);
+}
+
+.gc-reference-list a:hover {
+    background-color: #f8f9fa;
+    box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.3);
+    transform: translateY(-1px);
+    border-color: var(--gc-blue);
+}
+
+.gc-reference-list a::before {
+    content: '\f0c1';
+    /* FontAwesome link icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 12px;
+    font-size: 16px;
+    color: var(--gc-text-secondary);
+}
+
+.gc-reference-list a:hover::before {
+    color: var(--gc-blue);
+}

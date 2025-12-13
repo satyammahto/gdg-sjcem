@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
+import { AuthProvider } from './context/AuthContext';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import AOS from 'aos';
@@ -29,6 +30,9 @@ import EventDetails from './components/EventDetails';
 import ProjectSubmission from './components/ProjectSubmission';
 import PageTransition from './components/PageTransition';
 import CodelabTabs from './components/CodelabTabs';
+import GoogleCodelab from './components/GoogleCodelab';
+import CodelabLogin from './components/CodelabLogin';
+import CodelabDashboard from './components/CodelabDashboard';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
 import ScrollToTop from './components/ScrollToTop';
@@ -68,14 +72,37 @@ const AnimatedRoutes = () => {
         <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
         <Route path="/submit-idea" element={<PageTransition><ProjectSubmission /></PageTransition>} />
         <Route path="/leaderboard" element={<PageTransition><Leaderboard /></PageTransition>} />
+
+        {/* Codelab Routes */}
+        <Route path="/codelab/:id" element={<PageTransition><GoogleCodelab /></PageTransition>} />
+        <Route path="/codelab/techsprint" element={<PageTransition><GoogleCodelab /></PageTransition>} /> {/* Keep for backward compat if needed, but GoogleCodelab handles default */}
         <Route path="/CodelabTab" element={<PageTransition><CodelabTabs /></PageTransition>} />
+
+        {/* Auth & Dashboard Routes */}
+        <Route path="/codelabs/login" element={<PageTransition><CodelabLogin /></PageTransition>} />
+        <Route path="/codelabs" element={<PageTransition><CodelabDashboard /></PageTransition>} />
       </Routes>
     </AnimatePresence>
   );
 };
 
-import LaunchCountdown from './components/LaunchCountdown';
+// Layout component to handle conditional rendering of global elements
+const Layout = ({ children }) => {
+  const location = useLocation();
+  // Hide globals for codelab views AND dashboard views to keep them clean/app-like
+  const isCodelabApp = location.pathname.startsWith('/codelab') || location.pathname.startsWith('/codelabs');
 
+  return (
+    <div className="App">
+      {!isCodelabApp && <ScrollProgress />}
+      {!isCodelabApp && <Navbar />}
+      <ScrollToTop />
+      {children}
+      {!isCodelabApp && <Footer />}
+      {!isCodelabApp && <BackToTop />}
+    </div>
+  );
+};
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -97,8 +124,8 @@ function App() {
       }
     };
 
-    checkLaunchStatus(); // Initial check
-    const interval = setInterval(checkLaunchStatus, 1000); // Check every second
+    checkLaunchStatus();
+    const interval = setInterval(checkLaunchStatus, 1000);
 
     AOS.init({
       duration: 1000,
@@ -115,37 +142,25 @@ function App() {
     if (!loading && isLaunched) {
       setTimeout(() => {
         AOS.refresh();
-      }, 500); // Slight delay to Ensure DOM is ready after transition
+      }, 500);
     }
   }, [loading, isLaunched]);
 
-  /*
-  if (!isLaunched) {
-    return <LaunchCountdown targetDate={launchDate} onFinished={() => setIsLaunched(true)} />;
-  }
-  */
-
   return (
     <ThemeProvider>
-      <Router>
-        <div className="App">
+      <AuthProvider>
+        <Router>
           {loading && <Preloader onFinish={() => setLoading(false)} />}
           {!loading && (
-            <>
-              <ScrollProgress />
-              <Navbar />
-              <ScrollToTop />
+            <Layout>
               <AnimatedRoutes />
-              <Footer />
-              <BackToTop />
-            </>
+            </Layout>
           )}
-        </div>
-      </Router>
+        </Router>
+      </AuthProvider>
     </ThemeProvider>
   );
 }
 
 export default App;
-
 // Force HMR update
