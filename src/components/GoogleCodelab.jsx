@@ -6,6 +6,7 @@ import { db } from '../firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 import { codelabs } from '../data/codelabs';
+import LiveSessionPanel from './LiveSessionPanel';
 
 const GoogleCodelab = () => {
     const { currentUser, logout } = useAuth();
@@ -355,6 +356,9 @@ const GoogleCodelab = () => {
                         )}
                     </div>
                 </main>
+
+                {/* Right Sidebar - Live Session */}
+                <LiveSessionPanel codelabId={codelab.id} />
             </div>
         </div>
     );

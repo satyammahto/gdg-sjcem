@@ -1,5 +1,5 @@
 // src/components/CodelabLogin.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,9 +10,11 @@ const CodelabLogin = () => {
     const [loading, setLoading] = useState(false);
 
     // If already logged in, redirect to dashboard
-    if (currentUser) {
-        navigate('/codelabs');
-    }
+    useEffect(() => {
+        if (currentUser) {
+            navigate('/codelabs');
+        }
+    }, [currentUser, navigate]);
 
     async function handleLogin() {
         try {
