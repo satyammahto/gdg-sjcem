@@ -9,9 +9,10 @@ echo "🚀 Starting Deployment to Google Cloud Run..."
 cd backend
 
 # Deploy using source (Cloud Build)
+gcloud run deploy gdg-chat-backend \
   --source . \
   --region us-central1 \
   --allow-unauthenticated \
-  --project dc-infotechpvt-1
+  --project gdg-codelab-6bcdd
 
 echo "✅ Deployment Command Finished."

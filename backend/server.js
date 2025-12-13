@@ -7,7 +7,7 @@ const admin = require('firebase-admin');
 // Initialize Firebase Admin (Uses Application Default Credentials on Cloud Run)
 admin.initializeApp({
     credential: admin.credential.applicationDefault(),
-    projectId: "dc-infotechpvt-1"
+    projectId: "gdg-codelab-6bcdd"  // Connect to the project with existing data
 });
 
 const db = admin.firestore();
