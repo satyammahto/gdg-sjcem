@@ -92,20 +92,30 @@
     text-transform: uppercase;
 }
 
+/* Custom Swiper Styles - Premium Carousel Look */
 .about-slider-container {
     width: 100%;
-    margin-top: 60px;
-    height: 450px;
-    overflow: hidden;
-    /* Ensure slider doesn't overflow */
+    /* Full width */
+    max-width: 1200px;
+    /* Constrain max width for large screens */
+    margin: 60px auto 0;
+    padding: 20px 40px 60px;
+    /* Side padding for nav buttons */
+    height: 480px;
+    /* Taller for better impact */
+    position: relative;
 }
 
 .about-swiper {
     width: 100%;
     height: 100%;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: visible;
+    /* Allow buttons to float outside if needed */
+}
+
+.swiper-slide {
+    height: 100%;
+    /* width is calculated by Swiper */
 }
 
 .swiper-slide-content {
@@ -114,41 +124,73 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #f8f9fa;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.swiper-slide-content:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 .swiper-slide-content img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.6s ease;
 }
 
-/* Custom Swiper Styles */
+.swiper-slide-content:hover img {
+    transform: scale(1.08);
+}
+
+/* Navigation Buttons - Floating on sides */
 .swiper-button-next,
 .swiper-button-prev {
-    color: white !important;
-    background: rgba(0, 0, 0, 0.3);
-    width: 44px !important;
-    height: 44px !important;
+    color: var(--google-blue) !important;
+    background: #fff;
+    width: 50px !important;
+    height: 50px !important;
     border-radius: 50%;
-    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
+    z-index: 10;
 }
 
-.swiper-button-next:after,
-.swiper-button-prev:after {
-    font-size: 1.2rem !important;
-    font-weight: 700;
+.swiper-button-prev {
+    left: 0px !important;
+    /* Pull out to padding area */
+}
+
+.swiper-button-next {
+    right: 0px !important;
+    /* Pull out to padding area */
 }
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-    background: rgba(66, 133, 244, 0.9);
+    background: var(--google-blue);
+    color: white !important;
     transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(66, 133, 244, 0.4);
+}
+
+.swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    opacity: 0.7;
 }
 
 .swiper-pagination-bullet-active {
+    width: 24px;
     background: var(--google-blue) !important;
+    border-radius: 5px;
 }
 
 .tech-item.cloud:hover {

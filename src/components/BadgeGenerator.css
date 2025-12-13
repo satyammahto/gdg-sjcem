@@ -140,11 +140,132 @@
     /* Remove bottom gap */
 }
 
+.badge-actions-container {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    animation: fadeIn 0.5s ease;
+}
+
 .badge-actions {
-    margin-top: 2rem;
     display: flex;
     justify-content: center;
-    perspective: 1000px;
+}
+
+.share-text {
+    font-size: 1rem;
+    color: #5f6368;
+    font-weight: 500;
+}
+
+.social-share-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-share {
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.btn-twitter {
+    background: #000000;
+    /* X Black */
+}
+
+.btn-twitter:hover {
+    background: #333333;
+    transform: translateY(-2px);
+}
+
+.btn-linkedin {
+    background: #0a66c2;
+    /* LinkedIn Blue */
+}
+
+.btn-linkedin:hover {
+    background: #004182;
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.share-text {
+    font-size: 1rem;
+    color: #5f6368;
+    font-weight: 500;
+}
+
+.social-share-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-share {
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.btn-twitter {
+    background: #000000;
+    /* X Black */
+}
+
+.btn-twitter:hover {
+    background: #333333;
+    transform: translateY(-2px);
+}
+
+.btn-linkedin {
+    background: #0a66c2;
+    /* LinkedIn Blue */
+}
+
+.btn-linkedin:hover {
+    background: #004182;
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .btn-download {

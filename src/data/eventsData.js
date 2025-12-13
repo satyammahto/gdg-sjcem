@@ -1,41 +1,78 @@
 export const upcomingEvents = [
     {
         id: 1,
-        date: '16 Dec 2025',
-        type: 'Info session',
-        title: 'TechSprint Hackathon 2025 – Kick-Off Session | GDG on Campus SJCEM',
-        description: 'Welcome to the official Kick-Off Session of TechSprint 2025! Hosted by GDG on Campus – St. John College of Engineering & Management, this session marks the beginning of an exciting journey of innovation, problem-solving, and collaboration.',
+        date: '16 Dec 2025 – 13 Jan 2026',
+        type: 'Hackathon',
+        title: 'TechSprint Hackathon 2025 | GDG on Campus SJCEM',
+        description: 'Welcome to TechSprint 2025! Hosted by GDG on Campus – St. John College of Engineering & Management, this hackathon is an exciting journey of innovation, problem-solving, and collaboration.',
         longDescription: `
-            Welcome to the official Kick-Off Session of TechSprint 2025! 🚀 Hosted by GDG on Campus – St. John College of Engineering & Management (Autonomous) and powered by Hack2Skill, this session marks the beginning of our campus-wide innovation journey.
+            <h3>🚀 TechSprint 2025 – Official Kick-Off Session (Workshop)</h3>
+            <p><strong>Hosted by GDG on Campus – St. John College of Engineering & Management (Autonomous)</strong><br/>
+            <strong>Powered by Hack2Skill</strong></p>
 
-            TechSprint is a Google Developer Groups on Campus organizer-led hackathon that empowers students to identify real challenges in their campus or community and build impactful solutions using Google technologies—including Cloud, Firebase, AI/ML, Android, and more.
+            <p>Welcome to the official Kick-Off Session of TechSprint 2025 — a campus-wide innovation journey where student developers identify real problems and build meaningful solutions using Google technologies such as Cloud, Firebase, Android, AI/ML, and more.</p>
 
-            **This kick-off session will:**
-            - Introduce the TechSprint campaign
-            - Explain the theme, rules, judging criteria, and timeline
-            - Guide participants on using the Hack2Skill platform
-            - Share insights on how to structure winning projects
-            - Help students form teams and start brainstorming ideas
+            <p>This organizer-led hackathon empowers participants to think creatively, collaborate effectively, and create projects that make an impact on campus and in the community.</p>
 
-            Whether you're a beginner or an experienced developer, this session will set you on the path to success. Join us and be part of this exciting journey of innovation and problem-solving. Let's create technologies that matter!
+            <h4>📌 What This Kick-Off Session Will Cover</h4>
+            <ul>
+                <li>Introduction to the TechSprint 2025 campaign</li>
+                <li>Theme explanation, rules, judging criteria & timeline</li>
+                <li>How to use the Hack2Skill hackathon platform</li>
+                <li>Guidance on structuring strong, impactful projects</li>
+                <li>Team formation & idea brainstorming support</li>
+                <li>Tips to maximize your chances of winning</li>
+            </ul>
+
+            <p>Whether you’re a beginner or an experienced developer, this workshop will prepare you for a successful TechSprint journey.</p>
+
+            <h4>📅 Event Details</h4>
+            <p><strong>Kick-Off Session</strong><br/>
+            <strong>Date:</strong> 16 December 2025<br/>
+            <strong>Day:</strong> Tuesday<br/>
+            <strong>Time:</strong> 11:15 AM – 4:15 PM<br/>
+            <strong>Venue:</strong> Lab 1, First Floor</p>
+
+            <p>Be there to start your TechSprint journey with the right direction and mentorship.<br/>
+            <strong>Let’s build technologies that matter! 🚀</strong></p>
+
+            <hr/>
+
+            <h3>📅 TechSprint 2025 – Official Timeline</h3>
+            <ul>
+                <li><strong>16 December:</strong> Kick-Off Session (Problem statement briefing)</li>
+                <li><strong>16–22 December:</strong> Team Formation & Ideation (Reg Deadline: 22 Dec)</li>
+                <li><strong>20 December:</strong> Ask Me Anything (Online Session)</li>
+                <li><strong>23–31 December:</strong> Project Development Phase</li>
+                <li><strong>24 December:</strong> Onsite Guidance Session (SJCEM Campus)</li>
+                <li><strong>01 January:</strong> Project Submission Deadline (Hack2Skill)</li>
+                <li><strong>02–04 January:</strong> Internal Evaluation (Top 10 Shortlisting)</li>
+                <li><strong>05 January:</strong> Top 10 Teams Displayed on Website</li>
+                <li><strong>06–12 January:</strong> Pitching & Mentoring Phase (Top 10)</li>
+                <li><strong>13 January:</strong> Top 3 Wining Teams Announcement</li>
+            </ul>
         `,
         image: 'https://i.ibb.co/bjc6f31T/Generated-Image-December-04-2025-8-46-PM.jpg',
         showTimer: true,
         registrations: 20,
         teamSize: '2-4 Members',
-        lastDate: 'Mon 15 Dec 2025',
-        location: 'Lab - 1, SJCEM Campus',
+        lastDate: 'Submission: 01 Jan 2026',
+        location: 'SJCEM Campus (Hybrid)',
         registrationStatus: {
             message: 'Only 50 teams and 160 total seats are available for TechSprint 2025. Participation is 100% free — no fees at any stage.',
             type: 'urgent'
         },
         timeline: [
-            { date: '05 Dec - 20 Dec 2025', title: 'Registration', description: '05:30 AM IST Start - 05:30 AM IST End' },
-            { date: '05 Dec - 20 Dec 2025', title: 'Team Formation', description: 'Form your squads and brainstorm ideas.' },
-            { date: '10 Dec - 25 Dec 2025', title: 'Project Submission', description: 'Build and submit your solutions.' },
-            { date: '25 Dec - 07 Jan 2026', title: 'Initial Evaluations', description: 'Judges review all submissions.' },
-            { date: '07 Jan - 08 Jan 2026', title: 'Top 10 Announcement', description: 'Best 10 teams move forward.' },
-            { date: '13 Jan - 14 Jan 2026', title: 'Top 3 Announcement - Final', description: 'Winners declared!' }
+            { date: '16 December', title: 'Kick-Off Session', description: 'Problem statement briefing & guidelines.' },
+            { date: '16–22 December', title: 'Team Formation & Ideation', description: 'Registration Deadline: 22 December. Form your team and brainstorm ideas.' },
+            { date: '20 December', title: 'Ask Me Anything (Online)', description: 'Doubt clearing session for participants.' },
+            { date: '23–31 December', title: 'Project Development Phase', description: 'Start building your project.' },
+            { date: '24 December', title: 'Onsite Guidance Session', description: 'Offline session at SJCEM Campus.' },
+            { date: '01 January', title: 'Project Submission Deadline', description: 'Submit on Hack2Skill platform.' },
+            { date: '02–04 January', title: 'Internal Evaluation', description: 'Shortlisting of Top 10 Teams.' },
+            { date: '05 January', title: 'Top 10 Announcement', description: 'Shortlisted teams displayed on website.' },
+            { date: '06–12 January', title: 'Pitching & Mentoring Phase', description: 'Mentoring for Top 10 Teams (Online/On-campus).' },
+            { date: '13 January', title: 'Top 3 Teams Announcement', description: 'Top 3 Teams Announcement & Submission to Hack2Skills.' }
         ],
         agenda: [
             {

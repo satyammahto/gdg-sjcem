@@ -1,9 +1,10 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Autoplay, Pagination, Navigation, EffectCoverflow } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import 'swiper/css/effect-coverflow';
 import './About.css';
 
 const About = () => {
@@ -38,13 +39,23 @@ const About = () => {
                         <Swiper
                             modules={[Navigation, Pagination, Autoplay]}
                             spaceBetween={30}
-                            centeredSlides={true}
+                            slidesPerView={1}
+                            breakpoints={{
+                                640: {
+                                    slidesPerView: 2,
+                                },
+                                1024: {
+                                    slidesPerView: 3,
+                                },
+                            }}
+                            centeredSlides={false}
                             autoplay={{
                                 delay: 3000,
                                 disableOnInteraction: false,
                             }}
                             pagination={{
                                 clickable: true,
+                                dynamicBullets: true,
                             }}
                             navigation={true}
                             loop={true}

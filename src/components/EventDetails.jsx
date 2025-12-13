@@ -447,9 +447,7 @@ const EventDetails = () => {
                     </div>
 
                     <h3>About the Event</h3>
-                    <div className="event-description">
-                        {event.longDescription ? event.longDescription : event.description}
-                    </div>
+                    <div className="event-description" dangerouslySetInnerHTML={{ __html: event.longDescription || event.description }}></div>
                 </div>
 
                 <div className="event-sidebar">
@@ -572,7 +570,7 @@ const EventDetails = () => {
                 {event.timeline && (
                     <div className="event-timeline full-width-block">
                         <div className="content-wrapper">
-                            <h3 className="agenda-title">Hackathon Timeline (Tentative)</h3>
+                            <h3 className="agenda-title">TechSprint 2025 – Official Timeline</h3>
                             <div className="premium-vertical-timeline">
                                 {event.timeline.map((item, index) => (
                                     <div key={index} className="pv-timeline-item" data-aos="fade-up" data-aos-delay={index * 100}>
