@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { db } from '../firebase';
-import { collection, doc, setDoc, addDoc, deleteDoc, onSnapshot, query, orderBy, limit, writeBatch, getDocs } from 'firebase/firestore';
+import { collection, doc, setDoc, addDoc, deleteDoc, onSnapshot, query, orderBy, limit, writeBatch, getDocs, serverTimestamp } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -9,6 +9,7 @@ const LiveSessionPanel = ({ codelabId, sessionId }) => {
     const [votes, setVotes] = useState([]);
     const [counts, setCounts] = useState({ yes: 0, no: 0, help: 0 });
     const [myVote, setMyVote] = useState(null);
+    const [connectionStatus, setConnectionStatus] = useState('connecting'); // connecting, connected, error
 
     // Chat State
     const [activeTab, setActiveTab] = useState('chat'); // 'chat' or 'stats'
@@ -16,10 +17,14 @@ const LiveSessionPanel = ({ codelabId, sessionId }) => {
     const [newMessage, setNewMessage] = useState('');
     const [attachedImage, setAttachedImage] = useState(null);
     const [isUploading, setIsUploading] = useState(false);
+    const [isSending, setIsSending] = useState(false);
+    const [error, setError] = useState('');
     const chatEndRef = useRef(null);
 
     useEffect(() => {
         if (!codelabId) return;
+
+        setConnectionStatus('connecting');
 
         // Listen to live votes
         const qVotes = query(collection(db, "codelabs", codelabId, "live_votes"), orderBy("timestamp", "desc"));
@@ -43,9 +48,13 @@ const LiveSessionPanel = ({ codelabId, sessionId }) => {
             setVotes(newVotes);
             setCounts(newCounts);
             setMyVote(myCurrentVote);
+            setConnectionStatus('connected');
+        }, (err) => {
+            console.error("Votes Listener Error:", err);
+            setError(`Connection Error: ${err.message}`);
+            setConnectionStatus('error');
         });
 
-        // Listen to chat messages (Limit 50)
         // Listen to chat messages (Limit 50 latest)
         // Use 'desc' to get newest first, then reverse for display
         const qChat = query(collection(db, "codelabs", codelabId, "chat_messages"), orderBy("timestamp", "desc"), limit(50));
