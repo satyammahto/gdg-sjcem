@@ -55,10 +55,16 @@ const GoogleCodelab = () => {
                         // Calculate elapsed time since start
                         const startTime = data.timerStartTime.toDate();
                         setTimerStartTime(startTime);
+                        // Sync to local
+                        localStorage.setItem(`timer_${id}_${currentUser.uid}`, startTime.toISOString());
                     }
                 }
             } catch (error) {
-                console.error('Error loading timer state:', error);
+                console.warn('Network offline: Using local timer state.');
+                const localStart = localStorage.getItem(`timer_${id}_${currentUser.uid}`);
+                if (localStart) {
+                    setTimerStartTime(new Date(localStart));
+                }
             }
         };
 
@@ -181,7 +187,21 @@ const GoogleCodelab = () => {
                     console.log('⏱️ Timer started!');
                 }
             } catch (error) {
-                console.error('Error initializing timer:', error);
+                if (error.code === 'unavailable' || error.message?.includes('offline')) {
+                    console.warn('Network offline: Using local timer state (Offline Mode).');
+                } else {
+                    console.warn('Timer init error:', error);
+                }
+                // Fallback: Check localStorage
+                const localStart = localStorage.getItem(`timer_${id}_${currentUser.uid}`);
+                if (localStart) {
+                    setTimerStartTime(new Date(localStart));
+                } else {
+                    // If no local state, start new timer locally to keep user unblocked
+                    const now = new Date();
+                    setTimerStartTime(now);
+                    localStorage.setItem(`timer_${id}_${currentUser.uid}`, now.toISOString());
+                }
             }
         };
 

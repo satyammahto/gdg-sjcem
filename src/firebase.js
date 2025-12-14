@@ -1,7 +1,6 @@
-// src/firebase.js
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, initializeFirestore, persistentLocalCache, persistentMultipleTabManager } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAyYRukMtQs2geKV189S2lU33VO0n4Y_tU",
@@ -19,6 +18,20 @@ const app = initializeApp(firebaseConfig);
 // Initialize Services
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
-export const db = getFirestore(app);
 
+// Initialize Firestore with offline persistence (HMR safe)
+let db;
+try {
+    db = initializeFirestore(app, {
+        localCache: persistentLocalCache({
+            tabManager: persistentMultipleTabManager()
+        })
+    });
+} catch (error) {
+    // If already initialized (e.g. by HMR/Hot Reload), use the existing instance
+    console.warn("Firestore already initialized, reusing instance to avoid crash.");
+    db = getFirestore(app);
+}
+
+export { db };
 export default app;

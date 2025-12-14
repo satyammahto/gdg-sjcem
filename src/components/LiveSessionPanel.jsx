@@ -4,6 +4,7 @@ import { collection, doc, setDoc, addDoc, deleteDoc, onSnapshot, query, orderBy,
 import { useAuth } from '../context/AuthContext';
 import { AnimatePresence, motion } from 'framer-motion';
 import io from 'socket.io-client'; // Import Socket.io
+import './LiveSessionPanel.css'; // Import CSS for Mentions
 
 // ☁️ Production Backend URL (Google Cloud Run)
 const BACKEND_URL = import.meta.env.VITE_CHAT_SERVER_URL || "https://gdg-chat-backend-1042751012948.us-central1.run.app";
@@ -13,6 +14,7 @@ const LiveSessionPanel = ({ codelabId, sessionId }) => {
     const [votes, setVotes] = useState([]);
     const [counts, setCounts] = useState({ yes: 0, no: 0, help: 0 });
     const [myVote, setMyVote] = useState(null);
+    const [presenceCount, setPresenceCount] = useState(0); // Added: Realtime user count
     const [connectionStatus, setConnectionStatus] = useState('connecting'); // connecting, connected, error
 
     // Chat State
@@ -28,132 +30,194 @@ const LiveSessionPanel = ({ codelabId, sessionId }) => {
     // Socket Ref
     const socketRef = useRef(null);
 
+    // --- Reaction Logic (State & Handlers) ---
+    const [floatingReactions, setFloatingReactions] = useState([]);
+
+    const triggerFloatingReaction = (emoji) => {
+        const id = Date.now() + Math.random();
+        const left = Math.floor(Math.random() * 80) + 10;
+        setFloatingReactions(prev => [...prev, { id, emoji, left }]);
+        setTimeout(() => setFloatingReactions(prev => prev.filter(r => r.id !== id)), 2000);
+    };
+
+    const handleSendReaction = (emoji) => {
+        triggerFloatingReaction(emoji);
+        if (socketRef.current) {
+            socketRef.current.emit('send_reaction', {
+                codelabId,
+                emoji,
+                uid: currentUser?.uid
+            });
+        }
+    };
+
+    useEffect(() => {
+        // Load offline messages if available
+        if (codelabId) {
+            const cached = localStorage.getItem(`chat_${codelabId}`);
+            if (cached) {
+                try {
+                    setMessages(JSON.parse(cached));
+                } catch (e) { console.error("Error parsing local chat", e); }
+            }
+        }
+    }, [codelabId]);
+
+    // Save to LocalStorage whenever messages change
+    useEffect(() => {
+        if (codelabId && messages.length > 0) {
+            localStorage.setItem(`chat_${codelabId}`, JSON.stringify(messages));
+        }
+    }, [codelabId, messages]);
+
     useEffect(() => {
         if (!codelabId) return;
 
-        // --- 1. Firestore Listener for VOTES (Stats) ---
-        // Keeping this on Firestore for now as it's less bandwidth intensive than chat stream
-        const qVotes = query(collection(db, "codelabs", codelabId, "live_votes"), orderBy("timestamp", "desc"));
-        const unsubVotes = onSnapshot(qVotes, (snapshot) => {
-            const newVotes = [];
-            const newCounts = { yes: 0, no: 0, help: 0 };
-            let myCurrentVote = null;
-
-            snapshot.forEach((doc) => {
-                const data = doc.data();
-                newVotes.push({ id: doc.id, ...data });
-                if (data.status && newCounts[data.status] !== undefined) {
-                    newCounts[data.status]++;
-                }
-                if (doc.id === sessionId) {
-                    myCurrentVote = data.status;
-                }
-            });
-
-            setVotes(newVotes);
-            setCounts(newCounts);
-            setMyVote(myCurrentVote);
-        }, (err) => {
-            console.error("Votes Listener Error:", err);
-            // Don't set global error here to avoid blocking chat if only stats fail
-        });
-
-
-        // --- 2. Socket.io Connection for CHAT (The Fix) ---
-        setConnectionStatus('connecting'); // Indicate chat connection attempt
-        // Connect to the Google Cloud Backend
+        // --- 1. Socket.io Connection ---
+        setConnectionStatus('connecting');
         socketRef.current = io(BACKEND_URL);
 
         socketRef.current.on('connect', () => {
             console.log("✅ Custom Backend Connected");
             setConnectionStatus('connected');
-            setError(''); // Clear errors
-
-            // Join the specific codelab room
-            socketRef.current.emit('join_room', codelabId);
+            setError('');
+            socketRef.current.emit('join_room', codelabId, {
+                sessionId: sessionId,
+                uid: currentUser.uid,
+                name: currentUser.displayName,
+                photoURL: currentUser.photoURL,
+            });
             console.log(`📥 Joined room: ${codelabId}`);
         });
 
         socketRef.current.on('connect_error', (err) => {
-            console.error("Socket Connection Error:", err);
+            console.warn("Socket Connection Error (Offline?):", err.message);
             setConnectionStatus('error');
-            setError(`Chat Server Disconnected. (backend offline?)`);
         });
 
+        // --- 2. Presence & Stats (from Socket) ---
+        socketRef.current.on('presence_update', (count) => {
+            setPresenceCount(count);
+        });
+
+        const handleVotesUpdate = ({ votes, counts }) => {
+            setVotes(votes);
+            setCounts(counts);
+            // Find my vote
+            const myVoteDoc = votes.find(v => v.id === sessionId);
+            if (myVoteDoc) setMyVote(myVoteDoc.status);
+        };
+
+        socketRef.current.on('initial_votes', handleVotesUpdate);
+        socketRef.current.on('vote_update', handleVotesUpdate);
+
+
+        // --- 4. Floating Reactions ---
+        socketRef.current.on('receive_reaction', (reaction) => {
+            triggerFloatingReaction(reaction.emoji);
+        });
+
+        // --- 3. Chat Logic ---
         socketRef.current.on('load_history', (history) => {
             console.log(`📜 Loaded ${history.length} messages from history`);
-            setMessages(history);
+            setMessages(prev => {
+                const historyIds = new Set(history.map(m => m.id));
+                const historyMyMsgs = history.filter(m => m.uid === currentUser?.uid);
+
+                const uniqueLocal = prev.filter(localMsg => {
+                    if (historyIds.has(localMsg.id)) return false;
+                    if (localMsg.id.toString().startsWith('local_') && localMsg.uid === currentUser?.uid) {
+                        const isDuplicate = historyMyMsgs.some(hMsg =>
+                            hMsg.text === localMsg.text &&
+                            hMsg.image === localMsg.image &&
+                            Math.abs(new Date(hMsg.timestamp) - new Date(localMsg.timestamp)) < 10000
+                        );
+                        return !isDuplicate;
+                    }
+                    return true;
+                });
+                return [...history, ...uniqueLocal].sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+            });
             setTimeout(() => chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
         });
 
         socketRef.current.on('receive_message', (message) => {
             console.log('📨 Received message:', message);
             setMessages((prev) => {
-                const updated = [...prev, message];
-                console.log(`💬 Total messages now: ${updated.length}`);
-                return updated;
+                if (prev.some(m => m.id === message.id)) return prev;
+                if (message.uid === currentUser?.uid) {
+                    const pendingIdx = prev.findIndex(m =>
+                        m.id.toString().startsWith('local_') &&
+                        m.text === message.text &&
+                        m.image === message.image
+                    );
+                    if (pendingIdx !== -1) {
+                        const updated = [...prev];
+                        updated[pendingIdx] = message;
+                        return updated;
+                    }
+                }
+                return [...prev, message];
             });
             setTimeout(() => chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
         });
 
-
         // Cleanup
         return () => {
-            unsubVotes();
             if (socketRef.current) socketRef.current.disconnect();
         };
     }, [codelabId, currentUser, sessionId]);
 
-    // Auto-join on session enter & Cleanup on exit
-    useEffect(() => {
-        if (!currentUser || !codelabId || !sessionId) return;
-
-        const presenceRef = doc(db, "codelabs", codelabId, "live_votes", sessionId);
-
-        const joinSession = async () => {
-            try {
-                // Register presence using sessionId
-                await setDoc(presenceRef, {
-                    uid: currentUser.uid, // Store real UID for reference
-                    name: currentUser.displayName,
-                    photoURL: currentUser.photoURL,
-                    timestamp: new Date()
-                }, { merge: true });
-            } catch (e) {
-                console.error("Error joining session:", e);
-            }
-        };
-
-        joinSession();
-
-        // Cleanup on unmount or tab close
-        const handleDisconnect = () => {
-            deleteDoc(presenceRef).catch(err => console.error("Cleanup error", err));
-        };
-
-        window.addEventListener('beforeunload', handleDisconnect);
-
-        return () => {
-            handleDisconnect();
-            window.removeEventListener('beforeunload', handleDisconnect);
-        };
-    }, [codelabId, currentUser, sessionId]);
 
     const handleVote = async (status) => {
         if (!currentUser) return;
         try {
-            // Vote using sessionId
-            await setDoc(doc(db, "codelabs", codelabId, "live_votes", sessionId), {
+            // Emitting vote to backend via Socket
+            const voteData = {
+                codelabId: codelabId,
+                sessionId: sessionId,
                 uid: currentUser.uid,
                 name: currentUser.displayName,
-                status: status,
                 photoURL: currentUser.photoURL,
-                timestamp: new Date()
-            }, { merge: true });
+                status: status
+            };
+            socketRef.current.emit('cast_vote', voteData);
+
+            // Optimistic Update?
+            // We can wait for server 'vote_update' or simply set it locally for speed
+            setMyVote(status);
+
         } catch (e) {
             console.error("Error sending vote:", e);
         }
     };
+
+    const [showMentions, setShowMentions] = useState(false);
+    const [mentionQuery, setMentionQuery] = useState('');
+
+    const handleInputChange = (e) => {
+        const val = e.target.value;
+        setNewMessage(val);
+
+        // Simple detection for mention triggers
+        const lastWord = val.split(' ').pop();
+        if (lastWord.startsWith('@') && lastWord.length > 1) {
+            setShowMentions(true);
+            setMentionQuery(lastWord.slice(1));
+        } else {
+            setShowMentions(false);
+        }
+    };
+
+    const selectMention = (name) => {
+        const words = newMessage.split(' ');
+        words.pop(); // Remove the partial @mention
+        setNewMessage([...words, `@${name} `].join(' '));
+        setShowMentions(false);
+        document.getElementById('chat-message-input')?.focus();
+    };
+
+
 
     const handleImageUpload = async (e) => {
         const file = e.target.files[0];
@@ -198,6 +262,10 @@ const LiveSessionPanel = ({ codelabId, sessionId }) => {
             photoURL: currentUser.photoURL,
             // Timestamp added by server
         };
+
+        // Optimistic UI Update (Immediate feedback)
+        setMessages(prev => [...prev, { ...messageData, id: `local_${Date.now()}`, timestamp: new Date().toISOString() }]);
+        setTimeout(() => chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
 
         // Emit to Backend
         if (socketRef.current && socketRef.current.connected) {
@@ -246,7 +314,7 @@ const LiveSessionPanel = ({ codelabId, sessionId }) => {
                     <h3 style={{ margin: 0 }}>Live Session 🔴</h3>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <span style={{ fontSize: '12px', color: '#5f6368', fontWeight: 'bold' }}>
-                            {votes.length} Joined
+                            {presenceCount} Joined
                         </span>
                         <button
                             onClick={handleResetSession}
@@ -385,7 +453,39 @@ const LiveSessionPanel = ({ codelabId, sessionId }) => {
                     )}
                 </div>
             ) : (
-                <div className="chat-view animate-fade-in">
+                <div className="chat-view animate-fade-in" style={{ position: 'relative' }}>
+                    {/* Floating Reactions Layer */}
+                    <div className="reactions-container">
+                        <AnimatePresence>
+                            {floatingReactions.map(reaction => (
+                                <motion.div
+                                    key={reaction.id}
+                                    initial={{ opacity: 1, y: 0, scale: 0.5 }}
+                                    animate={{ opacity: 0, y: -200, scale: 1.5 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 2, ease: "easeOut" }}
+                                    className="floating-emoji"
+                                    style={{ left: `${reaction.left}%` }}
+                                >
+                                    {reaction.emoji}
+                                </motion.div>
+                            ))}
+                        </AnimatePresence>
+                    </div>
+
+                    {/* Reaction Toolbar */}
+                    <div className="reaction-toolbar">
+                        {['❤️', '👍', '🎉', '🦀'].map(emoji => (
+                            <button
+                                key={emoji}
+                                onClick={() => handleSendReaction(emoji)}
+                                className="reaction-btn"
+                            >
+                                {emoji}
+                            </button>
+                        ))}
+                    </div>
+
                     {error && (
                         <div style={{ padding: '8px', backgroundColor: '#fce8e6', color: '#c5221f', fontSize: '12px', textAlign: 'center' }}>
                             {error}
@@ -405,10 +505,15 @@ const LiveSessionPanel = ({ codelabId, sessionId }) => {
                         )}
                         {messages.map((msg) => (
                             <div key={msg.id} className={`chat-bubble ${msg.uid === currentUser?.uid ? 'mine' : 'theirs'}`}>
-                                {msg.uid !== currentUser?.uid && (
+                                {msg.uid !== currentUser?.uid ? (
                                     <div className="chat-user-header">
                                         <img src={msg.photoURL || "https://lh3.googleusercontent.com/a/default-user"} alt="User" />
                                         <span>{msg.displayName}</span>
+                                    </div>
+                                ) : (
+                                    <div className="chat-user-header" style={{ justifyContent: 'flex-end', gap: '6px' }}>
+                                        <span>{msg.displayName}</span>
+                                        <img src={msg.photoURL || "https://lh3.googleusercontent.com/a/default-user"} alt="Me" />
                                     </div>
                                 )}
                                 {msg.image && (
@@ -416,13 +521,39 @@ const LiveSessionPanel = ({ codelabId, sessionId }) => {
                                         <img src={msg.image} alt="Attachment" onClick={() => window.open(msg.image, '_blank')} />
                                     </div>
                                 )}
-                                {msg.text && <p className="chat-text">{msg.text}</p>}
+                                {msg.text && (
+                                    <p className="chat-text">
+                                        {msg.text.split(' ').map((word, i) => {
+                                            if (word.startsWith('@')) {
+                                                return <span key={i} className="mention-highlight">{word} </span>;
+                                            }
+                                            return word + ' ';
+                                        })}
+                                    </p>
+                                )}
                             </div>
                         ))}
                         <div ref={chatEndRef} />
                     </div>
 
+                    {/* Mention List Popup */}
+                    {showMentions && (
+                        <div className="mention-popup">
+                            {votes.filter(u => u.name?.toLowerCase().includes(mentionQuery.toLowerCase())).map(u => (
+                                <div
+                                    key={u.uid}
+                                    className="mention-item"
+                                    onClick={() => selectMention(u.name)}
+                                >
+                                    <img src={u.photoURL} alt={u.name} />
+                                    <span>{u.name}</span>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
                     <form className="chat-input-area" onSubmit={handleSendMessage}>
+                        {/* ... existing image preview ... */}
                         {attachedImage && (
                             <div className="image-preview">
                                 <img src={attachedImage} alt="Preview" />
@@ -435,13 +566,16 @@ const LiveSessionPanel = ({ codelabId, sessionId }) => {
                                     id="chat-message-input"
                                     name="message"
                                     className="chat-input"
-                                    placeholder="Type a message..."
+                                    placeholder="Type a message... (@ to mention)"
                                     value={newMessage}
-                                    onChange={(e) => setNewMessage(e.target.value)}
+                                    onChange={handleInputChange}
                                     onKeyDown={(e) => {
                                         if (e.key === 'Enter' && !e.shiftKey) {
                                             e.preventDefault();
                                             handleSendMessage(e);
+                                        }
+                                        if (showMentions) {
+                                            // Handle arrow keys for mentions later if needed
                                         }
                                     }}
                                     rows={1}
