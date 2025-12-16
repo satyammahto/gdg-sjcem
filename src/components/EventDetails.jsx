@@ -273,6 +273,19 @@ const EventDetails = () => {
     const [activeFaq, setActiveFaq] = useState(null);
     const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
 
+    // Lightbox State
+    const [selectedImage, setSelectedImage] = useState(null);
+
+    const openLightbox = (imgUrl) => {
+        setSelectedImage(imgUrl);
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeLightbox = () => {
+        setSelectedImage(null);
+        document.body.style.overflow = 'unset';
+    };
+
     // Scroll Progress Logic
     const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -952,8 +965,8 @@ const EventDetails = () => {
                             className="gallery-slider-full"
                         >
                             {event.gallery.map((img, index) => (
-                                <SwiperSlide key={index}>
-                                    <div className="gallery-slide-container">
+                                <SwiperSlide key={index} onClick={() => openLightbox(img)}>
+                                    <div className="gallery-slide-container" style={{ cursor: 'pointer' }}>
                                         <img src={img} alt={`Gallery ${index}`} className="gallery-image-full" />
                                     </div>
                                 </SwiperSlide>
@@ -1020,6 +1033,16 @@ const EventDetails = () => {
                     </div>
                 )
             }
+
+            {/* Lightbox Modal */}
+            {selectedImage && (
+                <div className="lightbox-overlay" onClick={closeLightbox}>
+                    <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+                        <button className="lightbox-close" onClick={closeLightbox}>&times;</button>
+                        <img src={selectedImage} alt="Full size" className="lightbox-image" />
+                    </div>
+                </div>
+            )}
         </section >
     );
 };
