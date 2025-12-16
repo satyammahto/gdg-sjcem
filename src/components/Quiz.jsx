@@ -35,18 +35,39 @@ const Quiz = ({ data }) => {
     const [leaderboard, setLeaderboard] = useState([]);
     const [submittingScore, setSubmittingScore] = useState(false);
     const [scoreSubmitted, setScoreSubmitted] = useState(false);
+    const [leaderboardError, setLeaderboardError] = useState(null);
 
     const quizCollectionRef = collection(db, 'techsprint_quiz_beta_1');
 
     // Fetch Leaderboard
     useEffect(() => {
-        // Increased limit to 50 as requested to see "all" (or significantly more)
-        const q = query(quizCollectionRef, orderBy('score', 'desc'), orderBy('timeTaken', 'asc'), limit(50));
+        // SIMPLIFIED QUERY: Only order by score desc. 
+        // Secondary sort (timeTaken) will be done client-side to avoid "Composite Index" errors.
+        // Increased limit to 100.
+        const q = query(quizCollectionRef, orderBy('score', 'desc'), limit(100));
+
         const unsubscribe = onSnapshot(q, (snapshot) => {
-            const data = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-            setLeaderboard(data);
+            try {
+                const rawData = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+
+                // CLIENT-SIDE SORT:
+                // 1. Score (High to Low) - handled by query largely, but good to reinforce
+                // 2. Time (Low to High) - for ties in score
+                const sortedData = rawData.sort((a, b) => {
+                    if (b.score !== a.score) return b.score - a.score;
+                    return (a.timeTaken || 9999) - (b.timeTaken || 9999);
+                });
+
+                setLeaderboard(sortedData);
+                setLeaderboardError(null);
+            } catch (err) {
+                console.error("Error processing leaderboard data:", err);
+                setLeaderboardError("Failed to process leaderboard data.");
+            }
         }, (error) => {
             console.error("Leaderboard fetch error:", error);
+            // This usually happens if index is missing or quota exceeded
+            setLeaderboardError("Unable to load leaderboard. Live updates might be paused.");
         });
 
         return () => unsubscribe();
@@ -181,7 +202,11 @@ const Quiz = ({ data }) => {
                             <span>Time</span>
                         </div>
                         <div className="leaderboard-list">
-                            {leaderboard.length === 0 ? (
+                            {leaderboardError ? (
+                                <div style={{ padding: '20px', textAlign: 'center', color: '#ea4335' }}>
+                                    ⚠️ {leaderboardError}
+                                </div>
+                            ) : leaderboard.length === 0 ? (
                                 <div style={{ padding: '20px', textAlign: 'center', color: '#888' }}>No scores yet. Be the first!</div>
                             ) : (
                                 leaderboard.map((entry, index) => (
