@@ -351,6 +351,36 @@ export const upcomingEvents = [
                     question: "The best way to describe Dhiraj's journey:",
                     options: ["Certified genius, employment pending", "14 certs, 0 offers, 100% dedication 💪", "Living proof that certs ≠ jobs", "An inspiration to never give up"],
                     correctAnswer: "14 certs, 0 offers, 100% dedication 💪"
+                },
+                {
+                    id: 16,
+                    question: "What is Dhiraj's favorite pick-up line?",
+                    options: ["Are you a cloud? Because you make my heart rain 🌧️", "Are you Google Cloud? Because you're everything I'm certified in ☁️", "Baby, are you an exception? Let me catch you.", "None (He only talks to computers)"],
+                    correctAnswer: "Are you Google Cloud? Because you're everything I'm certified in ☁️"
+                },
+                {
+                    id: 17,
+                    question: "Why did Dhiraj cross the road?",
+                    options: ["To get to the other cloud provider", "To escape the unemployment line", "To find better Wi-Fi", "He didn't, he just deployed a replica on the other side 🚀"],
+                    correctAnswer: "He didn't, he just deployed a replica on the other side 🚀"
+                },
+                {
+                    id: 18,
+                    question: "What is Dhiraj's hidden talent?",
+                    options: ["Debugging code by staring at it", "Getting certified without studying", "Explaining Kubernetes to his grandma", "All of the above"],
+                    correctAnswer: "Debugging code by staring at it"
+                },
+                {
+                    id: 19,
+                    question: "Dhiraj's relationship status?",
+                    options: ["Single", "Married", "Committed to git commit 💍", "It's complicated (with AWS)"],
+                    correctAnswer: "Committed to git commit 💍"
+                },
+                {
+                    id: 20,
+                    question: "If Dhiraj was a superhero, his name would be?",
+                    options: ["Captain Cloud 🦸‍♂️", "The Crtifier", "Unemployed Man", "Google-Man"],
+                    correctAnswer: "Captain Cloud 🦸‍♂️"
                 }
             ]
         }

@@ -4,6 +4,16 @@ import confetti from 'canvas-confetti';
 import { db } from '../firebase';
 import { collection, addDoc, onSnapshot, query, orderBy, limit, serverTimestamp } from 'firebase/firestore';
 
+// Fisher-Yates Shuffle
+const shuffleArray = (array) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+};
+
 const Quiz = ({ data }) => {
     const [started, setStarted] = useState(false);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -13,8 +23,10 @@ const Quiz = ({ data }) => {
     const [showResult, setShowResult] = useState(false);
     const [timeLeft, setTimeLeft] = useState(10); // 10 seconds per question
 
+    const [activeQuestions, setActiveQuestions] = useState([]);
     const { title, description, questions } = data;
-    const currentQuestion = questions[currentQuestionIndex];
+    // Use activeQuestions if started, otherwise fallback/placeholder
+    const currentQuestion = started && activeQuestions.length > 0 ? activeQuestions[currentQuestionIndex] : questions[0];
 
     const [userName, setUserName] = useState('');
     const [nameSubmitted, setNameSubmitted] = useState(false);
@@ -59,6 +71,11 @@ const Quiz = ({ data }) => {
             alert("Please enter your name first!");
             return;
         }
+
+        // Shuffle questions
+        const shuffled = shuffleArray(questions);
+        setActiveQuestions(shuffled);
+
         setNameSubmitted(true);
         setStarted(true);
         setStartTime(Date.now());
