@@ -9,6 +9,11 @@ const Gallery = ({ preview = false }) => {
     }, [preview]);
 
     const images = [
+        "/images/techsprint-day1/uploaded_image_0_1765824705394.png",
+        "/images/techsprint-day1/uploaded_image_1_1765824705394.png",
+        "/images/techsprint-day1/uploaded_image_2_1765824705394.png",
+        "/images/techsprint-day1/uploaded_image_3_1765824705394.png",
+        "/images/techsprint-day1/uploaded_image_4_1765824705394.png",
         "https://i.ibb.co/xtMWG5bB/IMG-0354.avif",
         "https://i.ibb.co/mFBXVYTS/IMG-0370.avif",
         "https://i.ibb.co/ybtt9nh/IMG-0383.avif",

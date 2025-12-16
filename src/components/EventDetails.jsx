@@ -12,6 +12,7 @@ import FeedbackModal from './FeedbackModal';
 import BadgeGenerator from './BadgeGenerator';
 
 import AOS from 'aos';
+import Quiz from './Quiz';
 
 // Helper to extract speaker info
 const parseAgendaItem = (item) => {
@@ -753,6 +754,15 @@ const EventDetails = () => {
                             <div className="challenge-card-large">
                                 <p className="challenge-desc-large">{event.challenge.description}</p>
                             </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Event Quiz Section */}
+                {event.quiz && (
+                    <div className="full-width-block">
+                        <div className="content-wrapper">
+                            <Quiz data={event.quiz} />
                         </div>
                     </div>
                 )}

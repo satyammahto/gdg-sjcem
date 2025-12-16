@@ -14,6 +14,18 @@ export const upcomingEvents = [
 
             <p>This organizer-led hackathon empowers participants to think creatively, collaborate effectively, and create projects that make an impact on campus and in the community.</p>
 
+            <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 5px solid #1a73e8;">
+                <h4 style="margin-top: 0; color: #1a73e8;">🎓 Who Can Participate?</h4>
+                <p style="margin-bottom: 0;"><strong>Open to ALL Students:</strong></p>
+                <ul style="margin-top: 5px; margin-bottom: 0;">
+                    <li>Engineering Students (BE/BTech)</li>
+                    <li>Diploma Students</li>
+                    <li><strong>ITI (Industrial Training Institute) Students</strong> – We strongly encourage you to participate!</li>
+                    <li>BSc/MSc/BCA/MCA Students</li>
+                </ul>
+                <p style="margin-top: 10px; margin-bottom: 0; font-size: 0.9em;">*No prior coding experience required. Mentorship will be provided.</p>
+            </div>
+
             <h4>📌 What This Kick-Off Session Will Cover</h4>
             <ul>
                 <li>Introduction to the TechSprint 2025 campaign</li>
@@ -238,17 +250,72 @@ export const upcomingEvents = [
             }
         ],
         faq: [
+            { question: 'Who is eligible to participate?', answer: 'This hackathon is open to ALL students, including Engineering, Diploma, ITI, and Science graduates. If you have an idea, you are welcome!' },
             { question: 'Do I need prior experience to participate?', answer: 'No, this hackathon is open to beginners and experts alike. We will have mentors to guide you.' },
             { question: 'Can I choose any problem statement or theme?', answer: 'Yes! The theme is Open Innovation, so you can build solutions for any problem you identify.' },
             { question: 'Is participation free?', answer: 'Yes, participation is completely free.' },
             { question: 'What is the team size?', answer: 'Teams can consist of 2 to 4 members.' },
             { question: 'Will food be provided?', answer: 'No, food will not be provided for this event. However, we may have special arrangements for the Top 10 shortlisted teams.' },
             { question: 'Can I participate remotely?', answer: 'The initial submission is online, but the final round will be held offline at the campus.' }
-        ]
+        ],
+        quiz: {
+            title: "TechSprint Pop Quiz! 🧠",
+            description: "Think you know everything about TechSprint 2025? Test your knowledge and get ready to hack!",
+            questions: [
+                {
+                    id: 1,
+                    question: "What is the team size for TechSprint 2025?",
+                    options: ["1 Member", "2-4 Members", "5-6 Members", "Unlimited"],
+                    correctAnswer: "2-4 Members"
+                },
+                {
+                    id: 2,
+                    question: "Which technology is MANDATORY for your project?",
+                    options: ["AWS", "Microsoft Azure", "Google Technology (Firebase, Gemini, Cloud, etc.)", "Blockchain"],
+                    correctAnswer: "Google Technology (Firebase, Gemini, Cloud, etc.)"
+                },
+                {
+                    id: 3,
+                    question: "Where will the Grand Finale be held?",
+                    options: ["Online (Zoom)", "St. John College of Engineering & Management (SJCEM)", "Mumbai University", "Google Office, Bangalore"],
+                    correctAnswer: "St. John College of Engineering & Management (SJCEM)"
+                },
+                {
+                    id: 4,
+                    question: "What is the theme of the hackathon?",
+                    options: ["FinTech Only", "HealthTech Only", "Open Innovation", "Agriculture"],
+                    correctAnswer: "Open Innovation"
+                },
+                {
+                    id: 5,
+                    question: "Is there a registration fee?",
+                    options: ["₹500 per team", "₹100 per person", "100% Free", "Only for finalists"],
+                    correctAnswer: "100% Free"
+                }
+            ]
+        }
     }
 ];
 
 export const pastEvents = [
+    {
+        id: 103,
+        date: '16 Dec 2025',
+        type: 'Workshop',
+        title: 'TechSprint 2025 | Day 1 Update - How NOT to Win a Hackathon',
+        location: 'GDG on Campus – SJCEM (Lab 1)',
+        description: 'Day 1 of TechSprint 2025 successfully kicked off with the "Anti-Workshop" session focused on hackathon strategy, team building, and execution. \n\nSpeaker: Prathamesh Jakkula (Finalist – SIH’24 & MumbaiHacks’25)',
+        materialsLink: 'https://www.youtube.com/watch?v=EkT1XYiY3gM',
+        registrations: 50,
+        image: '/images/techsprint-day1/uploaded_image_0_1765824705394.png',
+        gallery: [
+            '/images/techsprint-day1/uploaded_image_0_1765824705394.png',
+            '/images/techsprint-day1/uploaded_image_1_1765824705394.png',
+            '/images/techsprint-day1/uploaded_image_2_1765824705394.png',
+            '/images/techsprint-day1/uploaded_image_3_1765824705394.png',
+            '/images/techsprint-day1/uploaded_image_4_1765824705394.png'
+        ]
+    },
     {
         id: 101, // Unique ID for routing clarity
         date: '2 Oct 2025',

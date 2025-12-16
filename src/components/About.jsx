@@ -8,6 +8,18 @@ import 'swiper/css/effect-coverflow';
 import './About.css';
 
 const About = () => {
+    const [selectedImage, setSelectedImage] = React.useState(null);
+
+    const openLightbox = (imgUrl) => {
+        setSelectedImage(imgUrl);
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+    };
+
+    const closeLightbox = () => {
+        setSelectedImage(null);
+        document.body.style.overflow = 'unset'; // Restore scrolling
+    };
+
     return (
         <section id="about" className="section about-section">
             <div className="container">
@@ -40,15 +52,7 @@ const About = () => {
                             modules={[Navigation, Pagination, Autoplay]}
                             spaceBetween={30}
                             slidesPerView={1}
-                            breakpoints={{
-                                640: {
-                                    slidesPerView: 2,
-                                },
-                                1024: {
-                                    slidesPerView: 3,
-                                },
-                            }}
-                            centeredSlides={false}
+                            centeredSlides={true}
                             autoplay={{
                                 delay: 3000,
                                 disableOnInteraction: false,
@@ -62,6 +66,11 @@ const About = () => {
                             className="about-swiper"
                         >
                             {[
+                                "/images/techsprint-day1/uploaded_image_0_1765824705394.png",
+                                "/images/techsprint-day1/uploaded_image_1_1765824705394.png",
+                                "/images/techsprint-day1/uploaded_image_2_1765824705394.png",
+                                "/images/techsprint-day1/uploaded_image_3_1765824705394.png",
+                                "/images/techsprint-day1/uploaded_image_4_1765824705394.png",
                                 "https://i.ibb.co/xtMWG5bB/IMG-0354.avif",
                                 "https://i.ibb.co/mFBXVYTS/IMG-0370.avif",
                                 "https://i.ibb.co/ybtt9nh/IMG-0383.avif",
@@ -74,7 +83,7 @@ const About = () => {
                                 "/images/event-4.webp",
                                 "/images/event-5.webp"
                             ].map((imgUrl, index) => (
-                                <SwiperSlide key={index}>
+                                <SwiperSlide key={index} onClick={() => openLightbox(imgUrl)}>
                                     <div className="swiper-slide-content">
                                         <img src={imgUrl} alt={`Community Event ${index + 1}`} />
                                     </div>
@@ -84,6 +93,16 @@ const About = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Lightbox Modal */}
+            {selectedImage && (
+                <div className="lightbox-overlay" onClick={closeLightbox}>
+                    <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+                        <button className="lightbox-close" onClick={closeLightbox}>&times;</button>
+                        <img src={selectedImage} alt="Full size" className="lightbox-image" />
+                    </div>
+                </div>
+            )}
         </section>
     );
 };
