@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Quiz.css';
 import confetti from 'canvas-confetti';
 import { db } from '../firebase';
-import { collection, addDoc, onSnapshot, query, orderBy, limit, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, doc, updateDoc, onSnapshot, query, where, orderBy, limit, serverTimestamp } from 'firebase/firestore';
 
 // Fisher-Yates Shuffle
 const shuffleArray = (array) => {
@@ -38,49 +38,66 @@ const Quiz = ({ data = {} }) => {
         : (questions.length > 0 ? questions[0] : null);
 
     const [userName, setUserName] = useState('');
+    const [roomId, setRoomId] = useState('techsprint'); // Default room
+    const [currentDocId, setCurrentDocId] = useState(null); // Track the document created on start
     const [nameSubmitted, setNameSubmitted] = useState(false);
     const [startTime, setStartTime] = useState(null);
     const [endTime, setEndTime] = useState(null);
     const [leaderboard, setLeaderboard] = useState([]);
+    const [activeUsersCount, setActiveUsersCount] = useState(0);
+    const [startingQuiz, setStartingQuiz] = useState(false); // For spinner
     const [submittingScore, setSubmittingScore] = useState(false);
     const [scoreSubmitted, setScoreSubmitted] = useState(false);
     const [leaderboardError, setLeaderboardError] = useState(null);
 
     const quizCollectionRef = collection(db, 'techsprint_quiz_beta_1');
 
-    // Fetch Leaderboard
+    // Fetch Leaderboard & Active Users (Filtered by Room ID)
     useEffect(() => {
-        // SIMPLIFIED QUERY: Only order by score desc. 
-        // Secondary sort (timeTaken) will be done client-side to avoid "Composite Index" errors.
-        // Increased limit to 100.
-        const q = query(quizCollectionRef, orderBy('score', 'desc'), limit(100));
+        // Query both active and completed in the current room
+        const q = query(
+            quizCollectionRef,
+            where('roomId', '==', roomId.toLowerCase().trim()),
+            orderBy('score', 'desc'),
+            limit(100)
+        );
 
         const unsubscribe = onSnapshot(q, (snapshot) => {
             try {
                 const rawData = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
 
-                // CLIENT-SIDE SORT:
-                // 1. Score (High to Low) - handled by query largely, but good to reinforce
-                // 2. Time (Low to High) - for ties in score
-                const sortedData = rawData.sort((a, b) => {
+                // Filter Computed/Active
+                const completed = rawData.filter(d => d.status === 'completed');
+                const active = rawData.filter(d => d.status === 'active');
+
+                // Sort Completed: Score > Time
+                const sortedLeaderboard = completed.sort((a, b) => {
                     if (b.score !== a.score) return b.score - a.score;
                     return (a.timeTaken || 9999) - (b.timeTaken || 9999);
                 });
 
-                setLeaderboard(sortedData);
+                setLeaderboard(sortedLeaderboard);
+                setActiveUsersCount(active.length);
                 setLeaderboardError(null);
             } catch (err) {
-                console.error("Error processing leaderboard data:", err);
-                setLeaderboardError("Failed to process leaderboard data.");
+                console.error("Error processing data:", err);
+                // setLeaderboardError("Failed to process data."); // Suppress to avoid UI clutter
             }
         }, (error) => {
-            console.error("Leaderboard fetch error:", error);
-            // Show the actual error message to the user/developer for debugging
-            setLeaderboardError(`Error: ${error.message} (Check console for details)`);
+            console.error("Fetch error:", error);
+            if (error.code !== 'failed-precondition') {
+                setLeaderboardError(`Error: ${error.message}`);
+            }
         });
 
         return () => unsubscribe();
-    }, []);
+    }, [roomId]);
+
+    // Keep a ref to leaderboard for async access (fixing stale closure in submitScore)
+    const leaderboardRef = useRef(leaderboard);
+    useEffect(() => {
+        leaderboardRef.current = leaderboard;
+    }, [leaderboard]);
 
     // Timer Logic
     useEffect(() => {
@@ -107,14 +124,37 @@ const Quiz = ({ data = {} }) => {
             return;
         }
 
-        // Shuffle questions
+        // OPTIMISTIC START: Don't wait for network!
+        setStartingQuiz(true);
+
+        // 1. Setup Game State Immediately
         const shuffled = shuffleArray(questions);
         setActiveQuestions(shuffled);
-
         setNameSubmitted(true);
         setStarted(true);
         setStartTime(Date.now());
-        setTimeLeft(10); // Reset timer for first question
+        setTimeLeft(10);
+        setStartingQuiz(false);
+
+        // 2. Fire-and-Forget Firestore (Background)
+        addLog(`Background: Creating session for ${userName}...`);
+
+        addDoc(quizCollectionRef, {
+            name: userName,
+            roomId: roomId.toLowerCase().trim(),
+            status: 'active',
+            score: 0,
+            createdAt: serverTimestamp()
+        })
+            .then((docRef) => {
+                setCurrentDocId(docRef.id);
+                addLog("Background: Session created! ID: " + docRef.id);
+            })
+            .catch((error) => {
+                console.warn("Background session creation failed (will sync at end):", error);
+                addLog("Background creation failed. Offline mode active.");
+                // SILENT FALLBACK: No alert. User plays normally.
+            });
     };
 
     const handleOptionClick = (option, isTimeout = false) => {
@@ -191,41 +231,56 @@ const Quiz = ({ data = {} }) => {
 
         try {
             // Create a timeout promise
+            // Create a timeout promise (Increased to 15s for slower networks)
             const timeoutPromise = new Promise((_, reject) =>
-                setTimeout(() => reject(new Error("Request timed out (10s)")), 10000)
+                setTimeout(() => reject(new Error("Request timed out (15s)")), 15000)
             );
 
-            // Race the addDoc against the timeout
-            addLog("Sending to Firestore...");
-            await Promise.race([
-                addDoc(quizCollectionRef, {
-                    name: userName,
+            // Race the updateDoc/addDoc against the timeout
+            addLog(currentDocId ? "Updating Firestore doc..." : "Creating completion doc...");
+
+            const dbOperation = currentDocId
+                ? updateDoc(doc(db, 'techsprint_quiz_beta_1', currentDocId), {
                     score: score,
                     timeTaken: timeTaken,
-                    createdAt: serverTimestamp()
-                }),
+                    status: 'completed',
+                    completedAt: serverTimestamp()
+                })
+                : addDoc(quizCollectionRef, {
+                    name: userName,
+                    roomId: roomId.toLowerCase().trim(),
+                    status: 'completed',
+                    score: score,
+                    timeTaken: timeTaken,
+                    createdAt: serverTimestamp(),
+                    completedAt: serverTimestamp()
+                });
+
+            await Promise.race([
+                dbOperation,
                 timeoutPromise
             ]);
 
             addLog("Submission successful!");
             setScoreSubmitted(true);
         } catch (error) {
-            addLog(`Error: ${error.message}`);
-            console.error("Error submitting score: ", error);
-
             // If it failed/timed out, double check if it actually made it (race condition)
-            const entryExists = leaderboard.some(entry =>
+            // Use REF to get the latest data, not the stale closure state
+            const entryExists = leaderboardRef.current.some(entry =>
                 entry.name === userName &&
                 entry.score === score
             );
 
             if (entryExists) {
-                addLog("Found entry despite error. Success.");
+                addLog("Submission verified via leaderboard! (Network slow but successful)");
                 setScoreSubmitted(true);
-            } else {
-                addLog("Submission failed. Retrying manually might help.");
-                alert("Submission failed: " + error.message);
+                return; // Suppress error log since we succeeded
             }
+
+            addLog(`Error: ${error.message}`);
+            console.error("Error submitting score: ", error);
+
+            alert("Submission failed: " + error.message + ". Please try again.");
         } finally {
             setSubmittingScore(false);
         }
@@ -239,20 +294,41 @@ const Quiz = ({ data = {} }) => {
                     <p className="quiz-description">{description}</p>
 
                     <div className="name-input-container">
-                        <label className="quiz-input-label">Enter your name to start:</label>
+                        <label className="quiz-input-label">Enter your details:</label>
                         <input
                             type="text"
                             className="quiz-input"
                             placeholder="Your Name (e.g. John Doe)"
                             value={userName}
                             onChange={(e) => setUserName(e.target.value)}
+                            style={{ marginBottom: '10px' }}
+                        />
+                        <input
+                            type="text"
+                            className="quiz-input"
+                            placeholder="Room ID (Default: techsprint)"
+                            value={roomId}
+                            onChange={(e) => setRoomId(e.target.value)}
                         />
                     </div>
 
-                    <button onClick={handleStart} className="quiz-start-btn">Start Quiz 🚀</button>
+                    <button
+                        onClick={handleStart}
+                        className="quiz-start-btn"
+                        disabled={startingQuiz}
+                    >
+                        {startingQuiz ? <span className="spinner-small"></span> : 'Start Quiz 🚀'}
+                    </button>
 
                     {/* Mini Leaderboard Preview */}
                     <div className="leaderboard-container">
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                            <h4 style={{ margin: 0, color: '#202124' }}>🏆 Leaderboard: {roomId}</h4>
+                            <div style={{ display: 'flex', gap: '10px', fontSize: '0.9rem', fontWeight: 600 }}>
+                                <span style={{ color: '#34a853' }}>🟢 {activeUsersCount} Active</span>
+                                <span style={{ color: '#1a73e8' }}>🏁 {leaderboard.length} Done</span>
+                            </div>
+                        </div>
                         <div className="leaderboard-header">
                             <span>Rank</span>
                             <span>Name</span>
@@ -343,6 +419,13 @@ const Quiz = ({ data = {} }) => {
 
                 {/* Leaderboard */}
                 <div className="leaderboard-container">
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                        <h4 style={{ margin: 0, color: '#202124' }}>🏆 Standings: {roomId}</h4>
+                        <div style={{ display: 'flex', gap: '10px', fontSize: '0.9rem', fontWeight: 600 }}>
+                            <span style={{ color: '#34a853' }}>🟢 {activeUsersCount} Active</span>
+                            <span style={{ color: '#1a73e8' }}>🏁 {leaderboard.length} Done</span>
+                        </div>
+                    </div>
                     <div className="leaderboard-header">
                         <span>Rank</span>
                         <span>Name</span>

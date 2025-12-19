@@ -3,7 +3,8 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { upcomingEvents, pastEvents } from '../data/eventsData';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay, Virtual } from 'swiper/modules';
+import 'swiper/css/virtual';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -271,7 +272,9 @@ const EventDetails = () => {
         }
     };
     const [activeFaq, setActiveFaq] = useState(null);
+    const [swiperRef, setSwiperRef] = useState(null);
     const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
+    const [isDriveModalOpen, setIsDriveModalOpen] = useState(false);
 
     // Lightbox State
     const [selectedImage, setSelectedImage] = useState(null);
@@ -486,19 +489,32 @@ const EventDetails = () => {
                     <div className="event-main-image">
                         {event.gallery && event.gallery.length > 0 ? (
                             <Swiper
-                                modules={[Navigation, Pagination, Autoplay]}
+                                onSwiper={setSwiperRef}
+                                modules={[Navigation, Pagination, Autoplay, Virtual]}
                                 spaceBetween={0}
                                 slidesPerView={1}
                                 navigation
                                 pagination={{ clickable: true }}
                                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                                 loop={true}
+                                virtual
                                 className="event-main-slider"
                             >
-                                {event.gallery.map((img, index) => (
-                                    <SwiperSlide key={index}>
+                                {event.gallery.map((item, index) => (
+                                    <SwiperSlide key={item} virtualIndex={index}>
                                         <div className="main-slider-image-container">
-                                            <img src={img} alt={`Event Highlight ${index + 1}`} />
+                                            {item.endsWith('.mp4') ? (
+                                                <video
+                                                    src={item}
+                                                    controls
+                                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                    onPlay={() => swiperRef?.autoplay?.stop()}
+                                                    onPause={() => swiperRef?.autoplay?.start()}
+                                                    onEnded={() => swiperRef?.autoplay?.start()}
+                                                />
+                                            ) : (
+                                                <img src={item} alt={`Event Highlight ${index + 1}`} loading="lazy" />
+                                            )}
                                         </div>
                                     </SwiperSlide>
                                 ))}
@@ -640,6 +656,17 @@ const EventDetails = () => {
                                     </a>
                                 ))}
                             </div>
+                        )}
+
+                        {/* Drive Link Logic */}
+                        {event.driveLink && (
+                            <button
+                                className="sidebar-btn btn-outline-action"
+                                style={{ marginTop: '0.5rem', borderColor: '#34A853', color: '#2D8B46' }}
+                                onClick={() => setIsDriveModalOpen(true)}
+                            >
+                                View Event Photos 📸
+                            </button>
                         )}
 
                         <div className="event-projects-promo" style={{ marginTop: '2rem', borderTop: '1px solid #eee', paddingTop: '1.5rem' }}>
@@ -845,7 +872,11 @@ const EventDetails = () => {
                 {/* Virtual Badge Generator Section */}
                 <div className="full-width-block">
                     <div className="content-wrapper">
-                        <BadgeGenerator eventName={event.title} />
+                        <BadgeGenerator
+                            eventName={event.title}
+                            subtitle={event.id === 3 ? 'Guidance Session' : 'Hackathon 2025'}
+                            dateString={event.id === 3 ? 'Dec 20 • Online' : 'Dec 17-18 • SJCEM Palghar'}
+                        />
                     </div>
                 </div>
 
@@ -1043,10 +1074,47 @@ const EventDetails = () => {
                 )
             }
 
+            {/* Drive Link Modal */}
+            {isDriveModalOpen && (
+                <div className="feedback-modal-overlay" onClick={() => setIsDriveModalOpen(false)}>
+                    <div className="feedback-modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '400px', textAlign: 'center' }}>
+                        <button className="feedback-close-btn" onClick={() => setIsDriveModalOpen(false)}>&times;</button>
+                        <h3 style={{ marginTop: 0, color: '#1a73e8' }}>Access Event Photos 📸</h3>
+                        <p style={{ color: '#5f6368', margin: '20px 0' }}>
+                            To view the full high-resolution gallery on Google Drive, we recommend using your <strong>SJCEM Email ID</strong> for seamless access.
+                        </p>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                            <a
+                                href={event.driveLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-primary-action"
+                                style={{ textDecoration: 'none', justifyContent: 'center' }}
+                            >
+                                Continue to Drive 📂
+                            </a>
+
+                            <button
+                                className="btn-outline-action"
+                                onClick={() => {
+                                    setIsDriveModalOpen(false);
+                                    // Scroll to gallery
+                                    const gallery = document.querySelector('.event-main-image');
+                                    if (gallery) gallery.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                            >
+                                View Photos Here 🖼️
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <FeedbackModal
                 isOpen={isFeedbackModalOpen}
                 onClose={() => setIsFeedbackModalOpen(false)}
-                eventName={event.title}
+                eventTitle={event.title}
             />
             {/* Floating Registration Bar */}
             <div className={`floating-registration-bar ${showFloatingBar ? 'show' : ''}`}>

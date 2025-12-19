@@ -37,6 +37,10 @@ import CodelabDashboard from './components/CodelabDashboard';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
 import ScrollToTop from './components/ScrollToTop';
+import NotFound from './components/NotFound';
+import HackathonJudging from './components/HackathonJudging';
+import TeamRegistration from './components/TeamRegistration';
+import RegisteredTeams from './components/RegisteredTeams';
 
 const Home = () => (
   <>
@@ -74,6 +78,9 @@ const AnimatedRoutes = () => {
         <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
         <Route path="/submit-idea" element={<PageTransition><ProjectSubmission /></PageTransition>} />
         <Route path="/leaderboard" element={<PageTransition><Leaderboard /></PageTransition>} />
+        <Route path="/hackathon-judging" element={<PageTransition><HackathonJudging /></PageTransition>} />
+        <Route path="/register-team" element={<PageTransition><TeamRegistration /></PageTransition>} />
+        <Route path="/registered-teams" element={<PageTransition><RegisteredTeams /></PageTransition>} />
 
         {/* Codelab Routes */}
         <Route path="/codelab/:id" element={<PageTransition><GoogleCodelab /></PageTransition>} />
@@ -83,6 +90,9 @@ const AnimatedRoutes = () => {
         {/* Auth & Dashboard Routes */}
         <Route path="/codelabs/login" element={<PageTransition><CodelabLogin /></PageTransition>} />
         <Route path="/codelabs" element={<PageTransition><CodelabDashboard /></PageTransition>} />
+
+        {/* 404 Route - Must be last */}
+        <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>
     </AnimatePresence>
   );

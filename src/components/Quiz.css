@@ -285,6 +285,7 @@
     color: #5f6368;
     margin: 1rem 0;
 }
+
 /* Timer Badge */
 .timer-badge {
     background: #e8f0fe;
@@ -312,13 +313,34 @@
         box-shadow: 0 0 0 0 rgba(234, 67, 53, 0.4);
         transform: scale(1);
     }
+
     50% {
         transform: scale(1.05);
     }
+
     70% {
         box-shadow: 0 0 0 10px rgba(234, 67, 53, 0);
     }
+
     100% {
         transform: scale(1);
+    }
+}
+
+/* Spinner */
+.spinner-small {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
     }
 }

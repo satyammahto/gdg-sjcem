@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './BadgeGenerator.css';
 
-const BadgeGenerator = ({ eventName }) => {
+const BadgeGenerator = ({ eventName, subtitle = 'Session One', dateString = 'Dec 17-18 • SJCEM Palghar' }) => {
     const [name, setName] = useState('');
     const [isGenerated, setIsGenerated] = useState(false);
     const canvasRef = useRef(null);
@@ -9,7 +9,7 @@ const BadgeGenerator = ({ eventName }) => {
     // Initial draw to show empty badge or instructions
     useEffect(() => {
         drawBadge();
-    }, []);
+    }, [subtitle, dateString]);
 
     const drawBadge = (userName = '') => {
         const canvas = canvasRef.current;
@@ -128,7 +128,7 @@ const BadgeGenerator = ({ eventName }) => {
             // Subtitle
             ctx.fillStyle = '#EA4335';
             ctx.font = '600 40px "Google Sans", "Inter", sans-serif';
-            ctx.fillText('Session One', centerX, titleStartY + 160);
+            ctx.fillText(subtitle, centerX, titleStartY + 160);
 
             // User Name Highlight - Pushed to bottom relative to title
             const nameY = titleStartY + 270;
@@ -159,7 +159,7 @@ const BadgeGenerator = ({ eventName }) => {
 
             ctx.fillStyle = '#FFFFFF';
             ctx.font = '600 32px "Google Sans", "Inter", sans-serif';
-            ctx.fillText('Dec 17-18 • SJCEM Palghar', centerX, cardY + cardH - 40);
+            ctx.fillText(dateString, centerX, cardY + cardH - 40);
         };
 
         if (logo.complete) {
@@ -195,20 +195,20 @@ const BadgeGenerator = ({ eventName }) => {
         if (!canvas) return;
 
         const link = document.createElement('a');
-        link.download = `TechSprint_Badge_${name.replace(/\s+/g, '_')}.png`;
+        link.download = 'TechSprint_Badge_' + name.replace(/\s+/g, '_') + '.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
     };
 
     const handleShare = (platform) => {
-        const text = `I'm attending TechSprint Hackathon 2025! 🚀\n\nJoin me at the Kick-Off Session by GDG on Campus SJCEM.\n\n#TechSprint2025 #GDGonCampus #SJCEM #GoogleDevs`;
+        const text = "I'm attending TechSprint Hackathon 2025! 🚀\n\nJoin me at the Kick-Off Session by GDG on Campus SJCEM.\n\n#TechSprint2025 #GDGonCampus #SJCEM #GoogleDevs";
         const url = 'https://gdg.community.dev/events/details/google-gdg-on-campus-st-john-college-of-engineering-and-management-autonomous-palghar-india-presents-techsprint-hackathon-2025-kick-off-session-gdg-on-campus-sjcem/';
 
         let shareUrl = '';
         if (platform === 'twitter') {
-            shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+            shareUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url);
         } else if (platform === 'linkedin') {
-            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+            shareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url);
         }
 
         window.open(shareUrl, '_blank', 'width=600,height=400');
