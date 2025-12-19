@@ -31,7 +31,7 @@ const Organizers = () => {
         {
             name: 'Dhiraj Chaudhari',
             role: 'GDGoC Organizer',
-            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/dhiraj_chaudhari.jpeg',
+            image: 'https://media.licdn.com/dms/image/v2/D4D22AQFrIHuwofHGkw/feedshare-shrink_2048_1536/B4DZXZcd5FHIAo-/0/1743109876086?e=1767830400&v=beta&t=7dPb6Dkl1IRdYF-YJ7Y5d_bz3sTpZHKkiv6YCB0HFec',
             twitter: 'https://twitter.com/DhirajC39511965',
             linkedin: 'https://www.linkedin.com/in/dhirajchaudhari20/',
             github: 'https://github.com/dhirajchaudhari20',

@@ -34,7 +34,7 @@ const Team = () => {
         {
             name: 'Dhiraj Chaudhari',
             role: 'GDGoC Organizer',
-            image: 'https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_250,h_250,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/avatars/dhiraj_chaudhari.jpeg',
+            image: 'https://media.licdn.com/dms/image/v2/D4D22AQFrIHuwofHGkw/feedshare-shrink_2048_1536/B4DZXZcd5FHIAo-/0/1743109876086?e=1767830400&v=beta&t=7dPb6Dkl1IRdYF-YJ7Y5d_bz3sTpZHKkiv6YCB0HFec',
             twitter: 'https://twitter.com/DhirajC39511965',
             linkedin: 'https://www.linkedin.com/in/dhirajchaudhari20/',
             github: 'https://github.com/dhirajchaudhari20',
@@ -164,7 +164,13 @@ const Team = () => {
         { name: 'Hitanshu Vaidya', role: 'Member' },
         { name: 'Riya Umesh Singh', role: 'Member' },
         { name: 'Anushri Amul Sane', role: 'Member' },
-        { name: 'Saiyed Furquanahmed Barkatali', role: 'Member' },
+        {
+            name: 'Saiyed Furquanahmed Barkatali',
+            role: 'Technical Member',
+            image: 'https://ci3.googleusercontent.com/mail-img-att/AGAZnRqOXDi3oqKgNmRplPsyABU-eUApOuyxjQKwVAET_nBDYLj7RJW8TI-_T0uwnYJ4ZdiqdL4_ZnW1SoYIAX4L9PQKDo8rj-pGIZ7kPq76Py-dy_clZ2vNiCB285M4xcDyaDgoqK70eMwqV5FH_DCWmXcOWjvH016JS8SO52IybaYiFAK5HQhxwFWlZ91Y-k96-iTo37psZYR_-6gs77PDUO47NVTLoDNtNjFzustfk7QKFJ7WJRUrPRQrSQ4EPLTJH-BKrPuPgUbTb3sDvGSllsSPddfcSkmXwVV3PkPuwKUL5h0NvoZ2_hdVuR9U9d9Q0EE2eHwigC0iqgGKMWYmjY8Q5YhHU1l6sLYX346rF0GnBWrLsNM2xeNNAy0LUyqqCDWbwZENIzeGatusCpKioVNZE-82YUkRiC3Ip_KjMRuxQ4rR_n8pepis6g9ZBlWXdgHT8gTBBzK5hx99C5wQw9SfIH2x7b_ITeIOzmmlN1nRugWDA4JtlJ_jJcH3Aauo2kOo_URb-o1Vp0US9gTOAm5lfxm6fogXvN4AeLiPDy5XF_cMRtg1-bq5Jv6Q9EcXFhmcQSSfDHBYgRLRlRykYshSy7CNPqtpn-_wKirZPvCu7pw8hwrrfydVDXMzdR2a9RnfdJ0Qf9Sixti6dNPG7NJm4XQp0IQCUCc0PLWFlKyB69caJxR98-hiJbSUBj8e35xfZwboen0dN9p0ZA48_8aLos0yPf6BGk_Cjz-8o6VcrMGSaSmmmJguYUkr5byNewQfVblxJihwAh-q2CMmgfEtGr78ST1tH5gqW-fM6H4lgtuKCgjlsbVkXO0C5V0SAK6OP5ltki7HrNmzc4vJWZxchggKi1VXdRxCiolLYzHO2gCMwDITMJqMOi_HTO6Pxm3g-pypND7Ti0sruRxX1mglPXL3rwaJNg6NrBnvwNdRz9xErc_5Jn-1Twpg2sTPvAsrmrwzSLsvf-4JSQSsf-w7P1bpkSeAhg5578wqRh7SuAhKroQbGs5STgx-Bboe0Gk3czWeFti2tVEytYQZEqfFmLTtlNnkPwCB-pYTxut-YulzGQ=s0-l75-ft',
+            linkedin: 'https://www.linkedin.com/in/furquan-s-9331372a6',
+            github: 'https://github.com/fabs7869'
+        },
         { name: 'Sakshi Jaywant Mhatre', role: 'Volunteer' },
         { name: 'Satyam R. Tiwari', role: 'Volunteer', image: 'https://i.ibb.co/v6MmDcds/1000121746.jpg' },
         {
