@@ -19,7 +19,7 @@ const firebaseConfig = {
 const registrationApp = initializeApp(firebaseConfig, "team-registration");
 const db = getDatabase(registrationApp);
 
-const BRANCHES = ["COMP", "IT", "AIDS", "EXTC", "MECH", "CIVIL", "ECS", "Auto", "Other"];
+const BRANCHES = ["COMP", "IT", "AI", "DS", "EXTC", "MECH", "CIVIL", "ECS", "Auto", "Other"];
 const YEARS = ["FE", "SE", "TE", "BE", "Other"];
 const DIVISIONS = ["A", "B", "Other"];
 const COLLEGES = ["St. John College of Engineering and Management (Autonomous) (SJCEM)", "Other"];

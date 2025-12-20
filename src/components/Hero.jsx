@@ -73,11 +73,11 @@ const Hero = () => {
                         data-aos-delay="500"
                     >
                         <div className="stat-item">
-                            <span className="stat-number"><CountUp end={1172} suffix="+" /></span>
+                            <span className="stat-number"><CountUp end={1175} suffix="+" /></span>
                             <span className="stat-label">Group Members</span>
                         </div>
                         <div className="stat-item">
-                            <span className="stat-number"><CountUp end={4} suffix="+" /></span>
+                            <span className="stat-number"><CountUp end={5} suffix="+" /></span>
                             <span className="stat-label">Events Hosted</span>
                         </div>
                         <div className="stat-item">

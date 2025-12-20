@@ -673,9 +673,14 @@ export const upcomingEvents = [
             ]
         }
     },
+
+];
+
+export const pastEvents = [
     {
         id: 3,
         date: '20 Dec 2025',
+        status: 'ended',
         type: 'Session',
         title: 'TechSprint 2025 | Ask Me Anything & Hackathon Guidance Session',
         description: 'Join us for an important online guidance & AMA session as part of TechSprint 2025. Gain clarity on submissions, evaluation expectations, and execution strategy.',
@@ -707,7 +712,7 @@ export const upcomingEvents = [
                     correctAnswer: "Color of your T-shirt"
                 },
                 {
-                    question: "Where is the Grand Finale held?",
+                    question: "Where is the Grand Finale be held?",
                     options: ["Online", "SJCEM Campus", "Google HQ", "Mars"],
                     correctAnswer: "SJCEM Campus"
                 },
@@ -795,10 +800,7 @@ export const upcomingEvents = [
                 linkText: 'Start Code Lab'
             }
         ]
-    }
-];
-
-export const pastEvents = [
+    },
     {
         id: 103,
         date: '15 Dec 2025',

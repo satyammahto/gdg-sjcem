@@ -1,22 +1,82 @@
-/* Reusing styles from HackathonJudging for consistency using a new file */
+/* Main Container */
 .reg-teams-container {
-    max-width: 1000px;
-    /* Wider for table */
+    max-width: 1200px;
+    /* Wider for detailed table */
     margin: 40px auto;
     background: #ffffff;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     color: #333;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-.reg-teams-container h2 {
+/* Actions Header */
+.reg-teams-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.reg-teams-btn.export {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    margin-right: 12px;
+}
+
+.reg-teams-btn.delete {
+    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* Report Header (for PDF) */
+.report-header {
     text-align: center;
     margin-bottom: 30px;
-    color: #1a1a1a;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 20px;
+}
+
+.report-header h2 {
+    margin: 0 0 20px 0;
+    color: #1e293b;
     font-size: 28px;
-    font-weight: 700;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.stat-card {
+    background: #f8fafc;
+    padding: 15px 30px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 120px;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: #2563eb;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #64748b;
+    font-weight: 600;
+    letter-spacing: 0.05em;
 }
 
 /* Authentication Screen */
@@ -25,18 +85,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 60vh;
-    gap: 25px;
-    max-width: 400px;
-    margin: 60px auto;
+    min-height: 50vh;
+    gap: 20px;
+    max-width: 360px;
+    margin: 80px auto;
 }
 
 .reg-teams-input {
     width: 100%;
-    padding: 12px 16px;
+    padding: 14px 16px;
     font-size: 16px;
-    border-radius: 8px;
-    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
     box-sizing: border-box;
     transition: all 0.2s;
     background-color: #f8fafc;
@@ -45,43 +105,34 @@
 
 .reg-teams-input:focus {
     outline: none;
-    border-color: #4285f4;
-    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.15);
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
     background-color: #fff;
 }
 
 .reg-teams-btn {
-    width: 100%;
-    padding: 14px 20px;
-    font-size: 16px;
+    padding: 12px 24px;
+    font-size: 15px;
     font-weight: 600;
     cursor: pointer;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     transition: all 0.2s;
     color: white;
-    background: linear-gradient(135deg, #4285f4 0%, #3367d6 100%);
-    box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
 
 .reg-teams-btn:hover {
-    box-shadow: 0 6px 16px rgba(66, 133, 244, 0.4);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
 }
 
-.reg-teams-btn.export {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-    margin-bottom: 20px;
-    width: auto;
-    display: inline-block;
-}
-
-/* Table */
+/* Table styling */
 .reg-teams-table-wrapper {
     overflow-x: auto;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
 }
 
 .reg-teams-table {
@@ -93,27 +144,48 @@
 
 .reg-teams-table th,
 .reg-teams-table td {
-    padding: 14px 16px;
-    border-bottom: 1px solid #edf2f7;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f1f5f9;
     text-align: left;
+    vertical-align: top;
 }
 
 .reg-teams-table th {
     background: #f8fafc;
-    color: #4a5568;
-    font-weight: 600;
+    color: #475569;
+    font-weight: 700;
     text-transform: uppercase;
-    font-size: 12px;
-    letter-spacing: 0.05em;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
 }
 
-.reg-teams-table tr:hover {
-    background-color: #f7fafc;
+.reg-teams-table tr:last-child td {
+    border-bottom: none;
 }
 
-@media (max-width: 600px) {
+.reg-teams-table tr:hover td {
+    background-color: #fcfcfc;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
     .reg-teams-container {
-        margin: 10px;
         padding: 20px;
+        margin: 20px;
+    }
+
+    .stats-grid {
+        gap: 15px;
+    }
+
+    .stat-card {
+        padding: 10px;
+        min-width: auto;
+        flex: 1;
+    }
+
+    .stat-value {
+        font-size: 24px;
     }
 }

@@ -78,7 +78,7 @@ const Events = () => {
             // We'll set the check time to end of the event day.
             endDate.setHours(23, 59, 59, 999);
 
-            if (endDate < now) {
+            if (event.status === 'ended' || endDate < now) {
                 past.push(event);
             } else {
                 upcoming.push(event);
