@@ -129,6 +129,7 @@ const Quiz = ({ data = {} }) => {
 
         // OPTIMISTIC START: Don't wait for network!
         setStartingQuiz(true);
+        setLeaderboardError(null);
 
         // 1. Setup Game State Immediately
         const shuffled = shuffleArray(questions);
@@ -140,24 +141,31 @@ const Quiz = ({ data = {} }) => {
         setStartingQuiz(false);
 
         // 2. Fire-and-Forget Firestore (Background)
+        // We rely on try/catch instead of checking internal db._app properties which caused crashes
         addLog(`Background: Creating session for ${userName}...`);
 
-        addDoc(quizCollectionRef, {
-            name: userName,
-            roomId: roomId.toLowerCase().trim(),
-            status: 'active',
-            score: 0,
-            createdAt: serverTimestamp()
-        })
-            .then((docRef) => {
-                setCurrentDocId(docRef.id);
-                addLog("Background: Session created! ID: " + docRef.id);
+        try {
+            addDoc(quizCollectionRef, {
+                name: userName,
+                roomId: roomId.toLowerCase().trim(),
+                status: 'active',
+                score: 0,
+                createdAt: serverTimestamp()
             })
-            .catch((error) => {
-                console.warn("Background session creation failed (will sync at end):", error);
-                addLog("Background creation failed. Offline mode active.");
-                // SILENT FALLBACK: No alert. User plays normally.
-            });
+                .then((docRef) => {
+                    setCurrentDocId(docRef.id);
+                    addLog("Background: Session created! ID: " + docRef.id);
+                })
+                .catch((error) => {
+                    console.warn("Background session creation failed (will sync at end):", error);
+                    // Silent fail for background creation - user can still play
+                    addLog("Background creation failed. Offline mode active.");
+                });
+        } catch (e) {
+            console.error("Critical Firebase Error:", e);
+            addLog("Critical Error: " + e.message);
+            // We allow the user to play even if this fails
+        }
     };
 
     const handleOptionClick = (option, isTimeout = false) => {
@@ -233,7 +241,6 @@ const Quiz = ({ data = {} }) => {
         const timeTaken = (endTime - startTime) / 1000;
 
         try {
-            // Create a timeout promise
             // Create a timeout promise (Increased to 15s for slower networks)
             const timeoutPromise = new Promise((_, reject) =>
                 setTimeout(() => reject(new Error("Request timed out (15s)")), 15000)
@@ -275,9 +282,9 @@ const Quiz = ({ data = {} }) => {
             );
 
             if (entryExists) {
-                addLog("Submission verified via leaderboard! (Network slow but successful)");
+                addLog("Submission verified via leaderboard!");
                 setScoreSubmitted(true);
-                return; // Suppress error log since we succeeded
+                return;
             }
 
             addLog(`Error: ${error.message}`);
@@ -411,13 +418,7 @@ const Quiz = ({ data = {} }) => {
 
                     <button onClick={handleRestart} className="restart-btn" style={{ marginTop: '1rem' }}>Play Again 🔄</button>
 
-                    {/* Debug Log (Visible only if there are logs) */}
-                    {debugLog.length > 0 && (
-                        <div style={{ marginTop: '20px', padding: '10px', background: '#f8f9fa', borderRadius: '5px', fontSize: '0.8rem', color: '#666', textAlign: 'left', maxHeight: '100px', overflowY: 'auto' }}>
-                            <strong>Debug Log:</strong>
-                            {debugLog.map((log, i) => <div key={i}>{log}</div>)}
-                        </div>
-                    )}
+                    {/* Debug Log Hidden for Clean User Experience */}
                 </div>
 
                 {/* Leaderboard */}
