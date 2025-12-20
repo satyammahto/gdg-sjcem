@@ -14,14 +14,24 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     const loginWithGoogle = () => {
+        if (!auth) {
+            alert("Login unavailable: Firebase config missing.");
+            return Promise.reject("Firebase config missing");
+        }
         return signInWithPopup(auth, googleProvider);
     };
 
     const logout = () => {
+        if (!auth) return Promise.resolve();
         return signOut(auth);
     };
 
     useEffect(() => {
+        if (!auth) {
+            setLoading(false);
+            return;
+        }
+
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setCurrentUser(user);
             setLoading(false);
