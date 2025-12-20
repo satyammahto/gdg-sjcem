@@ -737,12 +737,12 @@ export const upcomingEvents = [
             </ul>
 
 
-            < div style = "background: #e6f4ea; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 5px solid #34a853;" >
+            <div style="background: #e6f4ea; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 5px solid #34a853;">
                 <h4 style="margin-top: 0; color: #34a853;">🗣️ Speaker</h4>
                 <p style="margin-bottom: 0;"><strong>Dhiraj Chaudhari</strong><br/>
                 GDG on Campus Organizer<br/>
                 Google Product Expert | 14× Google Cloud Certified</p>
-            </div >
+            </div>
 
             <h4>🗓 Event Details</h4>
             <p><strong>Date:</strong> Saturday, 20 Dec 2025<br/>

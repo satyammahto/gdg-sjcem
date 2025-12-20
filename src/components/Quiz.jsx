@@ -86,7 +86,10 @@ const Quiz = ({ data = {} }) => {
         }, (error) => {
             console.error("Fetch error:", error);
             if (error.code !== 'failed-precondition') {
-                setLeaderboardError(`Error: ${error.message}`);
+                setLeaderboardError(`Error: ${error.message} (Check your API Key)`);
+            }
+            if (error.code === 'permission-denied' || error.message.includes('permission')) {
+                setLeaderboardError('⚠️ API Key Revoked or Permission Denied. Please regenerate your API key in Google Cloud Console.');
             }
         });
 

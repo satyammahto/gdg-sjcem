@@ -3,14 +3,14 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { initializeFirestore, memoryLocalCache } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCohKlqNu0I1sXcLW4D_fv-OEw9x0S50q8",
-    authDomain: "dc-infotechpvt-1-d1a4b.firebaseapp.com",
-    databaseURL: "https://dc-infotechpvt-1-d1a4b-default-rtdb.firebaseio.com",
-    projectId: "dc-infotechpvt-1-d1a4b",
-    storageBucket: "dc-infotechpvt-1-d1a4b.firebasestorage.app",
-    messagingSenderId: "622552457680",
-    appId: "1:622552457680:web:4b80e21e14e2b8266f19d5",
-    measurementId: "G-ZXPZGMNR44"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
