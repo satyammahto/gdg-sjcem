@@ -141,31 +141,28 @@ const Quiz = ({ data = {} }) => {
         setStartingQuiz(false);
 
         // 2. Fire-and-Forget Firestore (Background)
-        // We rely on try/catch instead of checking internal db._app properties which caused crashes
-        addLog(`Background: Creating session for ${userName}...`);
-
-        try {
-            addDoc(quizCollectionRef, {
-                name: userName,
-                roomId: roomId.toLowerCase().trim(),
-                status: 'active',
-                score: 0,
-                createdAt: serverTimestamp()
-            })
-                .then((docRef) => {
-                    setCurrentDocId(docRef.id);
-                    addLog("Background: Session created! ID: " + docRef.id);
-                })
-                .catch((error) => {
-                    console.warn("Background session creation failed (will sync at end):", error);
-                    // Silent fail for background creation - user can still play
-                    addLog("Background creation failed. Offline mode active.");
-                });
-        } catch (e) {
-            console.error("Critical Firebase Error:", e);
-            addLog("Critical Error: " + e.message);
-            // We allow the user to play even if this fails
+        // If config is missing, skip Firestore entirely to avoid crashes
+        if (!db || !db._app) {
+            addLog("⚠️ Firebase API Key missing. Running in Offline Mode.");
+            setLeaderboardError("Offline Mode: Score won't be saved (Config Error)");
+            return;
         }
+        addDoc(quizCollectionRef, {
+            name: userName,
+            roomId: roomId.toLowerCase().trim(),
+            status: 'active',
+            score: 0,
+            createdAt: serverTimestamp()
+        })
+            .then((docRef) => {
+                setCurrentDocId(docRef.id);
+                addLog("Background: Session created! ID: " + docRef.id);
+            })
+            .catch((error) => {
+                console.warn("Background session creation failed (will sync at end):", error);
+                // Silent fail for background creation - user can still play
+                addLog("Background creation failed. Offline mode active.");
+            });
     };
 
     const handleOptionClick = (option, isTimeout = false) => {

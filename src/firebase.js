@@ -21,18 +21,38 @@ if (missingKeys.length > 0) {
     console.log("Firebase Config Loaded Successfully");
 }
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase Services with Safe Failover
+let app;
+let auth;
+let googleProvider;
+let db;
 
-// Initialize Services
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
+try {
+    if (!firebaseConfig.apiKey) {
+        throw new Error("Missing Firebase API Key");
+    }
 
-// Initialize Firestore with explicit Memory Cache to avoid persistence locks
-const db = initializeFirestore(app, {
-    localCache: memoryLocalCache()
-});
-console.log("Firebase Firestore Initialized (Forced Memory Cache)");
+    app = initializeApp(firebaseConfig);
+
+    // Initialize Auth
+    auth = getAuth(app);
+    googleProvider = new GoogleAuthProvider();
+
+    // Initialize Firestore with explicit Memory Cache
+    db = initializeFirestore(app, {
+        localCache: memoryLocalCache()
+    });
+    console.log("Firebase Firestore Initialized");
+
+} catch (e) {
+    console.error("Firebase Initialization Failed:", e);
+    // Export fallback structure to prevent "undefined" import crashes
+    app = null;
+    auth = null;
+    googleProvider = null;
+    // Mock DB object to separate "missing module" from "missing instance"
+    db = null;
+}
 
 export { db };
 export default app;
