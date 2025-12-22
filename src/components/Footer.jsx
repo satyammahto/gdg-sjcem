@@ -34,6 +34,8 @@ const Footer = () => {
                             <li><a href="#events">Upcoming Events</a></li>
                             <li><a href="#organizers">Organizers</a></li>
                             <li><a href="https://gdg.community.dev/gdg-on-campus-st-john-college-of-engineering-and-management-autonomous-palghar-india/" target="_blank" rel="noopener noreferrer">Community Page</a></li>
+                            <li><Link to="/weekly-update">Team Weekly Report</Link></li>
+                            <li><Link to="/team-performance">Performance Monitor</Link></li>
                         </ul>
                     </div>
 

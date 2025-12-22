@@ -42,6 +42,8 @@ import NotFound from './components/NotFound';
 import HackathonJudging from './components/HackathonJudging';
 import TeamRegistration from './components/TeamRegistration';
 import RegisteredTeams from './components/RegisteredTeams';
+import WeeklyReport from './components/WeeklyReport';
+import WeeklyReportsList from './components/WeeklyReportsList';
 
 const Home = () => (
   <>
@@ -83,6 +85,8 @@ const AnimatedRoutes = () => {
         <Route path="/hackathon-judging" element={<PageTransition><HackathonJudging /></PageTransition>} />
         <Route path="/register-team" element={<PageTransition><TeamRegistration /></PageTransition>} />
         <Route path="/registered-teams" element={<PageTransition><RegisteredTeams /></PageTransition>} />
+        <Route path="/weekly-update" element={<PageTransition><WeeklyReport /></PageTransition>} />
+        <Route path="/team-performance" element={<PageTransition><WeeklyReportsList /></PageTransition>} />
 
         {/* Codelab Routes */}
         <Route path="/codelab/:id" element={<PageTransition><GoogleCodelab /></PageTransition>} />
