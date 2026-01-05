@@ -977,7 +977,14 @@ const EventDetails = () => {
                                 <h4 className="results-subtitle">Top 10 Teams</h4>
                                 {event.results.top10.length > 0 ? (
                                     <div className="teams-grid">
-                                        {/* Render teams here later */}
+                                        {event.results.top10.map((team, index) => (
+                                            <div key={index} className="team-result-card" data-aos="fade-up" data-aos-delay={index * 50}>
+                                                <div className="team-rank">#{team.rank}</div>
+                                                <div className="team-info">
+                                                    <h4 className="team-name">{team.team}</h4>
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
                                 ) : (
                                     <div className="results-pending-banner">

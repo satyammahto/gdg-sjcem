@@ -475,8 +475,19 @@ export const upcomingEvents = [
             { name: 'DC Infotech Private Limited', logo: 'https://storage.googleapis.com/vision-hack2skill-production/innovator/USER00398865/1764868779435-logo.webp' }
         ],
         results: {
-            status: 'pending', // or 'announced'
-            top10: [], // To be populated later
+            status: 'announced',
+            top10: [
+                { rank: 1, team: 'the Debuggers', score: 9 },
+                { rank: 2, team: 'DEV_AXIS', score: 8 },
+                { rank: 3, team: 'Dev_Fusion', score: 7.5 },
+                { rank: 4, team: 'Dorara', score: 7.5 },
+                { rank: 5, team: 'syntax', score: 7 },
+                { rank: 6, team: 'void slayers', score: 7 },
+                { rank: 7, team: 'Dev_With_Innovation', score: 7 },
+                { rank: 8, team: 'Synapse Sages', score: 6 },
+                { rank: 9, team: 'Tech Pirates', score: 6 },
+                { rank: 10, team: 'stranger strings- gemini api', score: 4 }
+            ],
             top3: []
         },
         prizes: {
