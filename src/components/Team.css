@@ -1,7 +1,7 @@
 /* Team Page Specific Styles */
 .team-section-container {
     position: relative;
-    padding: 96px 0 80px;
+    padding: 75px 0 80px;
     background-color: var(--bg-color);
     overflow: hidden;
     min-height: 100vh;
