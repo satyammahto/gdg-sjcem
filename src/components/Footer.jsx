@@ -9,7 +9,7 @@ const Footer = () => {
                 <div className="footer-top">
                     <div className="footer-col" data-aos="fade-up" data-aos-delay="100">
                         <div className="footer-logo-wrapper" style={{ marginLeft: '-5px' }}>
-                            <img src="/gdg-logo.png" alt="GDG Logo" className="footer-logo-img" />
+                            <img src="/gdg-sjc-logo.png" alt="GDG on Campus SJCEM" className="footer-logo-img" />
                         </div>
                         <p className="footer-desc">
                             St. John College of Engineering and Management (Autonomous), Palghar.

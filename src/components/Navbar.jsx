@@ -8,27 +8,56 @@ const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
+      // Handle navbar background
       if (location.pathname === '/') {
         setScrolled(window.scrollY > 50);
       } else {
         setScrolled(true);
       }
+
+      // Handle active section highlight only on home page
+      if (location.pathname === '/') {
+        const sections = ['home', 'about', 'events', 'organizers', 'contact'];
+
+        // Find the current section
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            // detailed check for viewport intersection
+            if (rect.top <= 100 && rect.bottom >= 100) {
+              setActiveSection(section);
+              break;
+            }
+          }
+        }
+      } else {
+        // Reset active section when not on home page
+        setActiveSection('');
+      }
     };
 
     // Initial check
-    if (location.pathname !== '/') {
-      setScrolled(true);
-    } else {
-      setScrolled(window.scrollY > 50);
-    }
+    handleScroll();
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [location.pathname]);
+
+  const isActive = (path) => {
+    // For internal links on home page
+    if (path.startsWith('/#')) {
+      const section = path.substring(2);
+      return location.pathname === '/' && activeSection === section ? 'active' : '';
+    }
+    // For external routing paths
+    return location.pathname === path ? 'active' : '';
+  };
 
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
@@ -39,21 +68,21 @@ const Navbar = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <img src="/gdg-logo.png" alt="GDG Logo" className="logo-img" />
+          <img src="/gdg-sjc-logo.png" alt="Google Developer Group on Campus SJCEM" className="logo-img" />
         </motion.div>
 
         <div className={`nav-links ${menuOpen ? 'active' : ''}`}>
-          <a href="/#home" onClick={() => setMenuOpen(false)}>Home</a>
-          <a href="/#about" onClick={() => setMenuOpen(false)}>About</a>
-          <a href="/#events" onClick={() => setMenuOpen(false)}>Events</a>
-          <Link to="/codelabs" onClick={() => setMenuOpen(false)}>Codelabs</Link>
-          <Link to="/projects" onClick={() => setMenuOpen(false)}>Projects</Link>
-          <Link to="/leaderboard" onClick={() => setMenuOpen(false)}>Ranking</Link>
-          <Link to="/gallery" onClick={() => setMenuOpen(false)}>Gallery</Link>
-          <Link to="/blog" onClick={() => setMenuOpen(false)}>Blog</Link>
-          <Link to="/team" onClick={() => setMenuOpen(false)}>Team</Link>
-          <a href="/#organizers" onClick={() => setMenuOpen(false)}>Organizers</a>
-          <a href="/#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+          <a href="/#home" className={isActive('/#home')} onClick={() => setMenuOpen(false)}>Home</a>
+          <a href="/#about" className={isActive('/#about')} onClick={() => setMenuOpen(false)}>About</a>
+          <a href="/#events" className={isActive('/#events')} onClick={() => setMenuOpen(false)}>Events</a>
+          <Link to="/codelabs" className={isActive('/codelabs')} onClick={() => setMenuOpen(false)}>Codelabs</Link>
+          <Link to="/projects" className={isActive('/projects')} onClick={() => setMenuOpen(false)}>Projects</Link>
+          <Link to="/leaderboard" className={isActive('/leaderboard')} onClick={() => setMenuOpen(false)}>Ranking</Link>
+          <Link to="/gallery" className={isActive('/gallery')} onClick={() => setMenuOpen(false)}>Gallery</Link>
+          <Link to="/blog" className={isActive('/blog')} onClick={() => setMenuOpen(false)}>Blog</Link>
+          <Link to="/team" className={isActive('/team')} onClick={() => setMenuOpen(false)}>Team</Link>
+          <a href="/#organizers" className={isActive('/#organizers')} onClick={() => setMenuOpen(false)}>Organizers</a>
+          <a href="/#contact" className={isActive('/#contact')} onClick={() => setMenuOpen(false)}>Contact</a>
           <a
             href="https://gdg.community.dev/gdg-on-campus-st-john-college-of-engineering-and-management-autonomous-palghar-india/"
             target="_blank"
